@@ -64,4 +64,4 @@ use App\Biz\Org ;
 
 @section('js')
     <script src="{{ asset('js/custom.js') }}"></script>
-    @endsection
+@endsection

@@ -20,6 +20,8 @@ Route::group(['prefix' => 'admin' , 'namespace'=>'Admin'],function () {
     Route::post('/priviledge.modules2role', 'PriviledgeController@modules2role_post')->name('priviledge.modules2role_post');
 
     Route::get('/company.user_list', 'CompanyController@user_list');
+    Route::get('/company.acct_list', 'CompanyController@acct_list');
+    Route::get('/company.user_edit/{id}', 'CompanyController@user_edit');
 
     Route::get('/govmgr.org_list', 'GovMgrController@org_list');
     Route::get('/govmgr.org_list_del/{id}', 'GovMgrController@org_list_del')->name('govmgr.org_list_del');
