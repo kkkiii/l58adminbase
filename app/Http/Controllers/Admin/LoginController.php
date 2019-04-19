@@ -42,14 +42,14 @@ class LoginController extends Controller
             session(['menus_ids' =>$menus_modules[0]]);
             session(['allow_routes' =>$menus_modules[1]]);
 
-
-            foreach ($menus_modules[1] as $key=>$item){
-                Redis::lpush('allow_routes:'.Auth::id(), $item);
-            }
-
-            foreach ($menus_modules[0] as $key=>$item){
-                Redis::lpush('menus_ids:'.Auth::id(), $item);
-            }
+//
+//            foreach ($menus_modules[1] as $key=>$item){
+//                Redis::lpush('allow_routes:'.Auth::id(), $item);
+//            }
+//
+//            foreach ($menus_modules[0] as $key=>$item){
+//                Redis::lpush('menus_ids:'.Auth::id(), $item);
+//            }
 
             session(['uname' =>$user->uname]);
 
