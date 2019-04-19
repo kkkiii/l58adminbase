@@ -5,22 +5,22 @@ use Illuminate\Support\Str;
 
 @section('content')
 
-    <form action="{{ route('priviledge.add_admin_post') }}" method="POST">
+    <form action="{{ route('company.user_edit_post') }}" method="POST">
         @csrf
         <div class="form-group">
             <label>公司名</label>
-            <input type="text" name="uname" class="form-control" value="{{$company->cname}}">
+            <input type="text" name="cname" class="form-control" value="{{$company->cname}}">
         </div>
         <div class="form-group">
             <label>统一社会信用代码</label>
-            <input type="text" name="password" class="form-control" value="{{$company->unicode}}">
+            <input type="text" name="unicode" class="form-control" value="{{$company->unicode}}">
         </div>
 
         <div class="form-group">
         <select name="rtype" class="form-control">
 
             @foreach ($rtypes as $key => $value)
-                <option value="{{ $key }}"
+                <option value="{{$value->cd}}"
                         @if($company->rtype === $value->cd)
                         selected="selected"
                         @endif
@@ -39,11 +39,12 @@ use Illuminate\Support\Str;
             <select name="province" class="form-control">
 
                 @foreach ($provinces as $key => $value)
-                    <option value="{{ $key }}"
-                            @if($company->province_id === $key)
+                    <option value="{{$key}}"
+                            @if($company->province_cd == $key)
                             selected="selected"
                             @endif
                     > {{ $value }}</option>
+
                 @endforeach
             </select>
 
@@ -51,13 +52,13 @@ use Illuminate\Support\Str;
 
 
             <select name="city" class="form-control">
-                <option  value="{{ $company->city_id }}">{{ $company->city }}</option>
+                <option  value="{{ $company->city_cd }}">{{ $company->city }}</option>
             </select>
 
 
 
             <select name="district" class="form-control">
-                <option  value="{{ $company->district_id }}">{{ $company->district }}</option>
+                <option  value="{{ $company->district_cd }}">{{ $company->district }}</option>
             </select>
 
 
@@ -72,7 +73,7 @@ use Illuminate\Support\Str;
 
         <div class="form-group">
             <label>法定代表人</label>
-            <input type="text" name="reg_addr" class="form-control" value="{{$company->legal_person}}">
+            <input type="text" name="legal_person" class="form-control" value="{{$company->legal_person}}">
         </div>
 
         <div class="form-group">

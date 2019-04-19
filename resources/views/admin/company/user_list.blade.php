@@ -28,12 +28,12 @@
                 <td>{{$item->cname}}</td>
                 <td>{{$item->unicode}}</td>
 
-                <td>{{$item->reg_ent_type->reg_type}}</td>
+                <td>{{isset($item->reg_ent_type)?$item->reg_ent_type->cd:$item->rtype}}</td>
 
                 <td>
 
                     <a href="/admin/company.user_edit/{{$item->id}}" class="btn btn-info">编辑</a>
-                    <a href="/admin/priviledge.del/{{$item->id}}" onclick="return confirm('Are you sure?')" class="btn btn-info">删除</a>
+                    <a href="/admin/company.user_del/{{$item->id}}" onclick="return confirm('Are you sure?')" class="btn btn-info">删除</a>
                 </td>
             </tr>
 
