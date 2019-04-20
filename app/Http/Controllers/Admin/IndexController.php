@@ -19,6 +19,7 @@ class IndexController extends Controller
     }
     public function home(){
 
+
 //Helpers::p(session('menus_ids')) ;
 //        Helpers::p(session('allow_routes')) ;
 //

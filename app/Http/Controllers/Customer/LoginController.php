@@ -10,23 +10,25 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash ;
 use App\Http\Controllers\Controller ;
 use Illuminate\Support\Facades\Redis ;
-class LoginController extends Controller
+class LoginController extends CustomerBase
 {
-    public function __construct()
-    {
-        $this->middleware('auth',[
-            'only'=>['logout']
-        ]);
-        $this->middleware('guest',[
-            'only'=>['login','store']
-        ]);
-    }
+//    public function __construct()
+//    {
+//        $this->middleware('auth',[
+//            'only'=>['logout']
+//        ]);
+//        $this->middleware('guest',[
+//            'only'=>['login','store']
+//        ]);
+//    }
     public function login()
     {
+parent::dont_use_guest() ;
         return view('customer.login');
     }
     public function store(Request $request)
     {
+        parent::dont_use_guest() ;
         $data = $this->validate($request,[
             'cellphone'=>'required',
             'password'=>'required|min:5',
@@ -54,6 +56,7 @@ class LoginController extends Controller
     }
     public function logout()
     {
+        parent::haveto_login() ;
         Auth::logout() ;
         session()->flash(
             'success','已经退出了'

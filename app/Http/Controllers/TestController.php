@@ -4,6 +4,7 @@ use App\Biz\Area;
 use App\Biz\Org;
 use App\Car;
 use App\Http\Controllers\Common\AreaController;
+use App\Model\Customer;
 use App\Model\Module;
 use App\My\Helpers;
 use Faker\Provider\HtmlLorem;
@@ -236,8 +237,9 @@ die() ;
 //            }
 
 //        Helpers::p( Redis::lrange('allow_routes:'.Auth::id(), 0,-1)) ;
-        Redis::DEL() ;
+//        Redis::DEL("allow_routes:65") ;
 
+       var_dump(session()) ;
 
 //            Helpers::p($route) ;
 //            Helpers::p($route2) ;
@@ -281,6 +283,11 @@ EOD;
 //        die() ;
 
        return view("test.tree",compact('res')) ;
+    }
+    public function t7(Request $request){
+      $customer =  Customer::find(1) ;
+      var_dump($customer->company->cname) ;
+
     }
 
 }

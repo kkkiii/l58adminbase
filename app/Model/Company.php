@@ -15,9 +15,9 @@ class Company extends Authenticatable
      *
      * @var array
      */
-//    protected $fillable = [
-//        'name', 'email', 'password',
-//    ];
+    protected $fillable = [
+        'cname', 'unicode', 'rtype', 'province' , 'city','district' ,'reg_addr' ,'legal_person'
+    ];
 
 //    protected $table="yq_users" ;
 
@@ -41,6 +41,10 @@ class Company extends Authenticatable
     public function reg_ent_type()
     {
         return $this->hasOne('App\Model\Dict\RegEntType','cd' , 'rtype');
+    }
+    public function login_acct()
+    {
+        return $this->hasOne('App\Model\Customer','id' , 'customner_id');
     }
 
 }

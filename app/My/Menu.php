@@ -4,6 +4,7 @@ use App\Biz\Module;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB ;
 use Illuminate\Support\Facades\URL ;
+use Illuminate\Support\Facades\Redis ;
 class Menu{
 
 
@@ -26,9 +27,9 @@ class Menu{
          *
          */
 
-        $in_str = implode(',', session('menus_ids') );
 
-
+        $menu_ids  = Redis::SMEMBERS('menus_ids:'.Auth::id()) ;
+        $in_str = implode(',', $menu_ids );
 
         if (empty($in_str))
             $where_clause = "where id in(0)" ;

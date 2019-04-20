@@ -21,7 +21,7 @@ class CompanyController extends AdminBase
     }
     public function user_edit($id)
     {
-
+        parent::check_module() ;
         $company = Company::find($id) ;
         $rtypes = RegEntType::get() ;
 
@@ -38,7 +38,7 @@ class CompanyController extends AdminBase
     public function user_edit_post(Request $request)
     {
 
-        Helpers::p($request->post()) ;
+        parent::check_module() ;
 
 
         $company = Company::find($request->post('id'));
@@ -76,6 +76,7 @@ class CompanyController extends AdminBase
 
     public function user_del($id)
     {
+        parent::check_module() ;
        Company::find($id)->delete();
         return redirect(route('company.user_list')) ;
     }

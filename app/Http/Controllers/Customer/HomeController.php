@@ -8,17 +8,16 @@ use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpKernel\Exception\HttpException ;
 use Illuminate\Support\Facades\Hash ;
 use App\My\Helpers ;
-class HomeController extends Controller
+class HomeController extends CustomerBase
 {
-    public function __construct()
-    {
-        $this->middleware('auth',[
-            'only'=>['home']
-        ]);
-
-    }
+//    public function __construct()
+//    {
+//        $this->middleware('auth',[
+//            'only'=>['home']
+//        ]);
+//    }
     public function home(){
-
+        parent::haveto_login() ;
 //Helpers::p(session('menus_ids')) ;
 //        Helpers::p(session('allow_routes')) ;
 //

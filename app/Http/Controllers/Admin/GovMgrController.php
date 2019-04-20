@@ -38,7 +38,7 @@ class GovMgrController extends AdminBase
 
     public function org_list_edit(Request $request, $id)
     {
-//        parent::check_module() ;
+        parent::check_module() ;
         $org = OrgModel::find($id);
 
         $provinces = DB::table('dict_provinces')->pluck("name", "code");
@@ -48,6 +48,7 @@ class GovMgrController extends AdminBase
 
     public function org_list_edit_post(Request $request)
     {
+        parent::check_module() ;
         $org = \App\Model\Org::find($request->post('id'));
         $org->org_name = $request->post('org_name');
         $org->province_id = $request->post('province');
@@ -63,7 +64,7 @@ class GovMgrController extends AdminBase
     }
     public function org_list_sub(Request $request, $id)
     {
-//        parent::check_module() ;
+        parent::check_module() ;
         $org = OrgModel::find($id);
 
         $provinces = DB::table('dict_provinces')->pluck("name", "code");
@@ -72,7 +73,7 @@ class GovMgrController extends AdminBase
     }
     public function org_list_sub_post(Request $request)
     {
-
+        parent::check_module() ;
         $org =new \App\Model\Org();
         $org->org_name = $request->post('org_name');
         $org->province_id = $request->post('province');
@@ -91,7 +92,7 @@ class GovMgrController extends AdminBase
     }
     public function org_list_root(Request $request)
     {
-
+        parent::check_module() ;
 
         $provinces = DB::table('dict_provinces')->pluck("name", "code");
 
@@ -99,7 +100,7 @@ class GovMgrController extends AdminBase
     }
     public function org_list_root_post(Request $request)
     {
-        //        parent::check_module() ;
+                parent::check_module() ;
         $org =new \App\Model\Org();
         $org->org_name = $request->post('org_name');
         $org->province_id = $request->post('province');

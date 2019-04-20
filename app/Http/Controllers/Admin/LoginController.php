@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash ;
 use App\Http\Controllers\Controller ;
 use Illuminate\Support\Facades\Redis ;
+use Illuminate\Support\Facades\Session ;
 class LoginController extends Controller
 {
     public function __construct()
@@ -38,22 +39,31 @@ class LoginController extends Controller
 
            $menus_modules =  Module::menus_routes($user->id) ;
 
+//dd($menus_modules) ;
+           Helpers::p($menus_modules) ;
 
-            session(['menus_ids' =>$menus_modules[0]]);
-            session(['allow_routes' =>$menus_modules[1]]);
 
-//
-//            foreach ($menus_modules[1] as $key=>$item){
-//                Redis::lpush('allow_routes:'.Auth::id(), $item);
-//            }
-//
-//            foreach ($menus_modules[0] as $key=>$item){
-//                Redis::lpush('menus_ids:'.Auth::id(), $item);
-//            }
-
-            session(['uname' =>$user->uname]);
-
+//            session(['menus_ids' =>$menus_modules[0]]);
+//            session(['allow_routes' =>$menus_modules[1]]);
             Auth::login($user) ;
+
+            foreach ($menus_modules[1] as $key=>$item){
+                Redis::SADD('allow_routes:'.Auth::id(), $item);
+                Redis::EXPIRE('allow_routes:'.Auth::id(), 300);
+            }
+
+            foreach ($menus_modules[0] as $key=>$item){
+                Redis::SADD('menus_ids:'.Auth::id(), $item);
+                Redis::EXPIRE('menus_ids:'.Auth::id(), 300);
+            }
+
+            session(['admin' =>[
+               'uname'=> $user->uname,
+            ]]);
+
+
+
+
             session()->flash(
                 'success','登陆成功'
             ) ;
@@ -69,7 +79,13 @@ class LoginController extends Controller
     }
     public function logout()
     {
+
+        Redis::DEL('allow_routes:'.Auth::id()) ;
+        Redis::DEL('menus_ids:'.Auth::id()) ;
         Auth::logout() ;
+        Session::flush();
+        Session::forget('admin') ;
+
         session()->flash(
             'success','已经退出了'
         ) ;

@@ -201,12 +201,14 @@ EOD;
     }
 
     public function mgrs()
-    {   parent::check_module() ;
+    {
+        parent::check_module() ;
         $users = DB::table('admins')->paginate(15);
         return view('admin.priviledge.mgrs',compact('users'))  ;
 
     }
     public function edit_mgr($id){
+        parent::check_module() ;
 
         $admin = Admin::find($id);
         return view('admin.priviledge.edit_mgr',compact('admin'))  ;
@@ -214,7 +216,7 @@ EOD;
 
     public function add_admin(){
         parent::check_module() ;
-        parent::check_module() ;
+
         return view('admin.priviledge.add_admin');
 
     }
