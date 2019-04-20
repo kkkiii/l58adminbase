@@ -42,6 +42,10 @@ class Company extends Authenticatable
     {
         return $this->hasOne('App\Model\Dict\RegEntType','cd' , 'rtype');
     }
+    public function company_verify()
+    {
+        return $this->hasOne('App\Model\Dict\CompanyVerify','cd' , 'verify');
+    }
     public function login_acct()
     {
         return $this->hasOne('App\Model\Customer','id' , 'customner_id');

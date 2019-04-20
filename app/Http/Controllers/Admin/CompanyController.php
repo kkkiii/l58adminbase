@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Biz\Area;
+use App\Model\Dict\CompanyVerify;
 use App\Model\Dict\RegEntType;
 use App\My\Helpers;
 use Illuminate\Http\Request;
@@ -79,5 +80,31 @@ class CompanyController extends AdminBase
         parent::check_module() ;
        Company::find($id)->delete();
         return redirect(route('company.user_list')) ;
+    }
+    public function user_verify($id){
+        $company = Company::find($id);
+//        $verify = $company->company_verify ;
+        $verifys = CompanyVerify::all();
+
+//        foreach ($company_verifys as $k=>$item){
+//            print_r($item->cd) ;
+//            print_r($item->name) ;
+//        }
+//
+//        dd() ;
+
+        return view(('admin.company.user_verify'),compact('company','verifys')) ;
+
+    }
+    public function user_verify_post(Request $request){
+        $id = $request->post('id') ;
+        $verify = $request->post('verify') ;
+
+        $company = Company::find($id) ;
+        $company->verify = $verify ;
+        $company->save();
+
+        return redirect(route('company.user_list')) ;
+
     }
 }

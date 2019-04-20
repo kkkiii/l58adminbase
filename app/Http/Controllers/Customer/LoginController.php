@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash ;
 use App\Http\Controllers\Controller ;
 use Illuminate\Support\Facades\Redis ;
+use Illuminate\Support\Facades\Session ;
 class LoginController extends CustomerBase
 {
 //    public function __construct()
@@ -57,6 +58,7 @@ parent::dont_use_guest() ;
     public function logout()
     {
         parent::haveto_login() ;
+        Session::flush();
         Auth::logout() ;
         session()->flash(
             'success','已经退出了'
