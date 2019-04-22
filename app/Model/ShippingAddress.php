@@ -4,9 +4,9 @@ namespace App\Model;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-
-class ShippingAddress extends Authenticatable
+//use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
+class ShippingAddress extends Model
 {
     use Notifiable;
 

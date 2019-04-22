@@ -3,10 +3,7 @@ use Illuminate\Support\Str;
 ?>
 @extends('layouts.customerbase')
 
-@section('style')
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    {{--<link rel="stylesheet" href="/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">--}}
-    @endsection
+
 
 
 @section('content')
@@ -34,19 +31,20 @@ use Illuminate\Support\Str;
                 <td>{{$item->addr_detail}}</td>
                 <td>
                     @if($item->is_default == 1)
-                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                        <i class="fas fa-user-check"></i>
                     @endif
 
-                        <i class="fas fa-user-check"></i>
 
                 </td>
 
 
 
                 <td>
-                    <a href="/customer/product.edit/{{$item->id}}" class="btn btn-info">编辑</a>
-                    <a href="/customer/product.del/{{$item->id}}" onclick="return confirm('Are you sure?')" class="btn btn-info">删除</a>
-                    <a href="/customer/code_lable.apply/{{$item->id}}" class="btn btn-info">申请码标</a>
+                    <a href="/customer/my_address.edit/{{$item->id}}" class="btn btn-info">编辑</a>
+                    <a href="/customer/my_address.del/{{$item->id}}" onclick="return confirm('Are you sure?')" class="btn btn-info">删除</a>
+                    @if($item->is_default == 0)
+                        <a href="/customer/my_address.default/{{$item->id}}" onclick="return confirm('Are you sure?')" class="btn btn-info">设为缺省</a>
+                    @endif
                 </td>
             </tr>
 

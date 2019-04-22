@@ -6,7 +6,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Model\Dict\RegEntType ;
-class Company extends Authenticatable
+use Illuminate\Database\Eloquent\Model;
+class Company extends Model
 {
     use Notifiable;
 

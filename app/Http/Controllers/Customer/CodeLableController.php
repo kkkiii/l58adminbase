@@ -8,7 +8,7 @@ class CodeLableController extends CustomerBase
 {
     public function apply($pid){
         parent::haveto_login() ;
-        dd($pid) ;
-        return view('customer.order_list') ;
+
+        return view('customer.order_create') ;
     }
 }

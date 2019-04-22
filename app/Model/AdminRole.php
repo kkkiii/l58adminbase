@@ -5,8 +5,8 @@ namespace App\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
-class AdminRole extends Authenticatable
+use Illuminate\Database\Eloquent\Model;
+class AdminRole extends Model
 {
     use Notifiable;
 

@@ -25,5 +25,10 @@ Route::group(['prefix' => 'customer' , 'namespace'=>'Customer'],function () {
     Route::get('/order.list', 'ProductController@list')->name('order.list');
     Route::get('/code_lable.apply/{pid}', 'CodeLableController@apply')->name('code_lable.apply');
 
-    Route::get('/my.shipping_address', 'ShippingAddressController@list_my')->name('my.shipping_address');
+    Route::get('/my_address.list', 'ShippingAddressController@list_my')->name('my_address.list');
+    Route::get('/my_address.add', 'ShippingAddressController@add')->name('my_address.add');
+    Route::get('/my_address.del/{id}', 'ShippingAddressController@del')->name('my_address.del');
+    Route::get('/my_address.edit/{id}', 'ShippingAddressController@edit')->name('my_address.edit');
+    Route::post('/my_address.edit', 'ShippingAddressController@edit_post')->name('my_address.edit_post');
+    Route::get('/my_address.default/{id}', 'ShippingAddressController@set_default')->name('my_address.default');
 });

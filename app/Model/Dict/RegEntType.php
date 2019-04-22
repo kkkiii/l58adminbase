@@ -5,8 +5,8 @@ namespace App\Model\Dict;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
-class RegEntType extends Authenticatable
+use Illuminate\Database\Eloquent\Model;
+class RegEntType extends Model
 {
     use Notifiable;
 
