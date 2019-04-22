@@ -4,6 +4,7 @@ use App\Biz\Module;
 use App\Model\Customer;
 use App\My\Helpers;
 use App\My\MyAuth;
+use App\My\MyStr;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -88,13 +89,24 @@ parent::dont_use_guest() ;
 
         // 存一条 用户
 
+        $customer = Customer() ;
+        $customer->cellphone = $data['cellphone'] ;
+        $customer->password =  MyAuth::set_pwd($data['password']) ;
+        $customer->save() ;
 
 
         // 令其登入
 
+        session(['cellphone' =>$data['cellphone']]);
+
+        Auth::login($customer) ;
+
         // redirect home
 
-
+        session()->flash(
+            'success','登陆成功'
+        ) ;
+        return redirect(route('customer.home') ) ;
 
 
     }

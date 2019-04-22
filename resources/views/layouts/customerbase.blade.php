@@ -25,8 +25,8 @@
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{session('cellphone')}}</a>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="#one">one</a>
-                <a class="dropdown-item" href="#two">two</a>
+                <a class="dropdown-item" href="#one">我的订单</a>
+                <a class="dropdown-item" href="{{route('my.shipping_address')}}">我的收货地址</a>
                 <div role="separator" class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{{url('/customer/logout')}}">登出</a>
             </div>

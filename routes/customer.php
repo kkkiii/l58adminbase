@@ -17,5 +17,13 @@ Route::group(['prefix' => 'customer' , 'namespace'=>'Customer'],function () {
     Route::post('/enterprise.edit', 'EnterpriseController@edit_post')->name('enterprise.edit_post');
 
     Route::get('/product.list', 'ProductController@list')->name('product.list');
+    Route::get('/product.create', 'ProductController@create')->name('product.create');
+    Route::post('/product.create', 'ProductController@create_post')->name('product.create_post');
+    Route::get('/product.edit/{id}', 'ProductController@edit')->name('product.edit');
+    Route::post('/product.edit', 'ProductController@edit_post')->name('product.edit_post');
+    Route::get('/product.del/{id}', 'ProductController@del')->name('product.del');
     Route::get('/order.list', 'ProductController@list')->name('order.list');
+    Route::get('/code_lable.apply/{pid}', 'CodeLableController@apply')->name('code_lable.apply');
+
+    Route::get('/my.shipping_address', 'ShippingAddressController@list_my')->name('my.shipping_address');
 });
