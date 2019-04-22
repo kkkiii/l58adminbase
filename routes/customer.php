@@ -6,6 +6,8 @@ Route::group(['prefix' => 'customer' , 'namespace'=>'Customer'],function () {
     Route::get('/home', 'HomeController@home')->name('customer.home');
     Route::get('/logout', 'LoginController@logout')->name('customer.logout');
     Route::post('login', 'LoginController@store')->name('customer.login.store');
+    Route::get('/reg', 'LoginController@reg')->name('customer.login.reg');
+    Route::post('/reg', 'LoginController@reg_store')->name('customer.reg.store');
     Route::get('/enterprise.index', 'EnterpriseController@index')->name('enterprise.index');
 
     Route::get('/enterprise.view', 'EnterpriseController@view')->name('enterprise.view');

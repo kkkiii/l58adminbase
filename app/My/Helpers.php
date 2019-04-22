@@ -94,32 +94,7 @@ class Helpers
         if($days < 0) $days = 0;
         return $days;
     }
-    public static function gen_random_cd($length)
-    {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $charactersLength = strlen($characters);
-        $randomString = '';
-        for ($i = 0; $i < $length; $i ++) {
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
-        }
-        return $randomString;
-    }
-    public static function gen_random_num_cd($length)
-    {
-        $characters = '0123456789';
-        $charactersLength = strlen($characters);
-        $randomString = '';
-        for ($i = 0; $i < $length; $i ++) {
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
-        }
-        return $randomString;
-    }
-    public static function gen_random_datenum_cd($length)
-    {
-        $left =  $length - 10  ;
-        $gen_random_str =  static::gen_random_num_cd($left) ;
-        return    strrev( $gen_random_str .  time() )  ;
-    }
+
     public static function isMobile() {
         // 如果有HTTP_X_WAP_PROFILE则一定是移动设备
         if (isset ($_SERVER['HTTP_X_WAP_PROFILE'])){

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash ;
 use App\Http\Controllers\Controller ;
 use Illuminate\Support\Facades\Redis ;
 use Illuminate\Support\Facades\Session ;
+use App\Rules\MobileVcodeCheck ;
 class LoginController extends CustomerBase
 {
 //    public function __construct()
@@ -64,5 +65,46 @@ parent::dont_use_guest() ;
             'success','已经退出了'
         ) ;
         return redirect('/customer/login') ;
+    }
+    public function reg()
+    {
+//        dd(1);
+        return view('customer.reg');
+    }
+    public function reg_store(Request $req)
+    {
+        $cellphone = $req->post('cellphone') ;
+        $vcode = $req->post('vcode') ;
+
+        $data = $this->validate($req,[
+            'cellphone'=>'required|regex:/^1[0-9]{10}$/',
+            'vcode'=>['required','digits:6',
+               new MobileVcodeCheck($cellphone)
+            ],
+            'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
+            'password_confirmation' => 'min:6'
+        ])
+        ;
+
+        // 存一条 用户
+
+
+
+        // 令其登入
+
+        // redirect home
+
+
+
+
+    }
+    private function check_vcd($cellphone,$vcode)
+    {
+        $rest =  Redis::get('mobile.reg:' .$cellphone);
+
+        if ( strcmp($vcode ,$rest) == 0)
+        return false ;
+        else
+        return true ;
     }
 }

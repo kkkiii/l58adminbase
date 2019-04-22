@@ -44,7 +44,32 @@ class MyStr
         return $arr[1];
     }
 
-
+    public static function gen_random_cd($length)
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i ++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
+    public static function gen_random_num_cd($length)
+    {
+        $characters = '0123456789';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i ++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
+    public static function gen_random_datenum_cd($length)
+    {
+        $left =  $length - 10  ;
+        $gen_random_str =  static::gen_random_num_cd($left) ;
+        return    strrev( $gen_random_str .  time() )  ;
+    }
 
 
 }

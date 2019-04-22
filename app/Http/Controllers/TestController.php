@@ -206,7 +206,8 @@ die() ;
 
 
 //      $rest =  Redis::set('name', 'Taylor');
-
+         $rest =  Redis::get('mobile.reg:15738808900');
+         dd($rest) ;
 
 //        Redis::lpush('runoob:1', 'redis');
 //        Redis::lpush('runoob:1', 'mongo');
@@ -239,7 +240,7 @@ die() ;
 //        Helpers::p( Redis::lrange('allow_routes:'.Auth::id(), 0,-1)) ;
 //        Redis::DEL("allow_routes:65") ;
 
-       var_dump(session()) ;
+//       var_dump(session()) ;
 
 //            Helpers::p($route) ;
 //            Helpers::p($route2) ;
