@@ -30,7 +30,7 @@ use Illuminate\Support\Str;
                 <td>
                     <a href="/customer/product.edit/{{$item->id}}" class="btn btn-info">编辑</a>
                     <a href="/customer/product.del/{{$item->id}}" onclick="return confirm('Are you sure?')" class="btn btn-info">删除</a>
-                    <a href="/customer/code_lable.apply/{{$item->id}}" class="btn btn-info">申请码标</a>
+                    <a href="/customer/order.create/{{$item->id}}" class="btn btn-info">申请码标</a>
                 </td>
             </tr>
 

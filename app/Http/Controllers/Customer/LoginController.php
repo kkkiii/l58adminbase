@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller ;
 use Illuminate\Support\Facades\Redis ;
 use Illuminate\Support\Facades\Session ;
 use App\Rules\MobileVcodeCheck ;
+use App\Model\WST\YqCompanyUser ;
 class LoginController extends CustomerBase
 {
 //    public function __construct()
@@ -36,12 +37,14 @@ parent::dont_use_guest() ;
             'cellphone'=>'required',
             'password'=>'required|min:5',
         ]) ;
-        $user = Customer::where('cellphone',  $data['cellphone'] )->first();
 
-        if(MyAuth::check (  $data['password'],$user->password))
+
+        $user = YqCompanyUser::where('phone',  $data['cellphone'] )->first();
+
+        if(MyAuth::check_company_user(  $data['password'],$user->password))
         {
 
-            session(['cellphone' =>$user->cellphone]);
+            session(['cnpy_user' =>$user]);
 
             Auth::login($user) ;
             session()->flash(

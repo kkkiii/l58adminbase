@@ -17,7 +17,7 @@ $router->get('test/t5','TestController@t5');
 $router->get('test/t6','TestController@t6');
 $router->get('test/t7','TestController@t7');
 $router->get('test/tree','TestController@tree');
-
+$router->get('/test/params','TestController@params');
 
 
 Route::get('/page', 'HomeController@index');

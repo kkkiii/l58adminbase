@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Model\Product as ProductModel ;
 use App\Model\Customer ;
+use App\Biz\ShippingAddress ;
 class ProductController extends CustomerBase
 {
     public function list(){
@@ -26,10 +27,8 @@ class ProductController extends CustomerBase
 
     public function create(){
         parent::haveto_login() ;
-        $product =new ProductModel();
 
-        $customer = Customer::find(Auth::id());
-        $company = $customer->company ;
+        $company = parent::get_bind_company() ;
 
         return view('customer.product_create',compact('products','company')) ;
     }
@@ -39,6 +38,20 @@ class ProductController extends CustomerBase
             'pname'=>'required',
             'company_id'=>'required|numeric',
         ]) ;
+
+        $company = parent::get_bind_company() ;
+
+
+        if ($company->verify ==1)
+        ;
+        else
+        {
+            session()->flash(
+                'success','公司资料等待审核'
+            ) ;
+            return redirect(route('product.list') ) ;
+        }
+
         $product =new Product();
         $product->pname = $data['pname'] ;
         $product->company_id = $data['company_id'] ;
@@ -56,8 +69,6 @@ class ProductController extends CustomerBase
         ])
                 ->first();
 
-
-
         if ($product)
         return view('customer.product_edit',compact('product' ,'company')) ;
         else
@@ -74,10 +85,14 @@ class ProductController extends CustomerBase
         $data = $this->validate($request,[
             'pname'=>'required',
             'company_id'=>'required|numeric',
+            'product_id'=>'required|numeric'
         ]) ;
         $customer = Customer::find(Auth::id());
         $company = $customer->company ;
-        Product::where('company_id', $company->id)
+        Product::where([
+            'company_id'=> $company->id,
+            'id'=>$data['product_id']
+        ])
             ->update(['pname' =>$data['pname']]);
         return redirect(route('product.list') ) ;
     }

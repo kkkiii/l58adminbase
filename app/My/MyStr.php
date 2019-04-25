@@ -70,6 +70,29 @@ class MyStr
         $gen_random_str =  static::gen_random_num_cd($left) ;
         return    strrev( $gen_random_str .  time() )  ;
     }
+    //生成24位唯一订单号
+    public static function create_orderid(){
+        return date('Ymd').substr(implode(NULL, array_map('ord', str_split(substr(uniqid(), 7, 13), 1))), 0, 8);
+    }
+    /**
+     * php 生成唯一id
+     *
+     */
+    function guid($factor='',$prefix='',$suffix=''){
+        list($usec, $sec) = explode(" ", microtime());
+        $guid = $prefix. $factor. $_SERVER['HTTP_USER_AGENT'] . $_SERVER['REMOTE_ADDR']
+            . $sec . $usec
+            . mt_rand(0,1000000).time(). mt_rand(0,1000000).$suffix;
+        $guid = substr(sha1($guid),8,32);
+        $guid = base_convert($guid,16,36);
+        return $prefix.$guid.$suffix;
+    }
 
+
+//生成唯一标识符   //sha1()函数， "安全散列算法（SHA1）"
+    function create_unique(){
+        $data = $_SERVER['HTTP_USER_AGENT'].$_SERVER['REMOTE_ADDR'].time().rand();
+        return sha1($data);//return md5(time().$data);   //return $data;
+    }
 
 }

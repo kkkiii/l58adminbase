@@ -16,7 +16,7 @@ use App\Biz\CompanyBiz;
 <nav id="navbar-example2" class="navbar navbar-light bg-light">
     <a class="navbar-brand" href="#">
         @if( $uid = \Illuminate\Support\Facades\Auth::id())
-            {{CompanyBiz::login_customer_get_company($uid)->cname}}
+            {{session('cnpy_user')->company->company_name}}
         @else
             公司
         @endif
@@ -33,7 +33,7 @@ use App\Biz\CompanyBiz;
             <a class="nav-link"href="{{route('order.list')}}">订单</a>
         </li>
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{session('cellphone')}}</a>
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{session('cnpy_user')->realname}}</a>
             <div class="dropdown-menu">
 
                 <a class="dropdown-item" href="{{route('my_address.list')}}">我的收货地址</a>

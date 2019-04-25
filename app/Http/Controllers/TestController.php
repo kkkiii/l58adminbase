@@ -4,9 +4,14 @@ use App\Biz\Area;
 use App\Biz\Org;
 use App\Car;
 use App\Http\Controllers\Common\AreaController;
+use App\Jobs\Mytest;
+use App\Jobs\SleepSeconds;
 use App\Model\Customer;
+use App\Model\Dict\DictOrdFlowstop;
 use App\Model\Module;
+use App\Model\WST\YqCompanyUser;
 use App\My\Helpers;
+use App\My\MyAuth;
 use Faker\Provider\HtmlLorem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -23,6 +28,11 @@ use IntlChar ;
 use App\My\MyStr ;
 use Illuminate\Support\Str ;
 use Illuminate\Support\Arr;
+use App\Model\CodeTagType ;
+use App\Biz\ShippingAddress ;
+use Illuminate\Support\Facades\Queue ;
+use Illuminate\Support\Facades\Mail ;
+use Illuminate\Support\Facades\Log ;
 class TestController extends Controller
 {
     public function t1(Request $request)
@@ -136,13 +146,57 @@ print_r("==================================" ) ;
 
 //        var_dump(  IntlChar::isdigit(trim($str,'/')) );
 
-        $org = Org::retrive_item(44) ;
-        dd($org) ;
+//        $org = Org::retrive_item(44) ;
+//        dd($org) ;
+
+//        dd( MyStr::create_orderid() );
+       $items = DictOrdFlowstop::all() ;
+        dump($items);
+
 
     }
 
     public function t4(Request $request){
-      Helpers::p(Area::q_name( '120115', 'dict_areas') )  ;
+//      Helpers::p(Area::q_name( '120115', 'dict_areas') )  ;
+//        $uid = Auth::id() ;
+//
+//
+//        $addrs = ShippingAddress::addr_options($uid) ;
+//        Helpers::p($addrs) ;
+
+//        $sql = <<<EOD
+//SELECT VERSION()
+//EOD;
+//        $tree_nodes = DB::connection('mysql_wst')
+//            ->select($sql);
+////
+//        Helpers::p($tree_nodes) ;
+//        dd ( DB::connection('mysql_wst')->select('select version()') );
+
+        $user = YqCompanyUser::find(2000021) ;
+
+        var_dump($user->password) ;
+
+
+//        dd($user->id) ;
+
+      $str = MyAuth::check_company_user('123456' ,$user->password ) ;
+      var_dump($str) ;
+
+
+
+
+
+
+
+        for ($i=0 ; $i < 1000 ; $i++){
+            sleep(1) ;
+             $hand = new Mytest();
+             $hand->handle($i) ;
+        }
+
+
+
     }
 
     public function t5(Request $request){
@@ -288,6 +342,15 @@ EOD;
     public function t7(Request $request){
       $customer =  Customer::find(1) ;
       var_dump($customer->company->cname) ;
+
+    }
+    public function params(Request $request){
+
+       var_dump($request->query('f1')) ;
+        var_dump($request->query('f2')) ;
+        var_dump($request->query('f3'));
+        $recs = CodeTagType::all() ;
+        dd($recs) ;
 
     }
 

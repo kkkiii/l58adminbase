@@ -37,5 +37,5 @@ Route::group(['prefix' => 'admin' , 'namespace'=>'Admin'],function () {
     Route::post('/govmgr.org_list_root', 'GovMgrController@org_list_root_post')->name('govmgr.org_list_root_post');
 
     Route::get('/govmgr.user_list', 'GovMgrController@user_list');
-
+    Route::get('/order.list', 'OrderController@list');
 });

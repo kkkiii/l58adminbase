@@ -18,9 +18,10 @@ class EnterpriseController extends CustomerBase
 
     public function index(){
         parent::haveto_login() ;
-        $customer = Customer::find(Auth::id());
-//        print_r($customer->company->cname );
-        $company = $customer->company ;
+//        $customer = Customer::find(Auth::id());
+////        print_r($customer->company->cname );
+//        $company = $customer->company ;
+        $company = parent::get_bind_company() ;
 
         if (is_null($company))
             return redirect(route('enterprise.create')) ;
@@ -75,8 +76,7 @@ class EnterpriseController extends CustomerBase
     public function view(){
         parent::haveto_login() ;
 
-        $customer = Customer::find(Auth::id());
-        $company = $customer->company ;
+        $company = parent::get_bind_company() ;
 
         return view(('customer.enterprise_view'),compact('company')) ;
 

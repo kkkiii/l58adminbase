@@ -22,8 +22,12 @@ Route::group(['prefix' => 'customer' , 'namespace'=>'Customer'],function () {
     Route::get('/product.edit/{id}', 'ProductController@edit')->name('product.edit');
     Route::post('/product.edit', 'ProductController@edit_post')->name('product.edit_post');
     Route::get('/product.del/{id}', 'ProductController@del')->name('product.del');
-    Route::get('/order.list', 'ProductController@list')->name('order.list');
-    Route::get('/code_lable.apply/{pid}', 'CodeLableController@apply')->name('code_lable.apply');
+    Route::get('/order.list', 'OrderController@list')->name('order.list');
+    Route::get('/order.create/{id}', 'OrderController@create')->name('order.create');
+    Route::post('/order.create1', 'OrderController@create1')->name('order.create1');
+    Route::post('/order.create', 'OrderController@create_post')->name('order.create_post');
+    Route::get('/order.del/{id}', 'OrderController@del')->name('product.del');
+    Route::get('/order.pay/{id}', 'OrderController@pay')->name('product.pay');
 
     Route::get('/my_address.list', 'ShippingAddressController@list_my')->name('my_address.list');
     Route::get('/my_address.add', 'ShippingAddressController@add')->name('my_address.add');

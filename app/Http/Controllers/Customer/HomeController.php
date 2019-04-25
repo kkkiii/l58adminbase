@@ -19,7 +19,9 @@ class HomeController extends CustomerBase
     public function home(){
         parent::haveto_login() ;
 //Helpers::p(session('menus_ids')) ;
-//        Helpers::p(session('allow_routes')) ;
+//        var_dump(Auth::id()) ;
+//        Helpers::p(session('cnpy_user')->phone) ;
+//        dd() ;
 //
 //        Helpers::p(config('app.name') ) ;
 

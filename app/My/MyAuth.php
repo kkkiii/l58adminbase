@@ -8,9 +8,10 @@
 
 namespace App\My;
 use App\My\Helpers ;
-
+use App\My\MyConstant ;
 class MyAuth
 {
+
     public static function check($plain ,$pwd_hash)
     {
         $authcode = env('APP_AUTHCODE') ;
@@ -21,6 +22,20 @@ class MyAuth
     {
         $authcode = env('APP_AUTHCODE') ;
      return   "###" . md5(md5( $authcode . $plain)) ;
+    }
+
+
+    public static function check_company_user($plain ,$pwd_hash)
+    {
+        $authcode = MyConstant::$APP_CPNY_AUTHCODE ;
+
+        return   md5(sha1( $plain) . $authcode)== $pwd_hash ;
+
+    }
+    public static function set_company_user_pwd($plain ):string
+    {
+        $authcode = MyConstant::$APP_CPNY_AUTHCODE ;
+        return   md5(sha1( $plain) . $authcode) ;
     }
 
     public static function can_access (){

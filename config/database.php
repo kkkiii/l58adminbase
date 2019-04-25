@@ -59,6 +59,22 @@ return [
             ]) : [],
         ],
 
+        'mysql_wst' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST_WST', '172.16.16.10'),
+            'port' => env('DB_PORT_WST', 32760),
+            'database' => env('DB_DATABASE_WST', 'db_smgp'),
+            'username' => env('DB_USERNAME_WST', 'forge'),
+            'password' => env('DB_PASSWORD_WST', ''),
+            'unix_socket' => env('DB_SOCKET_WST', ''),
+            'charset' => env('DB_CHARSET_WST', 'utf8mb4'),
+            'collation' => env('DB_COLLATION_WST', 'utf8mb4_unicode_ci'),
+            'prefix' => env('DB_PREFIX_WST', ''),
+            'strict' => env('DB_STRICT_MODE_WST', true),
+            'engine' => env('DB_ENGINE_WST', null),
+            'timezone' => env('DB_TIMEZONE_WST', '+08:00'),
+        ],
+
         'pgsql' => [
             'driver' => 'pgsql',
             'host' => env('DB_HOST', '127.0.0.1'),
@@ -126,7 +142,13 @@ return [
             'database' => env('REDIS_DB', 0),
             'read_timeout' => 60,
         ],
-
+        'que' => [
+            'host' => env('REDIS_HOST', '127.0.0.1'),
+            'password' => env('REDIS_PASSWORD', null),
+            'port' => env('REDIS_PORT', 6379),
+            'database' => 2,
+            'read_timeout' => 60,
+        ],
         'session' => [
             'host' => env('REDIS_HOST', '127.0.0.1'),
             'password' => env('REDIS_PASSWORD', null),

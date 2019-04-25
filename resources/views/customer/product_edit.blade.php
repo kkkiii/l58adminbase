@@ -15,7 +15,7 @@ use Illuminate\Support\Str;
 
       <input type="hidden" name="company_id" value="{{$company->id}}">
 
-
+        <input type="hidden" name="product_id" value="{{$product->id}}">
 
 
 
