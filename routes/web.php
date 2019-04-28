@@ -16,6 +16,7 @@ $router->get('test/t4','TestController@t4');
 $router->get('test/t5','TestController@t5');
 $router->get('test/t6','TestController@t6');
 $router->get('test/t7','TestController@t7');
+$router->get('test/alipay','TestController@alipay');
 $router->get('test/tree','TestController@tree');
 $router->get('/test/params','TestController@params');
 

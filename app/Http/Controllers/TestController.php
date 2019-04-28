@@ -35,6 +35,7 @@ use Illuminate\Support\Facades\Queue ;
 use Illuminate\Support\Facades\Mail ;
 use Illuminate\Support\Facades\Log ;
 use App\Jobs\CodeGen ;
+use Pay;
 class TestController extends Controller
 {
     public function t1(Request $request)
@@ -338,6 +339,18 @@ EOD;
         $recs = CodeTagType::all() ;
         dd($recs) ;
 
+    }
+    public function alipay(Request $request)
+    {
+
+
+        $order = [
+            'out_trade_no' => time(),
+            'total_amount' => '1',
+            'subject' => 'test subject - 测试',
+        ];
+
+        return Pay::alipay()->web($order);
     }
 
 }
