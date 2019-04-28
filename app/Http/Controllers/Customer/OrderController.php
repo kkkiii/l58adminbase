@@ -25,8 +25,6 @@ class OrderController extends CustomerBase
 //         $ord =new Order() ;
 //         $ord->product_id = $id ;
 
-
-
         return view('customer.order.create' ,compact('id')) ;
     }
     public function create1(Request $request){
