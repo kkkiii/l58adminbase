@@ -31,6 +31,7 @@ Route::group(['prefix' => 'customer' , 'namespace'=>'Customer'],function () {
 
     Route::get('/my_address.list', 'ShippingAddressController@list_my')->name('my_address.list');
     Route::get('/my_address.add', 'ShippingAddressController@add')->name('my_address.add');
+    Route::post('/my_address.add', 'ShippingAddressController@add_post')->name('my_address.add_post');
     Route::get('/my_address.del/{id}', 'ShippingAddressController@del')->name('my_address.del');
     Route::get('/my_address.edit/{id}', 'ShippingAddressController@edit')->name('my_address.edit');
     Route::post('/my_address.edit', 'ShippingAddressController@edit_post')->name('my_address.edit_post');

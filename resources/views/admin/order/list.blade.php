@@ -12,7 +12,7 @@
         <tr>
             <th scope="col">ID</th>
             <th scope="col">公司</th>
-            <th scope="col">产品</th>
+            <th scope="col">品种</th>
 
             <th scope="col">申请码类型</th>
             <th scope="col">单价</th>
@@ -33,8 +33,10 @@
 
             <tr>
                 <th scope="row">{{$item->id}}</th>
-                <th scope="col">{{$item->product->company->cname}}</th>
-                <th scope="col">{{$item->product->pname}}</th>
+                <th scope="col">{{
+                 ($item->product->wst_company_id)
+                }}</th>
+                <th scope="col">{{$item->product->variety}}</th>
                 <td>{{$item->code_tag_type->title}}</td>
                 <td>{{$item->unit_price/100}}</td>
                 <td>{{$item->code_amount}}</td>
@@ -52,7 +54,7 @@
                 <td>
 
                     @if($item->flow_stop == 1)
-                    <a href="/admin/company.user_list/{{$item->id}}" onclick="return confirm('Are you sure?')" class="btn btn-info">派发</a>
+                    <a href="/admin/order.dispatch/{{$item->id}}" onclick="return confirm('Are you sure?')" class="btn btn-info">派发</a>
                         @endif
                 </td>
             </tr>

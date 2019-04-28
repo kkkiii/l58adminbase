@@ -1,17 +1,18 @@
 <?php
 use Illuminate\Support\Str;
+use App\Model\Dict\FarmProduct ;
 ?>
 @extends('layouts.customerbase')
 
 @section('content')
 
-    <a href="{{route('product.create')}}" class="btn btn-primary">增加</a>
 
     <table class="table table-striped">
         <thead>
         <tr>
             <th scope="col">ID</th>
-            <th scope="col">产品名</th>
+            <th scope="col">类别</th>
+            <th scope="col">规格</th>
 
             <th scope="col">操作</th>
         </tr>
@@ -23,7 +24,8 @@ use Illuminate\Support\Str;
 
             <tr>
                 <th scope="row">{{$item->id}}</th>
-                <td>{{$item->pname}}</td>
+                <td>{{ $item->farm_product->big_category.$item->farm_product->small_category}}</td>
+                <td>{{$item->variety}}</td>
 
 
 

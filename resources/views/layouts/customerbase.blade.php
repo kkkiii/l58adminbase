@@ -26,9 +26,19 @@ use App\Biz\CompanyBiz;
         <li class="nav-item">
             <a class="nav-link" href="{{route('enterprise.index')}}">企业资料</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link"  href="{{route('product.list')}}">产品资料</a>
+
+
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">产品资料</a>
+            <div class="dropdown-menu">
+
+                <a class="dropdown-item" href="{{route('product.list')}}">列表</a>
+                <a class="dropdown-item" href="{{route('product.create')}}">创建</a>
+            </div>
         </li>
+
+
+
         <li class="nav-item">
             <a class="nav-link"href="{{route('order.list')}}">订单</a>
         </li>

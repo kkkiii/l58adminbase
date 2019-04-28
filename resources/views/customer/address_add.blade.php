@@ -5,24 +5,20 @@ use Illuminate\Support\Str;
 
 @section('content')
 
-    <form action="{{ route('my_address.edit_post') }}" method="POST">
+    <form action="{{ route('my_address.add_post') }}" method="POST">
     @csrf
 
 
 
-     <input type="hidden" name="id" value="{{$address->id}}">
-
-
         <div class="form-check form-check-inline form-group">
+
 
 
             <select name="province" class="form-control">
 
                 @foreach ($provinces as $key => $value)
                     <option value="{{$key}}"
-                            @if($address->province_cd == $key)
-                            selected="selected"
-                            @endif
+
                     > {{ $value }}</option>
 
                 @endforeach
@@ -31,13 +27,13 @@ use Illuminate\Support\Str;
 
 
             <select name="city" class="form-control">
-                <option  value="{{ $address->city_cd }}">{{ $address->city }}</option>
+                <option  value=""></option>
             </select>
 
 
 
             <select name="district" class="form-control">
-                <option  value="{{ $address->district_cd }}">{{ $address->district }}</option>
+                <option  value=""></option>
             </select>
 
 
@@ -47,7 +43,7 @@ use Illuminate\Support\Str;
 
         <div class="form-group">
             <label>详细地址</label>
-            <input type="text" name="addr_detail" class="form-control" value="{{$address->addr_detail}}">
+            <input type="text" name="addr_detail" class="form-control" value="">
         </div>
 
 

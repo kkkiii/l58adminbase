@@ -13,12 +13,10 @@ class ShippingAddressController extends CustomerBase
         parent::haveto_login() ;
 
        $address = ShippingAddress::where([
-            'customer_id'=>Auth::id()
+            'wst_login_id'=>Auth::id()
         ])
            ->orderBy('id', 'desc')
            ->get();
-
-
 
         return view('customer.my_address',compact('address')) ;
     }
@@ -35,10 +33,12 @@ class ShippingAddressController extends CustomerBase
         $address =
             ShippingAddress::where([
                 'id'=>$id ,
-                'customer_id'=>$uid
+                'wst_login_id'=>$uid
             ])
                 ->first();
         $provinces = DB::table('dict_provinces')->pluck("name", "code");
+
+
         return view('customer.address_edit',compact('address','provinces')) ;
 
     }
@@ -61,6 +61,37 @@ class ShippingAddressController extends CustomerBase
 
         return redirect(route('my_address.list')) ;
     }
+
+    public function add(){
+        parent::haveto_login() ;
+        $uid = Auth::id() ;
+
+//        $address =
+//            ShippingAddress::where([
+//                'id'=>$id ,
+//                'customer_id'=>$uid
+//            ])
+//                ->first();
+        $provinces = DB::table('dict_provinces')->pluck("name", "code");
+        return view('customer.address_add',compact('provinces','uid')) ;
+
+    }
+    public function add_post(Request $request){
+//        dd($request->post()) ;
+        $addr = new ShippingAddress() ;
+        $addr->wst_login_id = Auth::id() ;
+        $addr->province_cd = $request->post('province') ;
+        $addr->province = Area::q_name($addr->province_cd , 'dict_provinces')[0]->name;
+        $addr->city_cd = $request->post('city') ;
+        $addr->city = Area::q_name($addr->city_cd , 'dict_cities')[0]->name;
+        $addr->district_cd = $request->post('district') ;
+        $addr->district = Area::q_name($addr->district_cd , 'dict_areas')[0]->name;
+        $addr->addr_detail = $request->post('addr_detail') ;
+        $addr->save() ;
+
+        return redirect(route('my_address.list')) ;
+    }
+
     public function del($id){
         parent::haveto_login() ;
         $address = ShippingAddress::find($id);
@@ -72,7 +103,7 @@ class ShippingAddressController extends CustomerBase
 
 
         $rec =  DB::connection()->table('shipping_addresses')->where([
-            'customer_id'=>Auth::id()
+            'wst_login_id'=>Auth::id()
         ])->update(
             [
                 'is_default' => 0

@@ -38,4 +38,5 @@ Route::group(['prefix' => 'admin' , 'namespace'=>'Admin'],function () {
 
     Route::get('/govmgr.user_list', 'GovMgrController@user_list');
     Route::get('/order.list', 'OrderController@list');
+    Route::get('/order.dispatch/{id}', 'OrderController@shoot')->name('order.dispatch');
 });

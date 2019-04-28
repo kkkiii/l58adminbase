@@ -33,17 +33,18 @@ class OrderController extends CustomerBase
         parent::haveto_login() ;
         $data = $this->validate($request,[
             'code_amount' => 'required|integer|min:1',
-            'code_type'=>'required|digits:1',
+//            'code_type'=>'required|digits:1',
         ]) ;
 
 
-//
         $product =
             Product::where([
                 'id'=>$request->post('product_id')
 
             ])
                 ->first();
+
+        $data['code_type'] = 1 ;
 
         $product_price =
             ProductPrice::where([

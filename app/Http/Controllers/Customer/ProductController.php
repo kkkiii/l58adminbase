@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Customer;
 
+use App\Biz\FarmProductBiz;
 use App\Model\Product;
 use App\My\Helpers;
 use Illuminate\Http\Request;
@@ -10,19 +11,26 @@ use Illuminate\Support\Facades\Auth;
 use App\Model\Product as ProductModel ;
 use App\Model\Customer ;
 use App\Biz\ShippingAddress ;
+use Illuminate\Support\Facades\DB ;
 class ProductController extends CustomerBase
 {
     public function list(){
         parent::haveto_login() ;
-        $customer = Customer::find(Auth::id());
-        $company = $customer->company ;
+//        $customer = Customer::find(Auth::id());
+//        $company = $customer->company ;
+
+       $cid =  parent::get_bind_company()->id  ;
+
         $products = ProductModel::where(
             [
-                'company_id'=>$company->id
+                'wst_company_id'=>$cid
             ]
         )->paginate(10);
-
+//
         return view('customer.product_list',compact('products')) ;
+
+
+
     }
 
     public function create(){
@@ -30,32 +38,61 @@ class ProductController extends CustomerBase
 
         $company = parent::get_bind_company() ;
 
-        return view('customer.product_create',compact('products','company')) ;
+        $cate1s =FarmProductBiz::cat1_list() ;
+
+//        dump($cate1s) ;
+//        dd($cate1s[0]->big_category) ;
+
+
+
+
+        return view('customer.product_create',compact('cate1s','company')) ;
     }
     public function create_post(Request $req){
         parent::haveto_login() ;
-        $data = $this->validate($req,[
-            'pname'=>'required',
-            'company_id'=>'required|numeric',
-        ]) ;
 
+
+
+        $data = $this->validate($req,[
+            'variety'=>'required',
+            'cate2' => 'required|integer|min:1',
+            'company_id'=>'required|integer|min:1',
+        ]) ;
+//        dd($req->post()) ;
         $company = parent::get_bind_company() ;
 
+        $product = new Product() ;
+        $product->wst_company_id = $data['company_id'] ;
+        $product->cate2 = $data['cate2'] ;
+        $product->variety = $data['variety'] ;
+        $product->save();
 
-        if ($company->verify ==1)
-        ;
-        else
-        {
-            session()->flash(
-                'success','公司资料等待审核'
-            ) ;
-            return redirect(route('product.list') ) ;
-        }
+//        $wst_company_id = $data['company_id'] ;
+//        $cate2 = $data['cate2'] ;
+//        $variety = $data['variety'] ;
+//
+//        DB::table('products')->insert(
+//            ['wst_company_id' =>$wst_company_id,
+//                'cate2' => $cate2,
+//                'variety' => $variety
+//            ]
+//        );
 
-        $product =new Product();
-        $product->pname = $data['pname'] ;
-        $product->company_id = $data['company_id'] ;
-        $product->save() ;
+
+//        if ($company->verify ==1)
+//        ;
+//        else
+//        {
+//            session()->flash(
+//                'success','公司资料等待审核'
+//            ) ;
+//            return redirect(route('product.list') ) ;
+//        }
+
+//        $product =new Product();
+//        $product->pname = $data['pname'] ;
+//        $product->company_id = $data['company_id'] ;
+//        $product->save() ;
         return redirect(route('product.list')) ;
     }
     public function edit($id){
@@ -100,15 +137,12 @@ class ProductController extends CustomerBase
     public function del(Request $request,$id){
         parent::haveto_login() ;
 
-
-
-        $customer = Customer::find(Auth::id());
-        $company = $customer->company ;
+        $company =  parent::get_bind_company() ;
 
        $product = Product::find($id) ;
 
 
-       if ($product->company_id == $company->id)
+       if ($product->wst_company_id == $company->id)
        {
            $product->delete();
            session()->flash(
@@ -122,9 +156,6 @@ class ProductController extends CustomerBase
            ) ;
            return redirect(route('product.list') ) ;
        }
-
-
-
 
     }
 

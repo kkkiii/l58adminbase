@@ -28,7 +28,7 @@ SELECT
 FROM
 	shipping_addresses
 WHERE
-	customer_id = $uid
+	wst_login_id = $uid
 EOD;
         $res = DB::connection()
             ->select($sql);

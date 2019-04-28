@@ -20,9 +20,9 @@ use Illuminate\Support\Str;
 
         <div class="form-group">
             <label>码标种类</label>
-        <select name="code_type" class="form-control">
+        <select name="code_type" class="form-control" disabled>
             <option >--选一个码标--</option>
-            <option  value="1">图片二维码贴标</option>
+            <option  value="1" selected="selected" >图片二维码贴标</option>
             <option  value="2"> RFID芯码合一</option>
             <option  value="3">NB-IoT+看门狗</option>
         </select>

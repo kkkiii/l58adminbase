@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 @section('content')
 
-    <a href="{{route('product.create')}}" class="btn btn-primary">增加</a>
+    <a href="{{route('my_address.add_post')}}" class="btn btn-primary">增加</a>
 
     <table class="table table-striped">
         <thead>

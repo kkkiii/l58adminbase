@@ -1,24 +1,23 @@
 <?php
 
-namespace App\Model\WST;
+namespace App\Model;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
-class YqCompany extends Authenticatable
+use Illuminate\Database\Eloquent\Model;
+class Product extends Model
 {
     use Notifiable;
-    protected $connection = 'mysql_wst';
-    protected $table = 'yq_company';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-//    protected $fillable = [
-//        'cellphone','password',
-//    ];
+    protected $fillable = [
+        'pname','remark','wst_company_id'
+    ];
 
 //    protected $table="yq_users" ;
 
@@ -40,6 +39,10 @@ class YqCompany extends Authenticatable
 //        'email_verified_at' => 'datetime',
 //    ];
     public function company()
+    {
+        return $this->hasOne('App\Model\Company','id' , 'company_id');
+    }
+    public function product_farm()
     {
         return $this->hasOne('App\Model\Company','id' , 'company_id');
     }

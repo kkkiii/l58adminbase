@@ -27,6 +27,7 @@ class LoginController extends CustomerBase
 //    }
     public function login()
     {
+
 parent::dont_use_guest() ;
         return view('customer.login');
     }
@@ -45,6 +46,7 @@ parent::dont_use_guest() ;
         {
 
             session(['cnpy_user' =>$user]);
+
 
             Auth::login($user) ;
             session()->flash(

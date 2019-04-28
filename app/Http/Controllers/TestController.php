@@ -4,7 +4,6 @@ use App\Biz\Area;
 use App\Biz\Org;
 use App\Car;
 use App\Http\Controllers\Common\AreaController;
-use App\Jobs\Mytest;
 use App\Jobs\SleepSeconds;
 use App\Model\Customer;
 use App\Model\Dict\DictOrdFlowstop;
@@ -12,6 +11,8 @@ use App\Model\Module;
 use App\Model\WST\YqCompanyUser;
 use App\My\Helpers;
 use App\My\MyAuth;
+use App\Vo\CodeGenVo;
+use App\Vo\Vo1;
 use Faker\Provider\HtmlLorem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -33,6 +34,7 @@ use App\Biz\ShippingAddress ;
 use Illuminate\Support\Facades\Queue ;
 use Illuminate\Support\Facades\Mail ;
 use Illuminate\Support\Facades\Log ;
+use App\Jobs\CodeGen ;
 class TestController extends Controller
 {
     public function t1(Request $request)
@@ -173,39 +175,23 @@ print_r("==================================" ) ;
 //        Helpers::p($tree_nodes) ;
 //        dd ( DB::connection('mysql_wst')->select('select version()') );
 
-        $user = YqCompanyUser::find(2000021) ;
-
-        var_dump($user->password) ;
-
+//        $user = YqCompanyUser::find(2000021) ;
+//
+//        var_dump($user->password) ;
 
 //        dd($user->id) ;
 
-      $str = MyAuth::check_company_user('123456' ,$user->password ) ;
-      var_dump($str) ;
+          $this->dispatch(new CodeGen(new CodeGenVo(10000,1,1,1,'code2')));
 
+         echo '1' ;
 
-
-
-
-
-
-        for ($i=0 ; $i < 1000 ; $i++){
-            sleep(1) ;
-             $hand = new Mytest();
-             $hand->handle($i) ;
-        }
-
-
+//        $this->dispatch(new Mytest($reader->toArray()));
 
     }
 
     public function t5(Request $request){
 
-
-
-        $array = \App\Biz\Module::menus_routes(2) ;
-
-        Helpers::p($array) ;
+//        Helpers::p($array) ;
 
         $modules =collect (DB::select('SELECT * from v_admin_id2modules where admin_id = 1'));
 
