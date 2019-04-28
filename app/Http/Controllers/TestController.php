@@ -342,7 +342,6 @@ EOD;
     }
     public function alipay(Request $request)
     {
-
         $order = [
             'out_trade_no' => time(),
             'total_amount' => '1',
@@ -350,5 +349,4 @@ EOD;
         ];
         return Pay::alipay()->web($order);
     }
-
 }
