@@ -30,7 +30,7 @@ class AliPayController extends Controller
     {
         $order = [
             'out_trade_no' => time(),
-            'total_amount' => '1',
+            'total_amount' => '9999',
             'subject' => 'test subject - 测试',
         ];
 
