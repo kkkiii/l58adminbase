@@ -19,10 +19,10 @@ $router->get('test/t7','TestController@t7');
 
 $router->get('test/tree','TestController@tree');
 $router->get('/test/params','TestController@params');
-
+$router->get('/test/qrcode','TestController@qr_code');
 $router->get('alipay/send','AliPayController@send');
 $router->get('alipay/return','AliPayController@return');
-$router->get('alipay/notify','AliPayController@notify');
+$router->post('alipay/notify','AliPayController@notify');
 
 Route::get('/page', 'HomeController@index');
 Route::get('states/get/{id}', 'HomeController@getStates');
