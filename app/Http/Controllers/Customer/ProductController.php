@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Biz\FarmProductBiz;
+use App\Model\Dict\FarmProduct;
 use App\Model\Product;
 use App\My\Helpers;
 use Illuminate\Http\Request;
@@ -26,6 +27,10 @@ class ProductController extends CustomerBase
                 'wst_company_id'=>$cid
             ]
         )->paginate(10);
+
+
+
+
 //
         return view('customer.product_list',compact('products')) ;
 
@@ -97,17 +102,22 @@ class ProductController extends CustomerBase
     }
     public function edit($id){
         parent::haveto_login() ;
-        $customer = Customer::find(Auth::id());
-        $company = $customer->company ;
+//        $customer = Customer::find(Auth::id());
+//        $company = $customer->company ;
+        $company =   parent::get_bind_company() ;
+
         $product =
         Product::where([
             'id'=>$id ,
-            'company_id'=>$company->id
+            'wst_company_id'=>$company->id
         ])
                 ->first();
 
+        $cate1s =FarmProductBiz::cat1_list() ;
+
+
         if ($product)
-        return view('customer.product_edit',compact('product' ,'company')) ;
+        return view('customer.product_edit',compact('product' ,'company' , 'cate1s')) ;
         else
         {
             session()->flash(
@@ -120,17 +130,23 @@ class ProductController extends CustomerBase
     public function edit_post(Request $request){
         parent::haveto_login() ;
         $data = $this->validate($request,[
-            'pname'=>'required',
-            'company_id'=>'required|numeric',
-            'product_id'=>'required|numeric'
+            'variety'=>'required',
+            'cate2' => 'required|integer|min:1',
+            'company_id'=>'required|integer|min:1',
+            'product_id'=>'required|integer|min:1',
         ]) ;
-        $customer = Customer::find(Auth::id());
-        $company = $customer->company ;
+
+
+
+        $company =   parent::get_bind_company() ;
         Product::where([
-            'company_id'=> $company->id,
+            'wst_company_id'=> $company->id,
             'id'=>$data['product_id']
         ])
-            ->update(['pname' =>$data['pname']]);
+            ->update([
+                'cate2' =>$data['cate2'],
+                'variety' =>$data['variety']
+            ]);
         return redirect(route('product.list') ) ;
     }
 

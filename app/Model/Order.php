@@ -6,7 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-
+    public function wst_company()
+    {
+        return $this->hasOne('App\Model\WST\YqCompany','id' , 'wst_company_id');
+    }
     public function product()
     {
         return $this->hasOne('App\Model\Product','id' , 'product_id');

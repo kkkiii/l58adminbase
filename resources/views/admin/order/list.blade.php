@@ -1,5 +1,6 @@
 <?php
 //use Illuminate\Support\Str;
+use App\Model\Dict\FarmProduct ;
 ?>
 @extends('layouts.adminbase')
 
@@ -11,7 +12,9 @@
         <thead>
         <tr>
             <th scope="col">ID</th>
+
             <th scope="col">公司</th>
+            <th scope="col">类别</th>
             <th scope="col">品种</th>
 
             <th scope="col">申请码类型</th>
@@ -33,9 +36,18 @@
 
             <tr>
                 <th scope="row">{{$item->id}}</th>
+
                 <th scope="col">{{
-                 ($item->product->wst_company_id)
+                $item->wst_company->company_name
                 }}</th>
+                <th scope="col">
+                @if($item->product->cate2)
+                        <?php
+                        $f = FarmProduct::find($item->product->cate2) ;
+                       echo     $f->big_category .$f->small_category ;
+                        ?>
+                    @endif
+                </th>
                 <th scope="col">{{$item->product->variety}}</th>
                 <td>{{$item->code_tag_type->title}}</td>
                 <td>{{$item->unit_price/100}}</td>

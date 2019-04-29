@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\Model\Dict\FarmProduct;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -39,10 +40,11 @@ class Product extends Model
 //        'email_verified_at' => 'datetime',
 //    ];
 
-    public function farm_product()
-    {
-        return $this->hasOne('App\Model\Dict\FarmProduct','id' , 'cate2');
-    }
+//    public function farm_product()
+//    {
+//        return $this->hasOne('App\Model\Dict\FarmProduct', 'id','cate2');
+//    }
+
 
 
 }

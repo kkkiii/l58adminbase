@@ -42,9 +42,9 @@ class FarmProduct extends Model
 //    {
 //        return $this->hasOne('App\Model\Company','id' , 'company_id');
 //    }
-//    public function product_farm()
+//    public function product()
 //    {
-//        return $this->hasOne('App\Model\Company','id' , 'company_id');
+//        return $this->hasOne('App\Model\Product','id' , 'company_id');
 //    }
 
 

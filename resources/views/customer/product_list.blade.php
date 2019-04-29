@@ -24,7 +24,11 @@ use App\Model\Dict\FarmProduct ;
 
             <tr>
                 <th scope="row">{{$item->id}}</th>
-                <td>{{ $item->farm_product->big_category.$item->farm_product->small_category}}</td>
+                <td>
+                    @if ($item->cate2)
+                          {{   FarmProduct::find($item->cate2)->big_category .   FarmProduct::find($item->cate2)->small_category   }}
+                    @endif
+               </td>
                 <td>{{$item->variety}}</td>
 
 

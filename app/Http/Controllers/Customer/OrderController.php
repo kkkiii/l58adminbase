@@ -85,9 +85,11 @@ class OrderController extends CustomerBase
         $addr = \App\Model\ShippingAddress::find($shipping_address) ;
 
 
+        $wst_company = parent::get_bind_company() ;
 
         $order =new Order();
         $order->product_id = $request->post('product_id') ;
+        $order->wst_company_id =$wst_company->id;
         $order->code_amount = $request->post('code_amount') ;
         $order->code_type = $request->post('code_type') ;
         $order->unit_price = $request->post('unit_price') ;
