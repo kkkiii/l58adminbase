@@ -375,4 +375,12 @@ EOD;
         $html_text = $pc->buildRequestForm($parameter,"post", "确认");
         echo $html_text;
     }
+    public function qr_code(Request $request)
+    {
+//      $res =  Storage::get('path/to/image.png') ;
+
+//        echo asset('pics/LOGO1mdpi.png');
+//      dd() ;
+        return view('test.qr_code') ;
+    }
 }

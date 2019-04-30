@@ -15,7 +15,8 @@
         "laravel/tinker": "^1.0",
         "moontoast/math": "^1.1",
         "predis/predis": "^1.1",
-        "yansongda/pay": "^2.7"
+        "yansongda/pay": "^2.7",
+        "simplesoftwareio/simple-qrcode": "~2"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

@@ -32,7 +32,7 @@ EOD;
         $sql = <<<EOD
 SELECT 
 id,
-small_category
+goods_category
 FROM
 farm_products
 WHERE

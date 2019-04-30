@@ -2,16 +2,16 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Log ;
 use Yansongda\Pay\Pay ;
-
+use App\My\Helpers ;
 class AliPayController extends Controller
 {
     protected $config = [
         'app_id' => '2016091000478372',
-        'notify_url' => 'http://trace.fooddaily.cn/alipay/notify',
-        'return_url' => 'http://trace.fooddaily.cn/alipay/return',
-        'ali_public_key' => 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2FkMK+IIMhbNrf2A8XkTO4UYFCoOBRNAkRCgmavEug07lPf8WuzyFoXEZJU7dOv65lTljwUVLix9PUR40vKIp9lL3BOZxuHtCDzdnPlugv6GpaWnKUL7HfKWxEcnxUUhlX8tXKdd3B0oiT7dTadj0ifFZw/iAn0XdGI1OGa5n7n7Od4Nu+KIPym+zD/FGH9S/oIz+kbn64iNPYXhs6IVzKb7ISAgY89dT/wSM2L846BsxH0ShVWcdERk2jUCUSwpkPJuOQ+3iZW8Wd1XPHMZMgeysUc9l6AOlPDo0npotEpp/m9e3javZD2mEblZcuLNWTFQOt/IakFuWFf91SwLNwIDAQAB',
+        'notify_url' => 'http://103.254.66.20:32990/alipay/notify',
+        'return_url' => 'http://103.254.66.20:32990/alipay/return',
+        'ali_public_key' => 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAiGG4yBu54g/TxkBjuYj6TQvbhbkcXIPyf9fzGj6YvLApehpbNmH2O5hiMCfNl917FAnNNaIp8+BC8rl4Z5UTPgV979x8OfOHWmaZYD0wqCuqkAl6mwuoevFKNpmdwk31zrRh4rl81JKNIndwZw6/+qG5KAQS52Y2YChnMUVCc/XUOTaZeTHiOHuoM77JXkJDNMMsyl1tM/nVZ6w1OYOGM+ZjREb1adzCuEGM3YoiU/e0hL6/QNDpq3Nej7RKZg7lvSjSVfbDc/wdvYrp9zpJofDtk6frESaor7we9EZhQOLEEHWdXxNrgqitmFv6mUOd2l7dpkillNdYCGZPjiRSXQIDAQAB',
         // 加密方式： **RSA2**
-        'private_key' => 'MIIEpAIBAAKCAQEA2FkMK+IIMhbNrf2A8XkTO4UYFCoOBRNAkRCgmavEug07lPf8WuzyFoXEZJU7dOv65lTljwUVLix9PUR40vKIp9lL3BOZxuHtCDzdnPlugv6GpaWnKUL7HfKWxEcnxUUhlX8tXKdd3B0oiT7dTadj0ifFZw/iAn0XdGI1OGa5n7n7Od4Nu+KIPym+zD/FGH9S/oIz+kbn64iNPYXhs6IVzKb7ISAgY89dT/wSM2L846BsxH0ShVWcdERk2jUCUSwpkPJuOQ+3iZW8Wd1XPHMZMgeysUc9l6AOlPDo0npotEpp/m9e3javZD2mEblZcuLNWTFQOt/IakFuWFf91SwLNwIDAQABAoIBAB1Dxlq1Q4iK/x12+hcv2oMlmME5gxX6qbQ1vJOs4XqNSa738IHYJVMYmx1D9nv1Y8X+W+MBvAC38eT0uydFuWiDAzjsydNWQjroCM4wC1va1BnaE4eIUPGXG//G5EFR/Z38SwWKei7JHu+ZulPDvcPyr0gmpNrTUvXiRvKvKpLJVMO+LxXBWNMc0TZYKFiRz2bdcVEtytFeVTZeyVByHR8bAyISi7cdJTIHlBzpQ9ae4IHD3cFv60vjpj7k9wcyKTsKlUsOLoUCmWLNJgQUvjBP7bhjKnizNUXOCkSKcgFpzoktOqnVIq7rZX9yQdS5KqGH4e/dcF1SbiGfLQo5GVECgYEA+anm8PQOMUk4Wi4QZ5Vk08i2KH1aNMhWXdBD5179nhJflfvDs6L8P3P7yCvUa80Ct8YeLd0/E6+2Sp8Nx62WWPgUzTqhGyowF9tpVlakS02V9thnNGecHMAJ5zgtxcdKbHiWZ3/owq6rbBjEM65+/tXxezcgkqNmYQ4NjIxq8c8CgYEA3dawIuAhxc7/VN/8hVA3dkR4q4J+rRjwrI/hy6/EkC4/XDhmkSYaO7a6Bp1zHINDBxL6f+TTuBqN3heZTD/sUeBX268BQ3tY3gGvukkJyx5XKlpHa/tSsdanpY2Sl1IxSS7CauCE81IV5XPH+ZXAqraUMu6Rmw61ht0JtWyAMhkCgYEAr9PrVCjdUfKaIFCutvSstMZ3G17kx6WLxbgmCm2IuemArfVIZ1vSwLFjUh8kE+OnFVwO5wgZIzktbbJElyr2ZqQYqkyvJ513j2Wz8t1ECdCTW+weCvcpJ8pLby7OdaqcDHaEnlGj0HAJRDDRBQDQaZKs5bT2WK+BK7sk6aX+r1sCgYBzEG1R2aGK4YBMvNVVLLNn08Ina8ta62nCh+rdZLD2/BX/Nn304aePu4qn7bkMXAVDQRPPjJhIkPVu8hygkTN5kHzhxNdJ8ku483T7kfDTe0xI+oS7PKO6/JT+aP1VIdvQksFjAEvVjYkv96sNCSDjK0qZVGcP30RGzJXBlaK02QKBgQCTNHI6BMe+urpW/Y1VMMgemXBtQ65iXLzIy3YnGue+sHd7zQWHOWHMzmUR8G8eQCM2CQ3AP5+WjcmANRaDVfdzYrcGCurrPurS5/attbXSgSzYbMRZaF5AfarSkHWarQMIZ5ufiNdRJeJt0pfma34mOuBBUi6xJgnN5lmQTDEGgg==',
+        'private_key' => 'MIIEpQIBAAKCAQEAsKrajnORlNI7te0IsxOx+MxMjPbpBxvaAV8khcFb9Nb2RjzwqrSj/mmFIVMZMgVejXJxQTWAQEeSv56EURirGGTRDGwJkgQFM+DguDr33NTtjTe2Jq+ghApPrrvIRa3WD5n52aUnBAVyxciMbj+WtloZGQd1sAkDLf+zDKeNiWWnNWz42xmJOPmENuANE5ibo8/6NQVseMxRxO5WnE9BHXNaf441B+J4SoUJIC4/FMFuYbeifH0J2DYI7ozeChdmAYl3QOk1W+mMtkWwZI6YWzOcsyVl85X10sA/QQkEDcAWNSkoNoI3r7gyOGcvbEN/sjBlsCIe8pY6X//P5SI5bQIDAQABAoIBAB+g5vH75MNlBAWlAxq0Wvd08/uEtOFt7hCyzOIZZPInjf2zKU8WegmxMIFv1CHtbikapQYMowJfDfm6UmwGY5NBcV+s8+WtTJUmHHU/MWLayBCxOa4hYTZidjONMOSwo5M1eNKrS5nfs9WO+v096yiIZtfhSwOSCXyxu4d3c9J2ERHgNFEopKAdwYn1s4tIPsBdqMRN7NdufztWiFEybhlWdMHnTLN7rYDw5WSqr0TxfZnkxRMDUu9LO/yZ9ikoQR+ipqays2D9HBCaSKJvnBlb7U+usK0Qii+E8kjtBf4KXdk8y05krsaz/Fpcxstv5aoIE/0DLkGVsWZW615Wx40CgYEA6B8Vlku/1iPEeUbfLPdnLvmkJ9GOHWUnbx3y2STos+jYBJ/WJv9wwhPlEuZCa++Ca2ENTMru83+0IYZC11K1ncPpVlNmTsbzuiM4xx0JMmf09u5QgG3bTA/NlmYypslw6zVSo2HUV06EAYjQoVqBVfnKXTiV17DHKSj2f0sjMrMCgYEAwtdjW/wNcpHksQzdTL8NnnxMkacnmgQ7jTEOkTfkPkUnty2LnljnVlP79uPufPKQ+Rw8ek9tXDfGii3hoOKpUeXgDSyU8XRUmi3Y49pE3k2pSICEVW+1kup7DZ3pnDwINzRoQbCzQxRc/Xg1i444OOhiPHWPCyErRhphnzWEc18CgYEAr9v9CuVQ7fgjPo7HPtYhwqE4EULenL6qZbEW8BTaiJN8NeSy5tDYqPFRuEPjRssq0Bezb96/spOp8Uw7D8+F8YUgH1sIQ97PgNJ2jcQd16aTHRHow6R3ZOUEKVI8RciQWGMJvOa9bXf64v64scZT/sNE4eOhAszX1wNF3aMbg6kCgYEAkcr3pynIqjUu6aiVo0rGlxOte8OXJ3EJWpIds14eJNY8bJ3g/kDKAdfgDxLpLoeXIUAWpPLwAvQdVOIWFfvk9MpMx67XWIFSmPe7dmup4qo8BGteGkv3kxJvt3W1C1oET8KgTJ860/PVzTh44I8v1K1WbKUOvyY3qkItUCOMk4MCgYEA5/MzcvwSkNYbYPSPlGU7DXayrfyICKmAQ49lgmGR/k7wIMZL/4h4d/BoWNobx9AXMJaIT+9nRVBZTYq+pxahYEjPUh1WoX6Jjk4vaMIm2fR/jNJJcDYSK2lMyNWF8xzolj6jQd94xI+rrxYq/ztmRc+oB5ej4dptG2WLRhwDq6M=',
         'log' => [ // optional
             'file' => './logs/alipay.log',
             'level' => 'info', // 建议生产环境等级调整为 info，开发环境为 debug
@@ -30,7 +30,7 @@ class AliPayController extends Controller
     {
         $order = [
             'out_trade_no' => time(),
-            'total_amount' => '9999',
+            'total_amount' => '1',
             'subject' => 'test subject - 测试',
         ];
 

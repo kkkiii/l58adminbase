@@ -30,7 +30,7 @@ use Illuminate\Support\Str;
                 <td>{{$item->code_amount}}</td>
                 <td>{{$item->unit_price/100}}</td>
                 <td>{{$item->tot_money/100}}</td>
-                <td>{{$item->flow_stop}}</td>
+                <td>{{$item->flowstop->title}}</td>
                 <td>
 
                     @if($item->flow_stop == 0)

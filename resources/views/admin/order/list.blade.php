@@ -44,7 +44,7 @@ use App\Model\Dict\FarmProduct ;
                 @if($item->product->cate2)
                         <?php
                         $f = FarmProduct::find($item->product->cate2) ;
-                       echo     $f->big_category .$f->small_category ;
+                       echo     $f->big_category .$f->goods_category ;
                         ?>
                     @endif
                 </th>

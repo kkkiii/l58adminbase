@@ -34,7 +34,7 @@ use App\Model\Dict\FarmProduct ;
 
 
             <select name="cate2" class="form-control">
-                <option  value="{{$product->cate2}}">{{\App\Model\Dict\FarmProduct::find($product->cate2)->small_category }}</option>
+                <option  value="{{$product->cate2}}">{{\App\Model\Dict\FarmProduct::find($product->cate2)->goods_category }}</option>
             </select>
 
         </div>

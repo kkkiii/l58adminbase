@@ -17,7 +17,7 @@ $(document).ready(function() {
 
                     $.each(data, function(key, value){
 
-                        $('select[name="cate2"]').append('<option value="'+ value['id'] +'">' + value['small_category'] + '</option>');
+                        $('select[name="cate2"]').append('<option value="'+ value['id'] +'">' + value['goods_category'] + '</option>');
 
                     });
                 },
