@@ -29,6 +29,11 @@ Route::group(['prefix' => 'customer' , 'namespace'=>'Customer'],function () {
     Route::get('/order.del/{id}', 'OrderController@del')->name('product.del');
     Route::get('/order.pay/{id}', 'OrderController@pay')->name('product.pay');
 
+    Route::get('/alipay/return','PayController@return');
+    Route::post('/alipay/notify','PayController@notify');
+
+    Route::get('/order.choose/{ordid}', 'PayController@choose')->name('pay.choose');
+    Route::post('/order.choose', 'PayController@choose_post')->name('pay.choose_post');
     Route::get('/my_address.list', 'ShippingAddressController@list_my')->name('my_address.list');
     Route::get('/my_address.add', 'ShippingAddressController@add')->name('my_address.add');
     Route::post('/my_address.add', 'ShippingAddressController@add_post')->name('my_address.add_post');

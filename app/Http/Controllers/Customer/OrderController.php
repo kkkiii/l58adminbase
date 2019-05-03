@@ -104,7 +104,7 @@ class OrderController extends CustomerBase
         $order->addr_detail = $addr->addr_detail ;
         $order->save() ;
 
-        return redirect(route('order.list')) ;
+        return redirect('customer/order.choose/' . $order->our_sn) ;
     }
     public function del(Request $request,$id){
         parent::haveto_login() ;

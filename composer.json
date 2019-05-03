@@ -14,9 +14,10 @@
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
         "moontoast/math": "^1.1",
+        "php-amqplib/php-amqplib": "^2.9",
         "predis/predis": "^1.1",
-        "yansongda/pay": "^2.7",
-        "simplesoftwareio/simple-qrcode": "~2"
+        "simplesoftwareio/simple-qrcode": "~2",
+        "yansongda/pay": "^2.7"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

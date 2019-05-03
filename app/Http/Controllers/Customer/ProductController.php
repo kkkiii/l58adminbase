@@ -16,9 +16,10 @@ use Illuminate\Support\Facades\DB ;
 class ProductController extends CustomerBase
 {
     public function list(){
+
+        dd(32) ;
+
         parent::haveto_login() ;
-//        $customer = Customer::find(Auth::id());
-//        $company = $customer->company ;
 
        $cid =  parent::get_bind_company()->id  ;
 

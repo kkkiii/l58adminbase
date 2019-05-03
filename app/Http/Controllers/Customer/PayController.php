@@ -1,14 +1,20 @@
 <?php
-namespace App\Http\Controllers;
+
+namespace App\Http\Controllers\Customer;
+
+use App\Model\Order;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log ;
 use Yansongda\Pay\Pay ;
 use App\My\Helpers ;
-class AliPayController extends Controller
+class PayController extends Controller
 {
-    protected $config = [
+
+    protected $ali_config = [
         'app_id' => '2016091000478372',
-        'notify_url' => 'http://103.254.66.20:32990/alipay/notify',
-        'return_url' => 'http://103.254.66.20:32990/alipay/return',
+        'notify_url' => 'http://103.254.66.20:32990/customer/alipay/notify',
+        'return_url' => 'http://103.254.66.20:32990/customer/alipay/return',
         'ali_public_key' => 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAiGG4yBu54g/TxkBjuYj6TQvbhbkcXIPyf9fzGj6YvLApehpbNmH2O5hiMCfNl917FAnNNaIp8+BC8rl4Z5UTPgV979x8OfOHWmaZYD0wqCuqkAl6mwuoevFKNpmdwk31zrRh4rl81JKNIndwZw6/+qG5KAQS52Y2YChnMUVCc/XUOTaZeTHiOHuoM77JXkJDNMMsyl1tM/nVZ6w1OYOGM+ZjREb1adzCuEGM3YoiU/e0hL6/QNDpq3Nej7RKZg7lvSjSVfbDc/wdvYrp9zpJofDtk6frESaor7we9EZhQOLEEHWdXxNrgqitmFv6mUOd2l7dpkillNdYCGZPjiRSXQIDAQAB',
         // 加密方式： **RSA2**
         'private_key' => 'MIIEpQIBAAKCAQEAsKrajnORlNI7te0IsxOx+MxMjPbpBxvaAV8khcFb9Nb2RjzwqrSj/mmFIVMZMgVejXJxQTWAQEeSv56EURirGGTRDGwJkgQFM+DguDr33NTtjTe2Jq+ghApPrrvIRa3WD5n52aUnBAVyxciMbj+WtloZGQd1sAkDLf+zDKeNiWWnNWz42xmJOPmENuANE5ibo8/6NQVseMxRxO5WnE9BHXNaf441B+J4SoUJIC4/FMFuYbeifH0J2DYI7ozeChdmAYl3QOk1W+mMtkWwZI6YWzOcsyVl85X10sA/QQkEDcAWNSkoNoI3r7gyOGcvbEN/sjBlsCIe8pY6X//P5SI5bQIDAQABAoIBAB+g5vH75MNlBAWlAxq0Wvd08/uEtOFt7hCyzOIZZPInjf2zKU8WegmxMIFv1CHtbikapQYMowJfDfm6UmwGY5NBcV+s8+WtTJUmHHU/MWLayBCxOa4hYTZidjONMOSwo5M1eNKrS5nfs9WO+v096yiIZtfhSwOSCXyxu4d3c9J2ERHgNFEopKAdwYn1s4tIPsBdqMRN7NdufztWiFEybhlWdMHnTLN7rYDw5WSqr0TxfZnkxRMDUu9LO/yZ9ikoQR+ipqays2D9HBCaSKJvnBlb7U+usK0Qii+E8kjtBf4KXdk8y05krsaz/Fpcxstv5aoIE/0DLkGVsWZW615Wx40CgYEA6B8Vlku/1iPEeUbfLPdnLvmkJ9GOHWUnbx3y2STos+jYBJ/WJv9wwhPlEuZCa++Ca2ENTMru83+0IYZC11K1ncPpVlNmTsbzuiM4xx0JMmf09u5QgG3bTA/NlmYypslw6zVSo2HUV06EAYjQoVqBVfnKXTiV17DHKSj2f0sjMrMCgYEAwtdjW/wNcpHksQzdTL8NnnxMkacnmgQ7jTEOkTfkPkUnty2LnljnVlP79uPufPKQ+Rw8ek9tXDfGii3hoOKpUeXgDSyU8XRUmi3Y49pE3k2pSICEVW+1kup7DZ3pnDwINzRoQbCzQxRc/Xg1i444OOhiPHWPCyErRhphnzWEc18CgYEAr9v9CuVQ7fgjPo7HPtYhwqE4EULenL6qZbEW8BTaiJN8NeSy5tDYqPFRuEPjRssq0Bezb96/spOp8Uw7D8+F8YUgH1sIQ97PgNJ2jcQd16aTHRHow6R3ZOUEKVI8RciQWGMJvOa9bXf64v64scZT/sNE4eOhAszX1wNF3aMbg6kCgYEAkcr3pynIqjUu6aiVo0rGlxOte8OXJ3EJWpIds14eJNY8bJ3g/kDKAdfgDxLpLoeXIUAWpPLwAvQdVOIWFfvk9MpMx67XWIFSmPe7dmup4qo8BGteGkv3kxJvt3W1C1oET8KgTJ860/PVzTh44I8v1K1WbKUOvyY3qkItUCOMk4MCgYEA5/MzcvwSkNYbYPSPlGU7DXayrfyICKmAQ49lgmGR/k7wIMZL/4h4d/BoWNobx9AXMJaIT+9nRVBZTYq+pxahYEjPUh1WoX6Jjk4vaMIm2fR/jNJJcDYSK2lMyNWF8xzolj6jQd94xI+rrxYq/ztmRc+oB5ej4dptG2WLRhwDq6M=',
@@ -26,7 +32,38 @@ class AliPayController extends Controller
         'mode' => 'dev', // optional,设置此参数，将进入沙箱模式
     ];
 
-    public function send()
+
+    public function choose(Request $request,$ordid)
+    {
+//        dump($ordid) ;
+
+     $ord =   Order::where(['our_sn'=>$ordid])->first() ;
+
+        return view('customer.pay.choose' ,[
+            'ord' =>$ord
+        ]) ;
+    }
+    public function choose_post(Request $request)
+    {
+
+        $int_amount = intval( $request->post('tot_amount') );
+        $order = [
+            'out_trade_no' => $request->post('ordsn') ,
+            'total_amount' => $int_amount/100 ,
+            'subject' => '买标码的订单sn:' .  $request->post('ordsn') ,
+        ];
+
+        $alipay = Pay::alipay($this->ali_config)->web($order);
+
+        return $alipay->send();// laravel 框架中请直接 `return $alipay`
+
+
+
+    }
+
+
+
+/*    public function send()
     {
 
         $order = [
@@ -35,27 +72,34 @@ class AliPayController extends Controller
             'subject' => 'test subject - 测试',
         ];
 
-        $alipay = Pay::alipay($this->config)->web($order);
+        $alipay = Pay::alipay($this->ali_config)->web($order);
 
         return $alipay->send();// laravel 框架中请直接 `return $alipay`
-    }
+    }*/
 
     public function return()
     {
-        $data = Pay::alipay($this->config)->verify(); // 是的，验签就这么简单！
+        $data = Pay::alipay($this->ali_config)->verify(); // 是的，验签就这么简单！
 
         // 订单号：$data->out_trade_no
         // 支付宝交易号：$data->trade_no
         // 订单总金额：$data->total_amount
 
-        Log::debug('|return|',$data->total_amount);
+
+        $ord =   Order::where(['our_sn'=>$data->out_trade_no])->first() ;
+        $ord->flow_stop = 1 ;
+
+        $ord->save();
+
+
+
+//        Log::debug('|return|',$data->total_amount);
     }
 
     public function notify()
     {
 
-
-        $alipay = Pay::alipay($this->config);
+        $alipay = Pay::alipay($this->ali_config);
 
         try{
             $data = $alipay->verify(); // 是的，验签就这么简单！
@@ -72,6 +116,11 @@ class AliPayController extends Controller
             // $e->getMessage();
         }
 
-        return $alipay->success()->send();// laravel 框架中请直接 `return $alipay->success()`
+//        return $alipay->success()->send();// laravel 框架中请直接 `return $alipay->success()`
+        return $alipay->success();
+
     }
+
+
+
 }
