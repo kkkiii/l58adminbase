@@ -17,7 +17,6 @@ class ProductController extends CustomerBase
 {
     public function list(){
 
-        dd(32) ;
 
         parent::haveto_login() ;
 

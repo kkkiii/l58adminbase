@@ -33,6 +33,8 @@ parent::dont_use_guest() ;
     }
     public function store(Request $request)
     {
+
+
         parent::dont_use_guest() ;
         $data = $this->validate($request,[
             'cellphone'=>'required',
@@ -40,7 +42,12 @@ parent::dont_use_guest() ;
         ]) ;
 
 
+
+
+
         $user = YqCompanyUser::where('phone',  $data['cellphone'] )->first();
+
+
 
         if(MyAuth::check_company_user(  $data['password'],$user->password))
         {

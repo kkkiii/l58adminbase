@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Phone;
 
+use function Couchbase\defaultDecoder;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB ;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Illuminate\Support\Facades\Validator ;
 class ScanController extends Controller
 {
     public function q(Request $request)
@@ -14,10 +17,20 @@ class ScanController extends Controller
 
 
 
-        $data = $this->validate($request,[
-            't'=>'required|integer|size:1',
-            'p'=>'required|size:36',
-        ]) ;
+//        $data = $request->validate($request,[
+//            't'=>'required|integer|size:1',
+//            'p'=>'required|size:36',
+//        ]) ;
+
+
+        $validator = Validator::make($request->all(), [
+            't' =>'required|integer|size:1',
+            'p' =>'required|size:36',
+        ]);
+
+        if ($validator->fails()) {
+            throw  new HttpException(403) ;
+        }
 
 
 
@@ -41,11 +54,15 @@ EOD;
         $res = DB::connection()
             ->select($sql);
 
-//        dump($res[0]) ;
-        $wst_company_id = $res[0]->wst_company_id ;
+
+        if (isset($res[0]))
+        {
 
 
-        $sql2 = <<<EOD
+            $wst_company_id = $res[0]->wst_company_id ;
+
+
+            $sql2 = <<<EOD
 SELECT
 yq_company.id,
 yq_company.company_name,
@@ -77,15 +94,34 @@ yq_company
 where
 id = $wst_company_id
 EOD;
-        $res2 = DB::connection('mysql_wst')
-            ->select($sql2);
+            $res2 = DB::connection('mysql_wst')
+                ->select($sql2);
 
 
-//        dump($res2[0]);
+            if (!is_null($res2[0]) && !is_null($res[0]))
+                return view('phone.scan.q',[
+                    'company'=>$res2[0],
+                    'product'=>$res[0]
+                ]) ;
+            else
+                throw new HttpException(403) ;
 
-        return view('phone.scan.q',[
-            'company'=>$res2[0],
-            'product'=>$res[0]
-        ]) ;
+
+        }
+
+
+      throw new HttpException(403) ;
+
+
+
+    }
+
+
+
+    public function render($request, Exception $e) {
+        dump(4) ;
+        if($e instanceof ValidationException) {
+           throw new HttpException(403) ;
+        }
     }
 }

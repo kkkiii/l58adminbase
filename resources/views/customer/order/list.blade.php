@@ -35,8 +35,8 @@ use Illuminate\Support\Str;
 
                     @if($item->flow_stop == 0)
                     <a href="/customer/order.del/{{$item->id}}" onclick="return confirm('Are you sure?')" class="btn btn-info">删除</a>
-                        <a href="/customer/order.pay/{{$item->id}}" class="btn btn-info">付钱</a>
-                        @endif
+                    <a href="/customer/order.pay/{{$item->id}}" class="btn btn-info">付钱</a>
+                    @endif
 
                 </td>
             </tr>

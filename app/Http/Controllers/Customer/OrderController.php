@@ -122,6 +122,8 @@ class OrderController extends CustomerBase
             return  redirect(route('order.list')) ;
     }
     public function pay(Request $request,$id){
-       echo '将来对接支付' ;
+        $ord = Order::find($id) ;
+
+        return redirect(url('/customer/order.choose/' .$ord->our_sn )) ;
     }
 }

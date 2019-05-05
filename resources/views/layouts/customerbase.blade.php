@@ -29,7 +29,7 @@ use App\Biz\CompanyBiz;
 
 
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">产品资料</a>
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">商品资料</a>
             <div class="dropdown-menu">
 
                 <a class="dropdown-item" href="{{route('product.list')}}">列表</a>
