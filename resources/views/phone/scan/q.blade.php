@@ -23,7 +23,7 @@
 
             <h3>产品信息</h3>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">{{$product->big_category . $product->goods_category}}</li>
+                <li class="list-group-item">{{$product->big_category }}</li>
                 <li class="list-group-item">{{$product->variety}}</li>
             </ul>
 
