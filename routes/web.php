@@ -27,7 +27,7 @@ $router->post('/alipay/notify','AliPayController@notify');
 Route::get('/page', 'HomeController@index');
 Route::get('states/get/{id}', 'HomeController@getStates');
 
-require __DIR__.'./common.php';
-require __DIR__.'./admin.php';
-require __DIR__.'./customer.php';
-require __DIR__.'./phone.php';
+require __DIR__.'/common.php';
+require __DIR__.'/admin.php';
+require __DIR__.'/customer.php';
+require __DIR__.'/phone.php';
