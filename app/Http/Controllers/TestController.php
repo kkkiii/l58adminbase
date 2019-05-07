@@ -93,12 +93,12 @@ print_r("==================================" ) ;
 
 
 
-      $rec =  DB::connection('mysql_user')->table("customer_locate_city")->where('customer_id', 1)->first() ;
-      var_dump($rec->chosen_city) ;
-
-     $no =  Helpers::gen_random_datenum_cd(16) ;
-
-     var_dump($no) ;
+//      $rec =  DB::connection('mysql_user')->table("customer_locate_city")->where('customer_id', 1)->first() ;
+//      var_dump($rec->chosen_city) ;
+//
+//     $no =  Helpers::gen_random_datenum_cd(16) ;
+//
+//     var_dump($no) ;
 
 //print_r(base64_encode('9131641542609436')) ;
 
@@ -106,17 +106,17 @@ print_r("==================================" ) ;
 
         $d_str = date("Y-m-d H:i:s",time()) ;
 
-        $rec =  DB::connection('mysql_user')->table('customer_order')->where([
-            'order_no'=>'9131641542609436',
-            'id'=>1
-        ])->update(
-            [
-'checking_no' => Helpers::gen_random_datenum_cd(16) ,
-'checking_time' =>$d_str
-            ]
-        );
-
-        var_dump($rec) ;
+//        $rec =  DB::connection('mysql_user')->table('customer_order')->where([
+//            'order_no'=>'9131641542609436',
+//            'id'=>1
+//        ])->update(
+//            [
+//'checking_no' => Helpers::gen_random_datenum_cd(16) ,
+//'checking_time' =>$d_str
+//            ]
+//        );
+//
+//        var_dump($rec) ;
 
     }
     public function t3(Request $request){
