@@ -36,7 +36,7 @@ use Illuminate\Support\Facades\Mail ;
 use Illuminate\Support\Facades\Log ;
 use App\Jobs\CodeGen ;
 use Pay;
-class TestController extends Controller
+class TestController extends CustomerBase
 {
     public function t1(Request $request)
     {
