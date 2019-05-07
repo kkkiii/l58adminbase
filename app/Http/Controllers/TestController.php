@@ -46,6 +46,12 @@ class TestController extends Controller
 //        ]);
 //
 //        $input = $request->all();
+
+
+
+        dump(session('cnpy_user'));
+
+
 dd(12) ;
         $date1 = "2014-11-11";
         $var = strtotime($date1) ;
