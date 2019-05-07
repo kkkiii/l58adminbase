@@ -2,7 +2,7 @@
 
 Route::get('/customer/login', 'Customer\LoginController@login')->name('customer.login');
 Route::group(['prefix' => 'customer' , 'namespace'=>'Customer'],function () {
-
+    Route::get('/test/t1','TestController@t1');
     Route::get('/home', 'HomeController@home')->name('customer.home');
     Route::get('/logout', 'LoginController@logout')->name('customer.logout');
     Route::post('login', 'LoginController@store')->name('customer.login.store');
