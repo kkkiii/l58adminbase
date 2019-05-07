@@ -46,7 +46,7 @@ class TestController extends Controller
 //        ]);
 //
 //        $input = $request->all();
-
+dd(12) ;
         $date1 = "2014-11-11";
         $var = strtotime($date1) ;
        Helpers::p($var)   ;
