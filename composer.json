@@ -17,6 +17,7 @@
         "php-amqplib/php-amqplib": "^2.9",
         "predis/predis": "^1.1",
         "simplesoftwareio/simple-qrcode": "~2",
+        "swooletw/laravel-swoole": "^2.6",
         "yansongda/pay": "^2.7"
     },
     "require-dev": {

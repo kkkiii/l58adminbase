@@ -179,7 +179,8 @@ return [
 //        Yansongda\LaravelPay\PayServiceProvider::class,
 //        Lxu\Alipay\AlipayServiceProvider::class,
 //        Hyperbolaa\Alipay\AlipayServiceProvider::class,
-        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class
+        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
+        SwooleTW\Http\LaravelServiceProvider::class,
     ],
 
     /*
