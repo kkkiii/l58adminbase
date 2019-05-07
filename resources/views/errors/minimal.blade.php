@@ -60,7 +60,7 @@
 
 
             @if(! is_null(session('cnpy_user')))
-                <a href="{{url('costomer/home')}}" class="badge badge-primary">返回</a>
+                <a href="{{url('customer/home')}}" class="badge badge-primary">返回</a>
             @elseif(!is_null(session('admin')['uname']))
                 <a href="{{url('home')}}" class="badge badge-primary">返回</a>
             @endif
