@@ -78,6 +78,8 @@ print_r("==================================" ) ;
 
     public function t2()
     {
+
+        dd(37) ;
 //        Redis::command('LPUSH', ['runoobkey', "sss"]);
         Redis::command('DECR',['aa']) ;
 //
