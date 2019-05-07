@@ -42,7 +42,7 @@ code1.company_id,
 code1.product_id,
 code1.sn,
 farm_products.big_category,
-farm_products.goods_category,
+
 products.variety
 FROM
 code$t
