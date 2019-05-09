@@ -48,7 +48,7 @@ class ScanController extends Controller
         }
 
         if( !empty($arr))
-               return view('phone.scan.q',[
+               return view('phone.scan.q2',[
                     'company'=>$arr[0],
                     'product'=>$arr[1]
                 ]) ;
