@@ -20,7 +20,7 @@
 
         <div class="text-center">
 
-            <img src="/pics/pt_logo.png" class="rounded" alt="Cinque Terre">
+            <img src="/pics/pt_logo.png" class="img-responsive img-circle" alt="Cinque Terre">
 
         </div>
 
