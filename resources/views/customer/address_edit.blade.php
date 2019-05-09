@@ -51,7 +51,6 @@ use Illuminate\Support\Str;
         </div>
 
 
-
         <div class="form-group">
             <button type="submit" class="btn btn-primary">保存</button>
         </div>

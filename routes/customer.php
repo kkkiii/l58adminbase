@@ -28,7 +28,8 @@ Route::group(['prefix' => 'customer' , 'namespace'=>'Customer'],function () {
     Route::post('/order.create', 'OrderController@create_post')->name('order.create_post');
     Route::get('/order.del/{id}', 'OrderController@del')->name('product.del');
     Route::get('/order.pay/{id}', 'OrderController@pay')->name('product.pay');
-
+    Route::get('/order.cart2ord', 'OrderController@cart2ord')->name('order.cart2ord');
+    Route::post('/order.cart2ord', 'OrderController@cart2ord_post')->name('order.cart2ord_post');
     Route::get('/alipay/return','PayController@return');
     Route::post('/alipay/notify','PayController@notify');
 

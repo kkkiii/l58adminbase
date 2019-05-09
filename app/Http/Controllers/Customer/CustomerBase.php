@@ -24,5 +24,10 @@ class CustomerBase extends Controller
 
        return  session('cnpy_user')->company ;
     }
+    protected function get_user()
+    {
+
+        return  session('cnpy_user') ;
+    }
 
 }

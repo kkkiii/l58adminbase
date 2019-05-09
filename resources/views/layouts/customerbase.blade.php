@@ -1,5 +1,6 @@
 <?php
-use App\Biz\CompanyBiz;
+use App\Biz\Cart ;
+ $uid = session('cnpy_user')->id ? session('cnpy_user')->id : 0;
 ?>
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
@@ -23,6 +24,15 @@ use App\Biz\CompanyBiz;
 
     </a>
     <ul class="nav nav-pills">
+
+
+        @if($uid && $cnt = Cart::header_show_count($uid))
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('order.cart2ord')}}">结算({{$cnt}})</a>
+            </li>
+            @endif
+
+
         <li class="nav-item">
             <a class="nav-link" href="{{route('enterprise.index')}}">企业资料</a>
         </li>

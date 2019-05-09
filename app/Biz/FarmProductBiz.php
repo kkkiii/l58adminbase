@@ -18,9 +18,10 @@ class FarmProductBiz
     {
         $sql = <<<EOD
 SELECT
-DISTINCT big_category
+dict_first_prod.`code`,
+dict_first_prod.farm_products_first title
 FROM
-farm_products
+dict_first_prod
 EOD;
         $res = DB::connection()
             ->select($sql);
@@ -30,13 +31,33 @@ EOD;
     static public function cat1_cate2($cate1)
     {
         $sql = <<<EOD
-SELECT 
-id,
-goods_category
+SELECT
+dict_second_prod.`code`,
+dict_second_prod.farm_products_second title
 FROM
-farm_products
+dict_second_prod
 WHERE
-big_category = '$cate1'
+pcode = $cate1
+EOD;
+        $res = DB::connection()
+            ->select($sql);
+        return   $res;
+    }
+
+    static public function trans_cate2_name($cate2)
+    {
+        $sql = <<<EOD
+SELECT
+dict_second_prod.`code`,
+dict_second_prod.pcode,
+dict_second_prod.farm_products_second title,
+dict_second_prod.goods_name,
+dict_second_prod.unit_price,
+dict_second_prod.comments
+FROM
+dict_second_prod
+WHERE
+dict_second_prod.`code` =  $cate2
 EOD;
         $res = DB::connection()
             ->select($sql);

@@ -9,14 +9,24 @@ use Illuminate\Support\Str;
         @csrf
 
 
-        <input type="hidden" name="product_id" value="{{$id}}">
 
+
+        <div class="form-group">
+            <label>商品名称{{$good->sy_goods_name}}</label>
+            <input type="hidden" name="sy_goods_name"   class="form-control" value="{{$good->sy_goods_name}}">
+        </div>
+
+        <div class="form-group">
+            <label>标签价格{{$dict2prod_item->unit_price/100}}</label>
+            <input type="hidden" name="unit_price"   class="form-control" value="{{$dict2prod_item->unit_price}}">
+        </div>
 
         <div class="form-group">
             <label>申请多少个码标</label>
             <input type="text" name="code_amount" class="form-control" value="">
         </div>
-
+        <input type="hidden" name="sy_goods_id"   class="form-control" value="{{$good->sy_goods_id}}">
+        <input type="hidden" name="dict_2_code"   class="form-control" value="{{$dict2prod_item->code}}">
 
         <div class="form-group">
             <label>码标种类</label>
@@ -30,7 +40,7 @@ use Illuminate\Support\Str;
 
 
         <div class="form-group">
-            <button type="submit" class="btn btn-primary">下一步</button>
+            <button type="submit" class="btn btn-primary">确认</button>
         </div>
     </form>
 

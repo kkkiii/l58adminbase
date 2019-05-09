@@ -1,11 +1,11 @@
 <?php
-
 namespace App\Http\Controllers\Customer;
-
 use App\Biz\FarmProductBiz;
+use App\Biz\SyGoods;
 use App\Model\Dict\FarmProduct;
 use App\Model\Product;
 use App\My\Helpers;
+use function Couchbase\defaultDecoder;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -13,25 +13,24 @@ use App\Model\Product as ProductModel ;
 use App\Model\Customer ;
 use App\Biz\ShippingAddress ;
 use Illuminate\Support\Facades\DB ;
+use App\Model\SyGood ;
 class ProductController extends CustomerBase
 {
-    public function list(){
+    public function list(Request $request){
 
 
         parent::haveto_login() ;
 
-       $cid =  parent::get_bind_company()->id  ;
-
-        $products = ProductModel::where(
-            [
-                'wst_company_id'=>$cid
-            ]
-        )->paginate(10);
+       $code =  parent::get_bind_company()->company_code  ;
 
 
 
 
-//
+        $products = SyGoods::retrive_list($code)
+            ->paginate(15);
+
+
+
         return view('customer.product_list',compact('products')) ;
 
 
@@ -41,63 +40,55 @@ class ProductController extends CustomerBase
     public function create(){
         parent::haveto_login() ;
 
-        $company = parent::get_bind_company() ;
+        $company =   parent::get_bind_company() ;
+
 
         $cate1s =FarmProductBiz::cat1_list() ;
-
-//        dump($cate1s) ;
-//        dd($cate1s[0]->big_category) ;
 
 
 
 
         return view('customer.product_create',compact('cate1s','company')) ;
     }
-    public function create_post(Request $req){
+    public function create_post(Request $request){
         parent::haveto_login() ;
 
-
-
-        $data = $this->validate($req,[
-            'variety'=>'required',
+        $data = $this->validate($request,[
+            'cate1' => 'required|integer|min:1',
             'cate2' => 'required|integer|min:1',
-            'company_id'=>'required|integer|min:1',
+            'sy_goods_name'=>'required',
+            'sy_brand_name'=>'required',
         ]) ;
-//        dd($req->post()) ;
+
+
         $company = parent::get_bind_company() ;
 
-        $product = new Product() ;
-        $product->wst_company_id = $data['company_id'] ;
-        $product->cate2 = $data['cate2'] ;
-        $product->variety = $data['variety'] ;
+        $product = new SyGood() ;
+        $product->sy_usc_id = $company->company_code;
+
+
+        $product->sy_cate_id = $data['cate2'] ;
+
+
+        $cate2_title = '';
+
+        if (FarmProductBiz::trans_cate2_name($data['cate2']))
+        {
+            $cate2_title = FarmProductBiz::trans_cate2_name($data['cate2'])[0]->title ;
+        }
+
+
+        $product->sy_cgoods = $cate2_title ;
+
+        $product->sy_pcate = $data['cate1'] ;
+
+        $product->sy_goods_name = $data['sy_goods_name'] ;$product->sy_brand_name = $data['sy_brand_name'] ;
+
         $product->save();
 
-//        $wst_company_id = $data['company_id'] ;
-//        $cate2 = $data['cate2'] ;
-//        $variety = $data['variety'] ;
-//
-//        DB::table('products')->insert(
-//            ['wst_company_id' =>$wst_company_id,
-//                'cate2' => $cate2,
-//                'variety' => $variety
-//            ]
-//        );
 
 
-//        if ($company->verify ==1)
-//        ;
-//        else
-//        {
-//            session()->flash(
-//                'success','公司资料等待审核'
-//            ) ;
-//            return redirect(route('product.list') ) ;
-//        }
 
-//        $product =new Product();
-//        $product->pname = $data['pname'] ;
-//        $product->company_id = $data['company_id'] ;
-//        $product->save() ;
         return redirect(route('product.list')) ;
     }
     public function edit($id){
@@ -107,11 +98,9 @@ class ProductController extends CustomerBase
         $company =   parent::get_bind_company() ;
 
         $product =
-        Product::where([
-            'id'=>$id ,
-            'wst_company_id'=>$company->id
-        ])
-                ->first();
+             SyGoods::retrive_item($id) ;
+
+
 
         $cate1s =FarmProductBiz::cat1_list() ;
 
@@ -129,23 +118,38 @@ class ProductController extends CustomerBase
     }
     public function edit_post(Request $request){
         parent::haveto_login() ;
+
+
         $data = $this->validate($request,[
-            'variety'=>'required',
+            'goods_id'=>'required|integer|min:1',
+            'cate1' => 'required|integer|min:1',
             'cate2' => 'required|integer|min:1',
             'company_id'=>'required|integer|min:1',
-            'product_id'=>'required|integer|min:1',
+            'sy_goods_name'=>'required',
+            'sy_brand_name'=>'required',
         ]) ;
 
 
-
         $company =   parent::get_bind_company() ;
-        Product::where([
-            'wst_company_id'=> $company->id,
-            'id'=>$data['product_id']
+
+        $cate2_title = '';
+
+        if (FarmProductBiz::trans_cate2_name($data['cate2']))
+        {
+            $cate2_title = FarmProductBiz::trans_cate2_name($data['cate2'])[0]->title ;
+        }
+
+
+        SyGood::where([
+            'sy_usc_id'=> $company->company_code,
+            'sy_goods_id'=>$data['goods_id']
         ])
             ->update([
-                'cate2' =>$data['cate2'],
-                'variety' =>$data['variety']
+                'sy_pcate' =>$data['cate1'],
+                'sy_cate_id' =>$data['cate2'],
+                'sy_cgoods' =>$cate2_title,
+                'sy_goods_name' =>$data['sy_goods_name'],
+                'sy_brand_name' =>$data['sy_brand_name']
             ]);
         return redirect(route('product.list') ) ;
     }
@@ -155,10 +159,9 @@ class ProductController extends CustomerBase
 
         $company =  parent::get_bind_company() ;
 
-       $product = Product::find($id) ;
+       $product = SyGood::find($id) ;
 
-
-       if ($product->wst_company_id == $company->id)
+       if ($product->sy_usc_id == $company->company_code)
        {
            $product->delete();
            session()->flash(

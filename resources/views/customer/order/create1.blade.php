@@ -54,11 +54,9 @@ use Illuminate\Support\Str;
     <form action="{{ route('order.create_post') }}" method="POST">
         @csrf
 
-        <input type="hidden" name="product_id" value="{{$product->id}}">
         <input type="hidden" name="code_amount" value="{{$ord_amt}}">
         <input type="hidden" name="code_type" value="{{$product_price->id}}">
         <input type="hidden" name="unit_price" value="{{$product_price->unit_price}}">
-
 
 
 

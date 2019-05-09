@@ -1,9 +1,11 @@
 <?php
 namespace App\Http\Controllers;
 use App\Biz\Area;
+use App\Biz\Cart;
 use App\Biz\Org;
 use App\Car;
 use App\Http\Controllers\Common\AreaController;
+use App\Http\Controllers\Customer\CustomerBase;
 use App\Jobs\SleepSeconds;
 use App\Model\Customer;
 use App\Model\Dict\DictOrdFlowstop;
@@ -36,7 +38,7 @@ use Illuminate\Support\Facades\Mail ;
 use Illuminate\Support\Facades\Log ;
 use App\Jobs\CodeGen ;
 use Pay;
-class TestController extends Controller
+class TestController extends CustomerBase
 {
     public function t1(Request $request)
     {
@@ -49,8 +51,10 @@ class TestController extends Controller
 
 
 
-        dump(session('cnpy_user'));
-
+dd(  parent::get_user()->id) ;
+        dump(!is_null(session('admin')['uname']));
+        dump(Auth::guest()) ;
+        dump(Auth::id()) ;
 
 dd(12) ;
         $date1 = "2014-11-11";
@@ -85,9 +89,11 @@ print_r("==================================" ) ;
     public function t2()
     {
 
-        dd(37) ;
-//        Redis::command('LPUSH', ['runoobkey', "sss"]);
-        Redis::command('DECR',['aa']) ;
+        $uid = parent::get_user()->id ;
+      $res =   Cart::header_show_count($uid) ;
+      dd($res) ;
+
+//        Redis::command('DECR',['aa']) ;
 //
 //        $data = [
 //            "a" =>1 ,
