@@ -90,8 +90,6 @@ class OrderController extends CustomerBase
          unset($set2redis['_token']) ;
 
 
-
-
         $cuser = parent::get_user() ;
         $set2redis['uid'] = $cuser->id ;
         $set2redis['tag_type'] = 1 ;
