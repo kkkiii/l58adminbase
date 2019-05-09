@@ -96,6 +96,7 @@ class PayController extends Controller
 
         $ord =   Order::where(['our_sn'=>$data->out_trade_no])->first() ;
         $ord->flow_stop = 1 ;
+        $ord->ali_sn = $data->trade_no ;
         $ord->save();
 
         session()->flash(

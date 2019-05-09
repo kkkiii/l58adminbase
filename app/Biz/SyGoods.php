@@ -27,7 +27,7 @@ class SyGoods
     {
         $product = DB::table('sy_goods')
 
-            ->select( 'sy_goods_id','sy_usc_id', 'sy_cgoods', 'sy_goods_name', 'sy_brand_name' , 'sy_pcate','sy_cate_id')
+            ->select( 'sy_goods_id','sy_usc_id', 'sy_cgoods', 'sy_goods_name', 'sy_brand_name' , 'sy_pcate','sy_cate_id' ,'sy_goods_level')
             ->where(['sy_goods_id'=>$id])->first() ;
 
         return  $product ;
