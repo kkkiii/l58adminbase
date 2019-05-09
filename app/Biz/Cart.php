@@ -95,6 +95,7 @@ EOD;
             $cart->sy_goods_name = $data['sy_goods_name'] ;
             $cart->unit_price = $data['unit_price'] ;
             $cart->code_amount = $data['code_amount'] ;
+            $cart->tag_type = $data['tag_type'] ;
             $cart->save() ;
 
         }else

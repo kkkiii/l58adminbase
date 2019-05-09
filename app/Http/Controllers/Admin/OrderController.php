@@ -14,9 +14,6 @@ class OrderController extends AdminBase
 
         $orders = Order::paginate(10);
 
-
-
-
         return view('admin.order.list',compact('orders'));
     }
     public function shoot($id){
@@ -26,13 +23,24 @@ class OrderController extends AdminBase
         $ord->flow_stop =2;
         $ord->save();
 
-        $code_type = $ord->code_type ;
-        $order_id = $id ;
-        $product =  $ord->product ;
-        $product_id = $product->id  ;
-        $company_id = $product->wst_company_id ;
 
-        $this->dispatch(new CodeGen(new CodeGenVo($ord->code_amount,$company_id,$product_id,$order_id,'code' . $code_type)));
+        $ord_details =  OrdDetail::where([
+            'pid'=>1
+        ])
+            ->get()
+        ;
+
+
+        foreach ($ord_details as $item) {
+
+            $goods_id =  $item->sy_goods_id ;
+            $ord_detail_id = $item->id  ;
+            $company_id = $ord->wst_company_id ;
+
+            $this->dispatch(new CodeGen(new CodeGenVo($ord->code_amount,$company_id,$goods_id,$ord_detail_id,'code' . $item->tag_type)));
+        }
+
+
 
         // 射 到后台任务慢慢生成数据
         // 告诉他  已经进入队列了

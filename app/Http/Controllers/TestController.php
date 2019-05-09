@@ -38,6 +38,7 @@ use Illuminate\Support\Facades\Mail ;
 use Illuminate\Support\Facades\Log ;
 use App\Jobs\CodeGen ;
 use Pay;
+use App\Model\OrdDetail ;
 class TestController extends CustomerBase
 {
     public function t1(Request $request)
@@ -48,6 +49,11 @@ class TestController extends CustomerBase
 //        ]);
 //
 //        $input = $request->all();
+
+        dump(session('cnpy_user') ) ;
+        dump(session('cnpy_user')->id ) ;
+//      dump($ord_details) ;
+
 
 
 

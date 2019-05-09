@@ -103,8 +103,6 @@ class PayController extends Controller
         ) ;
         return redirect(route('order.list') ) ;
 
-
-
     }
 
     public function notify()

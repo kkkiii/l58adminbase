@@ -23,7 +23,43 @@ class OrderController extends CustomerBase
     protected static  $cats ="carts:user" ;
     public function list(){
         parent::haveto_login() ;
-        $orders = Order::paginate(10);
+//        $orders = Order::paginate(10);
+
+
+        $orders = DB::table('orders')
+            ->join('v_order_detail_sum', 'v_order_detail_sum.ordid', '=', 'orders.id')
+            ->join('dict_ord_flowstops', 'orders.flow_stop', '=', 'dict_ord_flowstops.cd')
+            ->select(
+                'orders.id',
+                'orders.our_sn',
+                'orders.ali_sn',
+                'orders.wst_company_id',
+                'orders.flow_stop',
+                'orders.tot_money',
+                'orders.updated_at',
+                'orders.created_at',
+                'orders.province_cd',
+                'orders.province',
+                'orders.city_cd',
+                'orders.city',
+                'orders.district_cd',
+                'orders.district',
+                'orders.addr_detail',
+                'v_order_detail_sum.tot_cash_sum',
+                'v_order_detail_sum.tot_howmany',
+                'dict_ord_flowstops.title as flowstop'
+            )
+            ->paginate(15)
+;
+
+//        dd($orders) ;
+
+
+//        foreach ($orders as $value){
+//            dd($value) ;
+//        }
+
+
         return view('customer.order.list' ,compact('orders')) ;
     }
     public function create($id){
@@ -58,10 +94,13 @@ class OrderController extends CustomerBase
 
         $cuser = parent::get_user() ;
         $set2redis['uid'] = $cuser->id ;
+        $set2redis['tag_type'] = 1 ;
 
-        Redis::command('SET', [static::$cats . ":" .$cuser->id . ":goods" .$set2redis['sy_goods_id'] , json_encode($set2redis)]);
+//        Redis::command('SET', [static::$cats . ":" .$cuser->id . ":goods" .$set2redis['sy_goods_id'] , json_encode($set2redis)]);
+
 
 Cart::push2cart($set2redis) ;
+
 
         return redirect(route('product.list') ) ;
 
@@ -212,7 +251,7 @@ Cart::push2cart($set2redis) ;
         $dt = new DateTime;
         foreach ($cart as $value)
         {
-            $value = array_merge( $value ,[ 'pid'=>$order->id , 'created_at'=>$dt->format('m-d-y H:i:s') , 'updated_at'=>$dt->format('m-d-y H:i:s')  ] ) ;
+            $value = array_merge( $value ,['tag_type'=>1, 'pid'=>$order->id , 'created_at'=>$dt->format('m-d-y H:i:s') , 'updated_at'=>$dt->format('m-d-y H:i:s')  ] ) ;
 
             $data = array_merge( $data ,[$value] ) ;
 

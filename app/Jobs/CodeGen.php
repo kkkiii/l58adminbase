@@ -38,8 +38,8 @@ class CodeGen implements ShouldQueue
                 $ins_db = [
                     'sn'=>Str::orderedUuid(),
                 'wst_company_id'=>$this->vo->company_id ,
-                    'product_id'=>$this->vo->product_id,
-                      'ord_id'=>$this->vo->order_id,
+                    'goods_id'=>$this->vo->product_id,
+                      'ord_detail_id'=>$this->vo->order_id,
                     'created_at'=>date("Y-m-d H:i:s"),
                     'updated_at'=>date("Y-m-d H:i:s")
                 ] ;
