@@ -21,10 +21,10 @@
             </ul>
 
 
-            <h3>产品信息</h3>
+            <h3>商品信息</h3>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">{{$product->big_category }}</li>
-                <li class="list-group-item">{{$product->variety}}</li>
+                <li class="list-group-item">{{$product->sy_goods_name }}</li>
+                <li class="list-group-item">{{$product->sy_brand_name}}</li>
             </ul>
 
 
