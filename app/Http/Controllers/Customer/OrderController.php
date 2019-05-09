@@ -231,6 +231,8 @@ Cart::push2cart($set2redis) ;
 
 //        redirect to pay
 
+        return redirect(url('/customer/order.choose/' .$order->our_sn )) ;
+
     }
 
 
