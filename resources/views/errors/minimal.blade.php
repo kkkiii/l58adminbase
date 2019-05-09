@@ -49,11 +49,11 @@
         </style>
     </head>
     <body>
-    <div class="message" style="padding: 10px;">
-        <a href="{{url('customer/login')}}" class="badge badge-primary">登入</a>
+    {{--<div class="message" style="padding: 10px;">--}}
+        {{--<a href="{{url('customer/login')}}" class="badge badge-primary">登入</a>--}}
 
-        <a href="{{url('customer/home')}}" class="badge badge-primary">主页</a>
-    </div>
+        {{--<a href="{{url('customer/home')}}" class="badge badge-primary">主页</a>--}}
+    {{--</div>--}}
         <div class="flex-center position-ref full-height">
             <div class="code">
                 @yield('code')
