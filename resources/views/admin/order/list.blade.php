@@ -14,11 +14,7 @@ use App\Model\Dict\FarmProduct ;
             <th scope="col">ID</th>
 
             <th scope="col">公司</th>
-            <th scope="col">类别</th>
-            <th scope="col">品种</th>
 
-            <th scope="col">申请码类型</th>
-            <th scope="col">单价</th>
             <th scope="col">数量</th>
 
             <th scope="col">合计</th>
@@ -40,18 +36,8 @@ use App\Model\Dict\FarmProduct ;
                 <th scope="col">{{
                 $item->wst_company->company_name
                 }}</th>
-                <th scope="col">
-                @if($item->product->cate2)
-                        <?php
-                        $f = FarmProduct::find($item->product->cate2) ;
-                       echo     $f->big_category .$f->goods_category ;
-                        ?>
-                    @endif
-                </th>
-                <th scope="col">{{$item->product->variety}}</th>
-                <td>{{$item->code_tag_type->title}}</td>
-                <td>{{$item->unit_price/100}}</td>
-                <td>{{$item->code_amount}}</td>
+
+                <td>{{$item->tot_howmany->tot_howmany}}</td>
 
                 <td>{{$item->tot_money/100}}</td>
 

@@ -16,7 +16,7 @@ use App\Biz\Cart ;
 <body>
 <nav id="navbar-example2" class="navbar navbar-light bg-light">
     <a class="navbar-brand" href="#">
-        @if( $uid = \Illuminate\Support\Facades\Auth::id())
+        @if(   session('cnpy_user') && $uid =  session('cnpy_user')->id )
             {{session('cnpy_user')->company->company_name}}
         @else
             公司
@@ -30,7 +30,7 @@ use App\Biz\Cart ;
             <li class="nav-item">
                 <a class="nav-link" href="{{route('order.cart2ord')}}">结算({{$cnt}})</a>
             </li>
-            @endif
+        @endif
 
 
         <li class="nav-item">

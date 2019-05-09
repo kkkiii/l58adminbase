@@ -12,7 +12,7 @@ use Illuminate\Support\Str;
             <th scope="col">ID</th>
             <th scope="col">创建日期</th>
             <th scope="col">数量</th>
-            <th scope="col">单价</th>
+
             <th scope="col">合计</th>
             <th scope="col">阶段</th>
             <th scope="col">操作</th>
@@ -27,10 +27,10 @@ use Illuminate\Support\Str;
                 <th scope="row">{{$item->id}}</th>
                 <td>{{$item->created_at}}</td>
 
-                <td>{{$item->code_amount}}</td>
-                <td>{{$item->unit_price/100}}</td>
+                <td>{{$item->tot_howmany}}</td>
+
                 <td>{{$item->tot_money/100}}</td>
-                <td>{{$item->flowstop->title}}</td>
+                <td>{{$item->flowstop}}</td>
                 <td>
 
                     @if($item->flow_stop == 0)
