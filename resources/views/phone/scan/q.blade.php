@@ -17,6 +17,7 @@
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">{{$company->province}}</li>
                 <li class="list-group-item">{{$company->city}}</li>
+                <li class="list-group-item">{{$company->company_code}}</li>
                 <li class="list-group-item">{{$company->company_name}}</li>
             </ul>
 
