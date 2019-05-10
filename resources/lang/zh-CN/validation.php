@@ -173,5 +173,13 @@ return [
         'time'                  => '时间',
         'available'             => '可用的',
         'size'                  => '大小',
+        'cate1'                  => '一级大类',
+        'cate2'                  => '二级类别',
+        'sy_goods_name'                  => '商品名称',
+        'sy_brand_name'                  => '商品品牌',
+        'sy_package_unit'=>'净含量/规格',
+        'province'=>'省',
+        'district'=>'区县',
+        'addr_detail'=>'详细地址'
     ],
 ];
