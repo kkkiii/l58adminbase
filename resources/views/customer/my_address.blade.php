@@ -43,7 +43,7 @@ use Illuminate\Support\Str;
                     <a href="/customer/my_address.edit/{{$item->id}}" class="btn btn-info">编辑</a>
                     <a href="/customer/my_address.del/{{$item->id}}" onclick="return confirm('Are you sure?')" class="btn btn-info">删除</a>
                     @if($item->is_default == 0)
-                        <a href="/customer/my_address.default/{{$item->id}}" onclick="return confirm('Are you sure?')" class="btn btn-info">设为缺省</a>
+                        <a href="/customer/my_address.default/{{$item->id}}" onclick="return confirm('Are you sure?')" class="btn btn-info">设为默认</a>
                     @endif
                 </td>
             </tr>
