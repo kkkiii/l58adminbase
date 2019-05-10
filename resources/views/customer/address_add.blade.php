@@ -15,7 +15,7 @@ use Illuminate\Support\Str;
 
 
             <select name="province" class="form-control">
-
+                <option  value=""></option>
                 @foreach ($provinces as $key => $value)
                     <option value="{{$key}}"
 
