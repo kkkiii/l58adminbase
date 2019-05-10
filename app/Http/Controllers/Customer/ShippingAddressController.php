@@ -77,6 +77,16 @@ class ShippingAddressController extends CustomerBase
 
     }
     public function add_post(Request $request){
+
+        parent::haveto_login() ;
+        $data = $this->validate($request,[
+            'province'=>'required|size:2',
+            'city'=>'required|size:4',
+            'district'=>'required|size:6',
+            'addr_detail'=>'required',
+        ]) ;
+
+
 //        dd($request->post()) ;
         $addr = new ShippingAddress() ;
         $addr->wst_login_id = Auth::id() ;
