@@ -16,7 +16,7 @@ use Illuminate\Support\Str;
             <th scope="col">ID</th>
             <th scope="col">省市区</th>
             <th scope="col">详细</th>
-            <th scope="col">是否缺省</th>
+            <th scope="col">是否默认</th>
             <th scope="col">操作</th>
         </tr>
         </thead>
