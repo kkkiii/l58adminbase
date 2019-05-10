@@ -46,6 +46,14 @@ use App\Model\Dict\FarmProduct ;
             <label>品牌名称</label>
             <input type="text" name="sy_brand_name" class="form-control" value="">
         </div>
+
+        <div class="form-group">
+            <label>净含量/规格</label>
+            <input type="text" name="sy_package_unit" class="form-control" value="">
+        </div>
+
+
+
         <div class="form-group">
             <button type="submit" class="btn btn-primary">保存</button>
         </div>
