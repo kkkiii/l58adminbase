@@ -24,7 +24,7 @@ class OrderController extends CustomerBase
     public function list(){
         parent::haveto_login() ;
 //        $orders = Order::paginate(10);
-
+$company = parent::get_bind_company() ;
 
         $orders = DB::table('orders')
             ->join('v_order_detail_sum', 'v_order_detail_sum.ordid', '=', 'orders.id')
@@ -49,6 +49,9 @@ class OrderController extends CustomerBase
                 'v_order_detail_sum.tot_howmany',
                 'dict_ord_flowstops.title as flowstop'
             )
+            ->where([
+                'wst_company_id'=>$company->id
+            ])
             ->paginate(15)
 ;
 
