@@ -9,7 +9,7 @@ use App\Model\Dict\FarmProduct ;
 
 
 
-    <form action="{{ route('product.create_post') }}" method="POST">
+    <form action="{{ route('product.create_post') }}" method="POST" class="">
         @csrf
 
 
@@ -51,6 +51,42 @@ use App\Model\Dict\FarmProduct ;
             <label>净含量/规格</label>
             <input type="text" name="sy_package_unit" class="form-control" value="">
         </div>
+
+        <div class="form-group">
+            <label>商品条码</label>
+            <input type="text" name="sy_goods_number" class="form-control" value="">
+        </div>
+
+        <div class="form-group">
+            <label>计量单位</label>
+            <input type="text" name="sy_uom" class="form-control" value="">
+        </div>
+
+        <div class="form-group">
+            <label>生产日期</label>
+            <input type="date" name="sy_production_date" class="form-control" value="">
+        </div>
+
+
+
+
+
+
+         <div class="form-group row">
+                    <label for="inputKey" class="col-md-1 control-label">保质期</label>
+                    <div class="col-md-2">
+                        <input type="text" name="sy_shelf_life" class="form-control" value="">
+                    </div>
+                    <label for="inputValue" class="col-md-1 control-label">保质期时间单位</label>
+                    <div class="col-md-2">
+                        <select class="custom-select" name="sy_uo_shelf_life">
+                            <option value="">选一个</option>
+                            <option value="年">年</option>
+                            <option value="月">月</option>
+                            <option value="天">天</option>
+                        </select>
+                    </div>
+          </div>
 
 
 
