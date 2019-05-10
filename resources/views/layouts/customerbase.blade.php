@@ -17,7 +17,7 @@ use App\Biz\Cart ;
 <nav id="navbar-example2" class="navbar navbar-light bg-light">
     <a class="navbar-brand" href="#">
         @if(   session('cnpy_user') && $uid =  session('cnpy_user')->id )
-            {{session('cnpy_user')->company->company_name}}
+          {{session('cnpy_user')->realname}}
         @else
             公司
         @endif
