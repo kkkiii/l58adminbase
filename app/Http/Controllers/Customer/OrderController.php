@@ -194,12 +194,13 @@ Cart::push2cart($set2redis) ;
             return  redirect(route('order.list')) ;
     }
     public function pay(Request $request,$id){
+        parent::haveto_login() ;
         $ord = Order::find($id) ;
 
         return redirect(url('/customer/order.choose/' .$ord->our_sn )) ;
     }
     public function cart2ord(Request $reques){
-
+        parent::haveto_login() ;
 
        $uid = parent::get_user()->id ;
 
@@ -211,7 +212,7 @@ Cart::push2cart($set2redis) ;
         return view('customer.order.cart2ord' ,['uid'=>$uid ,'cart'=>$cart ,'addrs'=>$addrs]) ;
     }
     public function cart2ord_post(Request $request){
-
+        parent::haveto_login() ;
         $uid = parent::get_user()->id ;
 
         $tot = Cart::sum_tot($uid) ;

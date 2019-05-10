@@ -13,12 +13,12 @@ class CustomerBase extends Controller
           throw new HttpException(403,'不让访问');
 
     }
-    protected function dont_use_guest()
-    {
-        if( ! is_null(session('cnpy_user')) )
-            throw new HttpException(403,'不让访问');
-
-    }
+//    protected function dont_use_guest()
+//    {
+//        if( ! is_null(session('cnpy_user')) )
+//            throw new HttpException(403,'不让访问');
+//
+//    }
     protected function get_bind_company()
     {
 

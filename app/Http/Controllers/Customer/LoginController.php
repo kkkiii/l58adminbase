@@ -28,12 +28,15 @@ class LoginController extends CustomerBase
     public function login()
     {
 
-parent::dont_use_guest() ;
+        if(  is_null(session('cnpy_user')) )
+            redirect(route('customer.home')) ;
+
         return view('customer.login');
     }
     public function store(Request $request)
     {
-        parent::dont_use_guest() ;
+//        parent::dont_use_guest() ;
+//        parent::haveto_login() ;
         $data = $this->validate($request,[
             'cellphone'=>'required',
             'password'=>'required|min:5',
