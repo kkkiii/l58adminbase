@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Customer;
 use App\Biz\FarmProductBiz;
 use App\Biz\SyGoods;
+use App\Model\Dict\DictProvince;
 use App\Model\Dict\FarmProduct;
 use App\Model\Product;
 use App\My\Helpers;
@@ -14,6 +15,8 @@ use App\Model\Customer ;
 use App\Biz\ShippingAddress ;
 use Illuminate\Support\Facades\DB ;
 use App\Model\SyGood ;
+use App\Model\Dict\DictGoodsLevel ;
+use App\Biz\Area ;
 class ProductController extends CustomerBase
 {
     public function list(Request $request){
@@ -42,13 +45,18 @@ class ProductController extends CustomerBase
 
         $company =   parent::get_bind_company() ;
 
-
         $cate1s =FarmProductBiz::cat1_list() ;
 
+       $level =  DictGoodsLevel::all();
+
+        $provinces =  DictProvince::all();
+//       foreach ($level as $item)
+//       {
+//           dd($item->goods_level) ;
+//       }
 
 
-
-        return view('customer.product_create',compact('cate1s','company')) ;
+        return view('customer.product_create',compact('cate1s','company','level','provinces')) ;
     }
     public function create_post(Request $request){
         parent::haveto_login() ;
@@ -58,7 +66,19 @@ class ProductController extends CustomerBase
             'cate2' => 'required|integer|min:1',
             'sy_goods_name'=>'required',
             'sy_brand_name'=>'required',
+            'sy_package_unit'=>'required',
+            'sy_uom'=>'required',
+            'sy_production_date' => 'nullable|date',
+            'sy_shelf_life' => 'required|integer|min:1',
+             'sy_uo_shelf_life'=>'required',
+            'sy_goods_bases'=>'required',
+            'sy_goods_desc'=>'required',
+            'sy_lot'=>'required',
+            'sy_goods_level'=>'required',
+            'sy_origin'=>'required'
         ]) ;
+
+        $sy_goods_number = $request->post('sy_goods_number') ;
 
 
         $company = parent::get_bind_company() ;
@@ -84,10 +104,27 @@ class ProductController extends CustomerBase
 
         $product->sy_goods_name = $data['sy_goods_name'] ;$product->sy_brand_name = $data['sy_brand_name'] ;
 
+        $product->sy_package_unit =  $data['sy_package_unit'] ;
+
+        if ($sy_goods_number)
+                $product->sy_goods_number = $sy_goods_number ;
+
+        $product->sy_goods_number = $data['sy_production_date']  ;
+        $product->sy_uom = $data['sy_uom']  ;
+
+        $product->sy_shelf_life = $data['sy_shelf_life']  ;
+        $product->sy_uo_shelf_life = $data['sy_uo_shelf_life']  ;
+
+        $product->sy_goods_bases = $data['sy_goods_bases']  ;
+        $product->sy_goods_desc = $data['sy_goods_desc']  ;
+
+
+        $product->sy_lot = $data['sy_lot']  ;
+        $product->sy_goods_level = $data['sy_goods_level']  ;
+        $product->sy_origin_cd = $data['sy_origin']  ;
+
+        $product->sy_origin_title = Area::q_name( $data['sy_origin']  ,'dict_provinces')[0]->name;
         $product->save();
-
-
-
 
         return redirect(route('product.list')) ;
     }
@@ -127,6 +164,7 @@ class ProductController extends CustomerBase
             'company_id'=>'required|integer|min:1',
             'sy_goods_name'=>'required',
             'sy_brand_name'=>'required',
+            'sy_package_unit'=>'required',
         ]) ;
 
 
