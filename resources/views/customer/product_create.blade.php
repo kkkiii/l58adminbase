@@ -18,7 +18,7 @@ use App\Model\Dict\FarmProduct ;
 
 
             <select name="cate1" class="form-control">
-
+                <option value=""> 选一个</option>
                 @foreach ($cate1s as $key => $value)
                     <option value="{{$value->code}}"
 
@@ -29,7 +29,7 @@ use App\Model\Dict\FarmProduct ;
 
 
             <select name="cate2" class="form-control">
-
+                <option value=""> 选一个</option>
             </select>
 
 
