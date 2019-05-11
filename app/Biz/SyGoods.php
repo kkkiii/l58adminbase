@@ -27,7 +27,34 @@ class SyGoods
     {
         $product = DB::table('sy_goods')
 
-            ->select( 'sy_goods_id','sy_usc_id', 'sy_cgoods', 'sy_goods_name', 'sy_brand_name' , 'sy_pcate','sy_cate_id' ,'sy_goods_level')
+            ->select(
+                'sy_goods_id',
+                'sy_pcate',
+                'sy_cate_id',
+                'sy_cgoods',
+                'sy_usc_id',
+                'sy_goods_name',
+                'sy_brand_name',
+                'sy_goods_sn',
+                'sy_package_unit',
+                'sy_goods_number',
+                'sy_uom',
+                'sy_production_date',
+                'sy_shelf_life',
+                'sy_uo_shelf_life',
+                'sy_appearance_goods_url',
+                'sy_apthumbnail_url',
+                'sy_label_picture_url',
+                'sy_label_thumbnail_url',
+                'sy_goods_bases',
+                'sy_goods_desc',
+                'sy_lot',
+                'sy_origin_cd',
+                'sy_origin_title',
+                'sy_goods_level',
+                'updated_at',
+                'created_at'
+            )
             ->where(['sy_goods_id'=>$id])->first() ;
 
         return  $product ;
