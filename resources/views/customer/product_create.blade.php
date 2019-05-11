@@ -48,7 +48,7 @@ use App\Model\Dict\FarmProduct ;
         </div>
 
         <div class="form-group">
-            <label>净含量/规格</label>
+            <label>净含量</label>
             <input type="text" name="sy_package_unit" class="form-control" value="">
         </div>
 
@@ -88,6 +88,42 @@ use App\Model\Dict\FarmProduct ;
                     </div>
           </div>
 
+        <div class="form-group">
+            <label>食品等级</label>
+            <select class="custom-select" name="sy_goods_level">
+                <option value="">选一个</option>
+                @foreach($level as $value)
+                    <option value="{{$value->code}}">{{$value->goods_level}}</option>
+                @endforeach
+
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>商品批次</label>
+            <input type="text" name="sy_lot" class="form-control" value="">
+        </div>
+
+        <div class="form-group">
+            <label>产地</label>
+            <select class="custom-select" name="sy_origin">
+                <option value="">选一个</option>
+                @foreach($provinces as $item)
+                    <option value="{{$item->code}}">{{$item->name}}</option>
+                @endforeach
+
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>商品主要原料成分</label>
+            <textarea name="sy_goods_bases" rows="4" cols="60"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>商品描述</label>
+            <textarea name="sy_goods_desc" rows="4" cols="60"></textarea>
+        </div>
 
 
         <div class="form-group">
