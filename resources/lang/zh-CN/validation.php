@@ -177,9 +177,18 @@ return [
         'cate2'                  => '二级类别',
         'sy_goods_name'                  => '商品名称',
         'sy_brand_name'                  => '商品品牌',
-        'sy_package_unit'=>'净含量/规格',
+        'sy_package_unit'=>'净含量',
         'province'=>'省',
         'district'=>'区县',
-        'addr_detail'=>'详细地址'
+        'addr_detail'=>'详细地址',
+        'sy_uom'=>'计量单位(罐、瓶、听、桶、盒、袋)',
+        'sy_production_date'=>'生产日期',
+        'sy_shelf_life'=>'保质期',
+        'sy_uo_shelf_life'=>'保质期单位',
+        'sy_goods_bases'=>'商品主要原料成分',
+        'sy_goods_desc'=>'商品描述',
+        'sy_lot'=>'商品批次号',
+        'sy_goods_level'=>'食品等级',
+        'sy_origin'=>'产地'
     ],
 ];
