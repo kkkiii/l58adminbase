@@ -206,30 +206,44 @@ Cart::push2cart($set2redis) ;
 
        $cart = Cart::retrive2checkout($uid) ;
 
-//dd($cart) ;
-        $addrs = ShippingAddress::addr_options($uid) ;
 
-        return view('customer.order.cart2ord' ,['uid'=>$uid ,'cart'=>$cart ,'addrs'=>$addrs]) ;
+       $addrs = ShippingAddress::addr_options($uid) ;
+
+
+        $filtered = Arr::where($addrs, function ($value, $key) {
+            return ($value->is_default== 1);
+        });
+
+        $sel =count(data_get($filtered, '*.id')) > 0 ? data_get($filtered, '*.id')[0] :0 ;
+
+        return view('customer.order.cart2ord2',['arr'=>$cart,'addrs'=>$addrs,'selected'=> $sel]);
+
+//        return view('customer.order.cart2ord2' ,['uid'=>$uid ,'cart'=>$cart ,'addrs'=>$addrs]) ;
     }
     public function cart2ord_post(Request $request){
         parent::haveto_login() ;
+
+        $params = $request->post() ;
+
+        foreach ($params['pvalue'] as $value){
+
+            DB::connection()->table('cart')
+                ->where('sy_goods_id', $value['id'])
+                ->update(['code_amount' => $value['count']]) ;
+        }
+
         $uid = parent::get_user()->id ;
-
         $tot = Cart::sum_tot($uid) ;
-
         // create ord_details and order
 
-       $addr_id =  $request->post('shipping_address') ;
-
+       $addr_id = $params['addr'];
         $addr = \App\Model\ShippingAddress::find($addr_id) ;
-
 
         $wst_company = parent::get_bind_company() ;
 
         $order =new Order();
 
         $order->wst_company_id =$wst_company->id;
-
         $order->our_sn = MyStr::create_orderid() ;
         $order->tot_money = $tot[0]->tot ;
         $order->province_cd = $addr->province_cd ;
@@ -241,24 +255,17 @@ Cart::push2cart($set2redis) ;
         $order->addr_detail = $addr->addr_detail ;
         $order->save() ;
 
-
         $cart = Cart::retrive2checkout($uid) ;
-
         $cart = Helpers::objectToArray($cart) ;
 //        $tot = Helpers::objectToArray($tot) ;
-
-
 
         $data = [] ;
         $dt = new DateTime;
         foreach ($cart as $value)
         {
             $value = array_merge( $value ,['tag_type'=>1, 'pid'=>$order->id , 'created_at'=>$dt->format('m-d-y H:i:s') , 'updated_at'=>$dt->format('m-d-y H:i:s')  ] ) ;
-
             $data = array_merge( $data ,[$value] ) ;
-
         }
-
 
         DB::table('ord_details')->insert(
             $data
@@ -271,8 +278,11 @@ Cart::push2cart($set2redis) ;
         // dump carts
 
 //        redirect to pay
+        return response()->json([
+            'url' =>url('/customer/order.choose/' .$order->our_sn )
+        ]);
 
-        return redirect(url('/customer/order.choose/' .$order->our_sn )) ;
+//        return redirect(url('/customer/order.choose/' .$order->our_sn )) ;
 
     }
 
