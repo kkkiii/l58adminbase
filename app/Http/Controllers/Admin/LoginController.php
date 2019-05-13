@@ -65,14 +65,14 @@ class LoginController extends Controller
 
 
             session()->flash(
-                'success','登陆成功'
+                'success','登录成功'
             ) ;
             return redirect('/home' ) ;
         }
         else
         {
             session()->flash(
-                'success','登陆失败'
+                'success','登录失败'
             ) ;
             return back() ;
         }
