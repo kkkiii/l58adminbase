@@ -38,7 +38,7 @@ class LoginController extends CustomerBase
 //        parent::dont_use_guest() ;
 //        parent::haveto_login() ;
         $data = $this->validate($request,[
-            'cellphone'=>'required|numeric|size:10',
+            'cellphone'=>'required|regex:/^1[0-9]{10}$/',
             'password'=>'required|min:5',
         ]) ;
 
