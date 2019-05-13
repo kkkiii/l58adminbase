@@ -260,10 +260,10 @@ Cart::push2cart($set2redis) ;
 //        $tot = Helpers::objectToArray($tot) ;
 
         $data = [] ;
-        $dt = new DateTime;
+//        $dt = new DateTime;
         foreach ($cart as $value)
         {
-            $value = array_merge( $value ,['tag_type'=>1, 'pid'=>$order->id , 'created_at'=>$dt->format('m-d-y H:i:s') , 'updated_at'=>$dt->format('m-d-y H:i:s')  ] ) ;
+            $value = array_merge( $value ,['tag_type'=>1, 'pid'=>$order->id , 'created_at'=>date("Y-m-d H:i:s") , 'updated_at'=>date("Y-m-d H:i:s")  ] ) ;
             $data = array_merge( $data ,[$value] ) ;
         }
 
