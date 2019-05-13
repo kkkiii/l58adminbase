@@ -117,11 +117,23 @@ use App\Model\Dict\FarmProduct ;
 
         <div class="form-group">
             <label>商品主要原料成分</label>
-            <textarea name="sy_goods_bases" rows="4" cols="60"></textarea>
+
+
+
+        </div>
+        <div class="form-group">
+
+
+             <textarea name="sy_goods_bases" rows="4" cols="60"></textarea>
+
+        </div>
+        <div class="form-group">
+            <label>商品描述</label>
+
         </div>
 
         <div class="form-group">
-            <label>商品描述</label>
+
             <textarea name="sy_goods_desc" rows="4" cols="60"></textarea>
         </div>
 
