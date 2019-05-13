@@ -152,7 +152,7 @@ use App\Model\Dict\FarmProduct ;
         </div>
 
         <div class="form-group">
-           
+
             <textarea name="sy_goods_desc" rows="4" cols="60">{{$product->sy_goods_desc}}</textarea>
         </div>
 
