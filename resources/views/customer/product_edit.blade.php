@@ -138,14 +138,21 @@ use App\Model\Dict\FarmProduct ;
 
             </select>
         </div>
-
         <div class="form-group">
             <label>商品主要原料成分</label>
+
+        </div>
+        <div class="form-group">
+
             <textarea name="sy_goods_bases" rows="4" cols="60">{{$product->sy_goods_bases}}</textarea>
+        </div>
+        <div class="form-group">
+            <label>商品描述</label>
+
         </div>
 
         <div class="form-group">
-            <label>商品描述</label>
+           
             <textarea name="sy_goods_desc" rows="4" cols="60">{{$product->sy_goods_desc}}</textarea>
         </div>
 
