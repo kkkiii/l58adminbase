@@ -210,11 +210,18 @@ Cart::push2cart($set2redis) ;
        $addrs = ShippingAddress::addr_options($uid) ;
 
 
+
+
         $filtered = Arr::where($addrs, function ($value, $key) {
             return ($value->is_default== 1);
         });
 
         $sel =count(data_get($filtered, '*.id')) > 0 ? data_get($filtered, '*.id')[0] :0 ;
+
+
+        foreach ($cart as $item){
+            $item->unit_price = $item->unit_price /100 ;
+        }
 
         return view('customer.order.cart2ord2',['arr'=>$cart,'addrs'=>$addrs,'selected'=> $sel]);
 
