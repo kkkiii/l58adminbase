@@ -53,7 +53,7 @@ use App\Biz\Cart ;
             <a class="nav-link"href="{{route('order.list')}}">订单</a>
         </li>
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{session('cnpy_user')->realname}}</a>
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">用户中心</a>
             <div class="dropdown-menu">
 
                 <a class="dropdown-item" href="{{route('my_address.list')}}">我的收货地址</a>
