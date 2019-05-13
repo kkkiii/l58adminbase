@@ -1,16 +1,14 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Laravel</title>
+<?php
+use Illuminate\Support\Str;
+$tot = 0 ;
+?>
+@extends('layouts.customerbase')
 
-    <link href="{{ asset('css/app.css')  }}" rel="stylesheet">
-</head>
-<body>
+@section('content')
 
-<div id="app2">
+
+
+    <div id="app2">
 
 
         <table class="table">
@@ -40,61 +38,66 @@
             </tbody>
         </table>
 
-    <form @submit="formSubmit">
-        @csrf
+        <form @submit="formSubmit">
+            @csrf
 
 
-        <div class="card">
-            选择地址
-            <select name="shipping_address" class="form-control"  v-model="selected">
+            <div class="card">
+                选择地址
+                <select name="shipping_address" class="form-control"  v-model="selected">
 
-                @foreach($addrs as $item )
-                    <option  value="{{$item->id}}">{{$item->addr}}</option>
-                @endforeach
+                    @foreach($addrs as $item )
+                        <option  value="{{$item->id}}">{{$item->addr}}</option>
+                    @endforeach
 
-            </select>
-        </div>
-
-
-
-        <div class="card">
-            <ul class="list-group">
-                <li class="list-group-item"> 合计:@{{totalPrice()}}</li>
-                <button type="submit" class="btn btn-primary">确认</button>
-            </ul>
-        </div>
+                </select>
+            </div>
 
 
 
-    </form>
+            <div class="card">
+                <ul class="list-group">
+                    <li class="list-group-item"> 合计:@{{totalPrice()}}</li>
+                    <button type="submit" class="btn btn-primary">确认</button>
+                </ul>
+            </div>
 
-</div>
-<script src="{{ asset('js/app.js') }}"></script>
-<script>
 
-    var app2 = new Vue({
-        el: '#app2',
-        data: {
-            Ip_Json: [
 
-                @foreach($arr as $k =>$item)
-                        @if($k>0)
-                        ,
-                        @endif
-                {{'{'}}
-                        {{ "id:" .$item->sy_goods_id}} ,
-                   name:  "{{$item->sy_goods_name}}"  ,
-                    {{ "price:" .$item->unit_price}},
-                    {{ "count:" .$item->code_amount}}
+        </form>
 
-                    {{'}'}}
-                @endforeach
+    </div>
 
-                ],
+
+@endsection
+
+
+@section('js')
+    <script>
+
+        var app2 = new Vue({
+            el: '#app2',
+            data: {
+                Ip_Json: [
+
+                    @foreach($arr as $k =>$item)
+                    @if($k>0)
+                    ,
+                    @endif
+                    {{'{'}}
+                    {{ "id:" .$item->sy_goods_id}} ,
+                    name:  "{{$item->sy_goods_name}}"  ,
+                {{ "price:" .$item->unit_price}},
+        {{ "count:" .$item->code_amount}}
+
+        {{'}'}}
+        @endforeach
+
+        ],
         selected:{{$selected}}
 
 
-        },
+            },
         methods:{
             totalPrice : function(){
                 var totalP = 0;
@@ -113,7 +116,7 @@
                 })
                     .then(function (response) {
                         currentObj.output = response.data.url ;
-                       console.log(response.data) ;
+                        console.log(response.data) ;
                         $(location).attr('href',response.data.url)
                     })
                     .catch(function (error) {
@@ -123,8 +126,7 @@
 
 
         }
-    })
+        })
 
-</script>
-</body>
-</html>
+    </script>
+@endsection
