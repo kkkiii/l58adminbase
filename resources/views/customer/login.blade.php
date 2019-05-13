@@ -25,7 +25,7 @@
 
                 <div class="form-group">
                     <label for="email">账户</label>
-                    <input type="text" class="form-control" name="cellphone"  value="{{old('uname')}}">
+                    <input type="text" class="form-control" name="cellphone"  value="{{old('cellphone')}}">
 
                 </div>
 
