@@ -25,14 +25,14 @@
 
                 <div class="form-group">
                     <label for="email">账户</label>
-                    {{--<input type="text" class="form-control" name="uname"  value="{{old('uname')}}">--}}
-                    <input type="text" class="form-control" name="cellphone"  value="15245631422">
+                    <input type="text" class="form-control" name="uname"  value="{{old('uname')}}">
+
                 </div>
 
                 <div class="form-group">
                     <label for="password">密码</label>
-                    {{--<input type="password" class="form-control" name="password" value="{{old('password')}}">--}}
-                    <input type="password" class="form-control" name="password"  value="123456">
+                    <input type="password" class="form-control" name="password" value="{{old('password')}}">
+
                 </div>
 
 

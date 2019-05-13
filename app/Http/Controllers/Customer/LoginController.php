@@ -38,9 +38,13 @@ class LoginController extends CustomerBase
 //        parent::dont_use_guest() ;
 //        parent::haveto_login() ;
         $data = $this->validate($request,[
-            'cellphone'=>'required',
+            'cellphone'=>'required|numeric|size:10',
             'password'=>'required|min:5',
         ]) ;
+
+
+        dd($request->post()) ;
+
 
         $user = YqCompanyUser::where('phone',  $data['cellphone'] )->first();
 
@@ -54,14 +58,14 @@ class LoginController extends CustomerBase
 
             Auth::login($user) ;
             session()->flash(
-                'success','登陆成功'
+                'success','登录成功'
             ) ;
             return redirect(route('customer.home') ) ;
         }
         else
         {
             session()->flash(
-                'success','登陆失败'
+                'success','登录失败'
             ) ;
             return redirect(route('customer.login') ) ;
         }
@@ -113,7 +117,7 @@ class LoginController extends CustomerBase
         // redirect home
 
         session()->flash(
-            'success','登陆成功'
+            'success','登录成功'
         ) ;
         return redirect(route('customer.home') ) ;
 

@@ -189,6 +189,7 @@ return [
         'sy_goods_desc'=>'商品描述',
         'sy_lot'=>'商品批次号',
         'sy_goods_level'=>'食品等级',
-        'sy_origin'=>'产地'
+        'sy_origin'=>'产地',
+        'cellphone'=>'手机号'
     ],
 ];
