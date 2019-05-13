@@ -116,7 +116,7 @@ use App\Model\Dict\FarmProduct ;
         </div>
 
         <div class="form-group">
-            <label>商品主要原料成分</label>
+            <label>商品主要原料成分(最多255个字)</label>
 
 
 
@@ -128,7 +128,7 @@ use App\Model\Dict\FarmProduct ;
 
         </div>
         <div class="form-group">
-            <label>商品描述</label>
+            <label>商品描述(最多65535个字)</label>
 
         </div>
 

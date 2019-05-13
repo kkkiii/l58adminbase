@@ -140,6 +140,7 @@ use App\Model\Dict\FarmProduct ;
         </div>
         <div class="form-group">
             <label>商品主要原料成分</label>
+            <label>商品主要原料成分(最多255个字)</label>
 
         </div>
         <div class="form-group">
@@ -147,7 +148,7 @@ use App\Model\Dict\FarmProduct ;
             <textarea name="sy_goods_bases" rows="4" cols="60">{{$product->sy_goods_bases}}</textarea>
         </div>
         <div class="form-group">
-            <label>商品描述</label>
+            <label>商品描述(最多65535个字)</label>
 
         </div>
 
