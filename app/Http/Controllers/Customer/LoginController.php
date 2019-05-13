@@ -54,6 +54,17 @@ class LoginController extends CustomerBase
             session(['cnpy_user' =>$user]);
 
 
+            if ($user->company)
+                ;
+            else
+            {
+                session()->flash(
+                    'success','这个用户的数据没有公司信息'
+                ) ;
+                return redirect(route('customer.login') ) ;
+            }
+
+
             Auth::login($user) ;
             session()->flash(
                 'success','登录成功'
