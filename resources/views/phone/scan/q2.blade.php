@@ -15,14 +15,18 @@
 
 @section('content')
 
-    <div class="container-fluid">
 
 
-        <div  class="text-center">
+
+
+            <div class="card">
+
+                <div class="card-body">
 
             <img src="/pics/pt_logo.png" class="img-responsive img-circle" alt="Cinque Terre">
 
         </div>
+            </div>
 
 
 
@@ -56,7 +60,7 @@
         </div>
     </div>
 
-    </div>
+
 @endsection
 
 
