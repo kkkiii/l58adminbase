@@ -11,11 +11,11 @@
             text-align: center;
         }
         img{
-
+            align; center
             width: auto;
             height: auto;
-            max-width: 100%;
-            max-height: 100%;
+            max-width: 50%;
+            max-height: 50%;
 
         }
     </style>
@@ -29,7 +29,7 @@
 
     <div class="card">
 
-        <div class="card-body" style="background-color: #17b651">
+        <div class="text-center card-body" style="background-color: #17b651">
 
             <img src="/pics/pt_logo.png" class="img-responsive img-circle" alt="Cinque Terre">
 
