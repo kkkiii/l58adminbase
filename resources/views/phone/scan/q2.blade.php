@@ -15,14 +15,16 @@
 
 @section('content')
 
-    <div class="top">
+    <div class="container-fluid">
 
 
-        <div class="text-center">
+        <div  class="text-center">
 
             <img src="/pics/pt_logo.png" class="img-responsive img-circle" alt="Cinque Terre">
 
         </div>
+
+
 
     </div>
 
