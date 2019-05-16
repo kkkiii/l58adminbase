@@ -1,16 +1,24 @@
 @extends('layouts.phonebase')
 
 @section('style')
-<style>
-    .top {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        width: 100%;
-        background-color: #0cb658;
-        text-align: center;
-    }
-</style>
+    <style>
+        .top {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            background-color: #0cb658;
+            text-align: center;
+        }
+        img{
+
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -19,14 +27,14 @@
 
 
 
-            <div class="card">
+    <div class="card">
 
-                <div class="card-body">
+        <div class="card-body" style="background-color: #17b651">
 
             <img src="/pics/pt_logo.png" class="img-responsive img-circle" alt="Cinque Terre">
 
         </div>
-            </div>
+    </div>
 
 
 
@@ -50,7 +58,6 @@
                 <li class="list-group-item">{{$product->sy_goods_name }}</li>
                 <li class="list-group-item">{{$product->sy_brand_name}}</li>
             </ul>
-
 
 
         </div>
