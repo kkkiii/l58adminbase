@@ -26,9 +26,6 @@
 
 
 
-    </div>
-
-
 
     <div class="card">
 
@@ -57,6 +54,8 @@
         <div class="card-footer text-muted">
 
         </div>
+    </div>
+
     </div>
 @endsection
 
