@@ -23,9 +23,12 @@ class Order extends Model
         return $this->hasOne('App\Model\CodeTagType','id' , 'code_type');
     }
 
-    public function tot_howmany()
+    public function sum_howmany()
     {
 //        VOrderDetailSum
+
+
+
         return $this->hasOne('App\Model\VOrderDetailSum','ordid' , 'id');
     }
 

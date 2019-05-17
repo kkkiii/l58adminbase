@@ -39,17 +39,17 @@ use App\Model\Dict\FarmProduct ;
 
         <div class="form-group">
             <label>商品名称</label>
-            <input type="text" name="sy_goods_name" class="form-control" value="">
+            <input type="text" name="sy_goods_name" class="form-control" value="{{old('sy_goods_name')}}">
         </div>
 
         <div class="form-group">
             <label>品牌名称</label>
-            <input type="text" name="sy_brand_name" class="form-control" value="">
+            <input type="text" name="sy_brand_name" class="form-control" value="{{old('sy_brand_name')}}">
         </div>
 
         <div class="form-group">
             <label>净含量</label>
-            <input type="text" name="sy_package_unit" class="form-control" value="">
+            <input type="text" name="sy_package_unit" class="form-control" value="{{old('sy_package_unit')}}">
         </div>
 
         <div class="form-group">

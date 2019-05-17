@@ -37,7 +37,7 @@ use App\Model\Dict\FarmProduct ;
                 $item->wst_company->company_name
                 }}</th>
 
-                <td>{{$item->tot_howmany->tot_howmany}}</td>
+                <td>{{$item->id}}</td>
 
                 <td>{{$item->tot_money/100}}</td>
 

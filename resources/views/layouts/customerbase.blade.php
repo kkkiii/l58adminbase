@@ -71,15 +71,10 @@ use App\Biz\Cart ;
 
 
 
-
-
-
         <main role="main" class="">
 
             @include('layouts.errors')
             @include('layouts.msg')
-
-
 
             @yield('content')
 

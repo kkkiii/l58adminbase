@@ -206,18 +206,22 @@ Cart::push2cart($set2redis) ;
 
        $cart = Cart::retrive2checkout($uid) ;
 
+       if(empty($cart))
+       {
+           session()->flash(
+               'danger','购物车是空的'
+           ) ;
+           return redirect(route('customer.home')) ;
+       }
+
 
        $addrs = ShippingAddress::addr_options($uid) ;
-
-
-
 
         $filtered = Arr::where($addrs, function ($value, $key) {
             return ($value->is_default== 1);
         });
 
         $sel =count(data_get($filtered, '*.id')) > 0 ? data_get($filtered, '*.id')[0] :0 ;
-
 
         foreach ($cart as $item){
             $item->unit_price = $item->unit_price /100 ;
@@ -231,15 +235,30 @@ Cart::push2cart($set2redis) ;
         parent::haveto_login() ;
 
         $params = $request->post() ;
+        $uid = parent::get_user()->id ;
+        $cart = Cart::retrive2checkout($uid) ;
+
+
+
+        if(empty($cart))
+        {
+            session()->flash(
+                'danger','购物车是空的'
+            ) ;
+            return response()->json([
+                'cd'=>-1,
+                'url' =>url('/customer/home'  )
+            ]);
+        }
+
 
         foreach ($params['pvalue'] as $value){
-
             DB::connection()->table('cart')
                 ->where('sy_goods_id', $value['id'])
                 ->update(['code_amount' => $value['count']]) ;
         }
 
-        $uid = parent::get_user()->id ;
+
         $tot = Cart::sum_tot($uid) ;
         // create ord_details and order
 
@@ -286,6 +305,7 @@ Cart::push2cart($set2redis) ;
 
 //        redirect to pay
         return response()->json([
+            'cd'=>1,
             'url' =>url('/customer/order.choose/' .$order->our_sn )
         ]);
 

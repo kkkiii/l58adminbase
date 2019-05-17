@@ -15,6 +15,8 @@ class OrderController extends AdminBase
 
         $orders = Order::paginate(10);
 
+
+
         return view('admin.order.list',compact('orders'));
     }
     public function shoot($id){
