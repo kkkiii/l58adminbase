@@ -43,7 +43,6 @@ class LoginController extends CustomerBase
         ]) ;
 
 
-
         $user = YqCompanyUser::where('phone',  $data['cellphone'] )->first();
 
 
