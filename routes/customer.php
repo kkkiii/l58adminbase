@@ -42,4 +42,12 @@ Route::group(['prefix' => 'customer' , 'namespace'=>'Customer'],function () {
     Route::get('/my_address.edit/{id}', 'ShippingAddressController@edit')->name('my_address.edit');
     Route::post('/my_address.edit', 'ShippingAddressController@edit_post')->name('my_address.edit_post');
     Route::get('/my_address.default/{id}', 'ShippingAddressController@set_default')->name('my_address.default');
+
+
+    Route::get('/template.list', 'TemplateController@list')->name('template.list');
+    Route::get('/template.create', 'TemplateController@create')->name('template.create');
+    Route::post('/template.create', 'TemplateController@create_post')->name('template.create_post');
+    Route::get('/template.edit/{id}', 'TemplateController@edit')->name('template.edit');
+    Route::post('/template.edit', 'TemplateController@edit_post')->name('template.edit_post');
+    Route::get('/template.del/{id}', 'TemplateController@del')->name('template.del');
 });

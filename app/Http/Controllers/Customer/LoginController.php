@@ -43,8 +43,16 @@ class LoginController extends CustomerBase
         ]) ;
 
 
+
         $user = YqCompanyUser::where('phone',  $data['cellphone'] )->first();
 
+        if (is_null($user))
+        {
+            session()->flash(
+                'success','没有这个用户'
+            ) ;
+            return redirect(route('customer.login') ) ;
+        }
 
 
         if(MyAuth::check_company_user(  $data['password'],$user->password))

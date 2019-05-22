@@ -14,6 +14,8 @@ use App\Biz\Cart ;
     @yield('style')
 </head>
 <body>
+
+<header>
 <nav id="navbar-example2" class="navbar navbar-light bg-light">
     <a class="navbar-brand" href="#">
         @if(   session('cnpy_user') && $uid =  session('cnpy_user')->id )
@@ -38,15 +40,24 @@ use App\Biz\Cart ;
         </li>
 
 
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">商品资料</a>
-            <div class="dropdown-menu">
 
-                <a class="dropdown-item" href="{{route('product.list')}}">列表</a>
-                <a class="dropdown-item" href="{{route('product.create')}}">创建</a>
-            </div>
-        </li>
+            {{--<li class="nav-item dropdown">--}}
+                {{--<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">商品资料</a>--}}
+                {{--<div class="dropdown-menu">--}}
 
+                    {{--<a class="dropdown-item" href="{{route('product.list')}}">列表</a>--}}
+                    {{--<a class="dropdown-item" href="{{route('product.create')}}">创建</a>--}}
+                {{--</div>--}}
+            {{--</li>--}}
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">模板</a>
+                <div class="dropdown-menu">
+
+                    <a class="dropdown-item" href="{{route('template.list')}}">列表</a>
+                    <a class="dropdown-item" href="{{route('template.create')}}">创建</a>
+                </div>
+            </li>
 
 
         <li class="nav-item">
@@ -64,26 +75,21 @@ use App\Biz\Cart ;
     </ul>
 </nav>
 
+</header>
 
 
 
-<div class="container-fluid">
-
-
-
-        <main role="main" class="">
+<main role="main" class="container">
 
             @include('layouts.errors')
             @include('layouts.msg')
 
             @yield('content')
 
-        </main>
+</main>
 
 
-
-</div>
-
+@include('layouts.simplefooter2')
 
 <!-- JavaScript files-->
 <script src="/js/app.js"></script>
