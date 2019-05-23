@@ -7,13 +7,13 @@ use App\Model\Dict\FarmProduct ;
 @section('content')
 
 
-    <a class="btn btn-primary"  href="{{route('product.create')}}" role="button">创建</a>
+    <a class="btn btn-primary"  href="{{route('template.create')}}" role="button">创建</a>
     <table class="table table-striped">
         <thead>
         <tr>
             <th scope="col">ID</th>
-            <th scope="col">类别</th>
-            <th scope="col">商品名称</th>
+            <th scope="col">题目</th>
+
 
             <th scope="col">操作</th>
         </tr>
@@ -21,23 +21,21 @@ use App\Model\Dict\FarmProduct ;
         <tbody>
 
 
-        @foreach ($products as $item)
+        @foreach ($recs as $item)
 
             <tr>
-                <th scope="row">{{$item->sy_goods_id}}</th>
+                <th scope="row">{{$item->id}}</th>
+
                 <td>
-                    {{$item->sy_cgoods}}
-               </td>
-                <td>
-                    {{$item->sy_goods_name}}
+                    {{$item->title}}
                 </td>
 
 
 
                 <td>
-                    <a href="/customer/product.edit/{{$item->sy_goods_id}}" class="btn btn-info">编辑</a>
-                    <a href="/customer/product.del/{{$item->sy_goods_id}}" onclick="return confirm('Are you sure?')" class="btn btn-info">删除</a>
-                    <a href="/customer/order.create/{{$item->sy_goods_id}}" class="btn btn-info">申请码标</a>
+                    <a href="/customer/template.edit/{{$item->id}}" class="btn btn-info">编辑</a>
+                    <a href="/customer/template.qrsee/{{$item->id}}" class="btn btn-info">预览</a>
+                    <a href="/customer/template.create/{{$item->id}}" class="btn btn-info">申请码标</a>
                 </td>
             </tr>
 
@@ -48,6 +46,6 @@ use App\Model\Dict\FarmProduct ;
         </tbody>
     </table>
 
-    {{ $products->links()}}
+    {{ $recs->links()}}
 
 @endsection

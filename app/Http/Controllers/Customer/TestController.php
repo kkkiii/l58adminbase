@@ -37,11 +37,15 @@ use Illuminate\Support\Facades\Log ;
 use App\Jobs\CodeGen ;
 use Pay;
 use App\Http\Controllers\Controller ;
-class TestController extends Controller
+class TestController extends CustomerBase
 {
     public function t1(Request $request)
     {
-echo 1 ;
+$company = parent::get_bind_company() ;
+dump($company->id) ;
+        $code =  parent::get_bind_company()->company_code ;
+dump($code ) ;
+dd($company) ;
     }
 }
 

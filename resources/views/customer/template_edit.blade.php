@@ -9,13 +9,13 @@ use App\Model\Dict\FarmProduct ;
 
 
 
-    <form action="{{ route('template.create_post') }}" method="POST">
+    <form action="{{ route('template.edit_post') }}" method="POST">
         @csrf
 
-
+<input type="hidden" name="id" value="{{$item->id}}">
         <div class="form-group">
             <label>题目</label>
-            <input type="text" name="title" class="form-control" value="">
+            <input type="text" name="title" class="form-control" value="{{$item->title}}">
         </div>
 
         <div class="form-group">
@@ -25,7 +25,7 @@ use App\Model\Dict\FarmProduct ;
 
         <div class="form-group">
 
-            <textarea name="content" rows="5" cols="60" id="content"></textarea>
+            <textarea name="content" rows="5" cols="60" id="content">{{$item->content}}</textarea>
         </div>
 
 

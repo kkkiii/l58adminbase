@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller ;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpKernel\Exception\HttpException ;
 use App\Model\Customer ;
+use Illuminate\Pagination\LengthAwarePaginator ;
 class CustomerBase extends Controller
 {
     protected function haveto_login()
@@ -30,4 +31,14 @@ class CustomerBase extends Controller
         return  session('cnpy_user') ;
     }
 
+    public function arrayPaginator($array, $request)
+    {
+
+        $page = $request->get('page', 1);
+        $perPage = 10;
+        $offset = ($page * $perPage) - $perPage;
+
+        return new LengthAwarePaginator(array_slice($array, $offset, $perPage, true), count($array), $perPage, $page,
+            ['path' => $request->url(), 'query' => $request->query()]);
+    }
 }
