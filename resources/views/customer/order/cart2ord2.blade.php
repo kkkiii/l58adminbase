@@ -85,8 +85,8 @@ $tot = 0 ;
                     ,
                     @endif
                     {{'{'}}
-                    {{ "id:" .$item->sy_goods_id}} ,
-                    name:  "{{$item->sy_goods_name}}"  ,
+                    {{ "id:" .$item->templateid}} ,
+                    name:  "{{$item->templatename}}"  ,
                 {{ "price:" .$item->unit_price}},
         {{ "count:" .$item->code_amount}}
 

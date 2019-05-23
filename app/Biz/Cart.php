@@ -62,10 +62,11 @@ EOD;
     static public function push2cart($data)
     {
 
-    $goods_id =     $data['sy_goods_id'] ;
-    $dict_2_code =  $data['dict_2_code'];
+//    $goods_id =     $data['sy_goods_id'] ;
+//    $dict_2_code =  $data['dict_2_code'];
     $uid = $data['uid'];
-
+     $templateid =    $data['id'] ;
+        $templatename =    $data['templatename'] ;
 //        1 check exists
 
         $sql = <<<EOD
@@ -75,24 +76,20 @@ FROM
 cart
 WHERE
 cart.uid = $uid
-AND cart.sy_goods_id = $goods_id
+AND cart.templateid = $templateid
 EOD;
         $res =  DB::connection()
             ->select($sql);
 
-
-
         if (empty($res))
-
         {
             // insert
 
             $cart = new \App\Model\Cart() ;
             $cart->uid = $uid ;
-            $cart->sy_goods_id = $goods_id ;
+            $cart->templateid = $templateid ;
+            $cart->templatename = $templatename ;
 
-            $cart->dict_2_code = $dict_2_code ;
-            $cart->sy_goods_name = $data['sy_goods_name'] ;
             $cart->unit_price = $data['unit_price'] ;
             $cart->code_amount = $data['code_amount'] ;
             $cart->tag_type = $data['tag_type'] ;
@@ -105,11 +102,9 @@ EOD;
             DB::table('cart')
                 ->where([
                     'uid'=>$uid ,
-                    'sy_goods_id'=>$goods_id ,
+                    'templateid'=>$templateid ,
                 ])
                 ->increment('code_amount', intval( $data['code_amount'] )) ;
-
-
         }
 
 
@@ -121,9 +116,10 @@ EOD;
         $sql = <<<EOD
 SELECT
 cart.uid,
-cart.sy_goods_id,
-cart.sy_goods_name,
+cart.templateid,
+cart.templatename,
 cart.unit_price,
+cart.tag_type,
 cart.code_amount
 FROM
 cart
@@ -132,8 +128,6 @@ cart.uid = $uid
 EOD;
         $res =  DB::connection()
             ->select($sql);
-
-
 
         if(isset($res))
             return $res ;

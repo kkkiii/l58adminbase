@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Customer;
 use App\Biz\Cart;
+use App\Model\CodeTagType;
+use App\Model\CodeView;
 use App\Model\Order;
 use App\Model\Org;
 use App\Model\SyGood;
@@ -68,39 +70,39 @@ $company = parent::get_bind_company() ;
     public function create($id){
         parent::haveto_login() ;
 
-      $good =  SyGood::find($id) ;
 
-       $dict2prod_item = DictSecondProd::find($good->sy_cate_id) ;
+        $template = CodeView::find($id);
+        $codetypes = CodeTagType::all() ;
 
-//       dump($dict2prod_item) ;
 
-//      dd($good) ;
 
-        return view('customer.order.create' ,compact('good' ,'dict2prod_item')) ;
+        return view('customer.order.create' ,compact('template' )) ;
     }
     public function create1(Request $request){
         parent::haveto_login() ;
         $data = $this->validate($request,[
             'code_amount' => 'required|integer|min:1',
-//            'code_type'=>'required|digits:1',
+            'unit_price'=>'required|integer',
+            'id'=>'required|integer',
+            'templatename'=>'required',
         ]) ;
 
-
-
-
-        $set2redis = $request->post();
-
-         unset($set2redis['_token']) ;
-
+//        dd($data) ;
+//
+//
+//        $set2redis = $data ;
+//        $set2redis = $request->post();
+//
+//         unset($set2redis['_token']) ;
 
         $cuser = parent::get_user() ;
-        $set2redis['uid'] = $cuser->id ;
-        $set2redis['tag_type'] = 1 ;
+        $data['uid'] = $cuser->id ;
+        $data['tag_type'] = 1 ;
 
 //        Redis::command('SET', [static::$cats . ":" .$cuser->id . ":goods" .$set2redis['sy_goods_id'] , json_encode($set2redis)]);
 
 
-Cart::push2cart($set2redis) ;
+Cart::push2cart($data) ;
 
 
         return redirect(route('product.list') ) ;
@@ -235,9 +237,11 @@ Cart::push2cart($set2redis) ;
         parent::haveto_login() ;
 
         $params = $request->post() ;
+
+
+
         $uid = parent::get_user()->id ;
         $cart = Cart::retrive2checkout($uid) ;
-
 
 
         if(empty($cart))
@@ -254,7 +258,7 @@ Cart::push2cart($set2redis) ;
 
         foreach ($params['pvalue'] as $value){
             DB::connection()->table('cart')
-                ->where('sy_goods_id', $value['id'])
+                ->where('templateid', $value['id'])
                 ->update(['code_amount' => $value['count']]) ;
         }
 
@@ -293,6 +297,8 @@ Cart::push2cart($set2redis) ;
             $data = array_merge( $data ,[$value] ) ;
         }
 
+
+///*
         DB::table('ord_details')->insert(
             $data
         );
@@ -308,6 +314,7 @@ Cart::push2cart($set2redis) ;
             'cd'=>1,
             'url' =>url('/customer/order.choose/' .$order->our_sn )
         ]);
+//*/
 
 //        return redirect(url('/customer/order.choose/' .$order->our_sn )) ;
 

@@ -47,5 +47,12 @@ dump($company->id) ;
 dump($code ) ;
 dd($company) ;
     }
+    public function t2(){
+        $url = url('preview?p=' . 5);
+//        print_r($url) ;
+
+        print_r(  url('common/qrcode-g') .   ('/preview?p=' . 1) ) ;
+
+    }
 }
 

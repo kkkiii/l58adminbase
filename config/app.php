@@ -181,6 +181,7 @@ return [
 //        Hyperbolaa\Alipay\AlipayServiceProvider::class,
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         SwooleTW\Http\LaravelServiceProvider::class,
+        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class
     ],
 
     /*
@@ -232,6 +233,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 //        'Pay' => Yansongda\LaravelPay\Facades\Pay::class,
+        'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class
     ],
 
 ];

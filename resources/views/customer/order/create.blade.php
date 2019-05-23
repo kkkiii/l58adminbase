@@ -12,21 +12,21 @@ use Illuminate\Support\Str;
 
 
         <div class="form-group">
-            <label>商品名称{{$good->sy_goods_name}}</label>
-            <input type="hidden" name="sy_goods_name"   class="form-control" value="{{$good->sy_goods_name}}">
+            <label>模板名称{{$template->title}}</label>
+            <input type="hidden" name="id"   class="form-control" value="{{$template->id}}">
+            <input type="hidden" name="templatename"   class="form-control" value="{{$template->title}}">
         </div>
 
         <div class="form-group">
-            <label>标签价格{{$dict2prod_item->unit_price/100}}</label>
-            <input type="hidden" name="unit_price"   class="form-control" value="{{$dict2prod_item->unit_price}}">
+            <label>标签价格{{0.05}}</label>
+            <input type="hidden" name="unit_price"   class="form-control" value="{{5}}">
         </div>
 
         <div class="form-group">
             <label>申请多少个码标</label>
             <input type="text" name="code_amount" class="form-control" value="">
         </div>
-        <input type="hidden" name="sy_goods_id"   class="form-control" value="{{$good->sy_goods_id}}">
-        <input type="hidden" name="dict_2_code"   class="form-control" value="{{$dict2prod_item->code}}">
+
 
         <div class="form-group">
             <label>码标种类</label>
