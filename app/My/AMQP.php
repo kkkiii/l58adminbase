@@ -3,21 +3,18 @@
 namespace App\My;
 use PhpAmqpLib\Connection\AMQPStreamConnection ;
 use PhpAmqpLib\Message\AMQPMessage ;
+use App\My\MyConstant ;
 class AMQP
 {
-    static protected $amqp_cluster =
-        [
-            ['host' => "172.16.16.130", 'port' => 30000, 'user' => 'guest', 'password' =>  'guest'],
-            ['host' => "172.16.16.130", 'port' => 30002, 'user' => 'guest', 'password' =>  'guest'],
-            ['host' => "172.16.16.130", 'port' => 30004, 'user' => 'guest', 'password' =>  'guest'],
-        ] ;
+
 
     static public function sender($data,$q_name)
     {
 //        $connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest');
 //        $connection = new AMQPStreamConnection('172.16.16.130', 30000, 'guest', 'guest');
+
         $connection = AMQPStreamConnection::create_connection(
-            static::$amqp_cluster
+            MyConstant::$amqp_cluster
         );
         $channel = $connection->channel();
 

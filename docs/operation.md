@@ -1,2 +1,0 @@
-启动守护进程监听派发订单任务,用来生成一物一码数据的
-php artisan subscribe:m dispatch_ord
