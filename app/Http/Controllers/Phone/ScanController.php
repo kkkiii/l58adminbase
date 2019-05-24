@@ -18,6 +18,7 @@ class ScanController extends Controller
 
 
 
+
 //        $data = $request->validate($request,[
 //            't'=>'required|integer|size:1',
 //            'p'=>'required|size:36',
@@ -30,7 +31,7 @@ class ScanController extends Controller
         ]);
 
         if ($validator->fails()) {
-            throw  new HttpException(403) ;
+                       throw  new HttpException(403) ;
         }
 
         $arr = [] ;
@@ -40,17 +41,17 @@ class ScanController extends Controller
 
 
             try {
-                $arr =    PhoneScan::q1($p);
+                $template =    PhoneScan::q1($p);
+
             } catch (\Exception $e) {
                 abort(403) ;
             }
 
         }
 
-        if( !empty($arr))
+        if( $template)
                return view('phone.scan.q2',[
-                    'company'=>$arr[0],
-                    'product'=>$arr[1]
+                    'template'=>$template
                 ]) ;
         else
             abort(403) ;
@@ -63,10 +64,6 @@ class ScanController extends Controller
 //                ]) ;
 //            else
 //                throw new HttpException(403) ;
-
-
-
-
 
 
 

@@ -21,7 +21,7 @@ class PhoneScan
 SELECT
 code1.sn,
 code1.wst_company_id,
-code1.goods_id,
+code1.templateid,
 code1.ord_detail_id,
 code1.scan_1st,
 code1.total_scan,
@@ -37,13 +37,13 @@ EOD;
         $arr = Helpers::objectToArray($node) ;
 
 
-        $company_id =0;
-        $goods_id =0;
-if ($arr)
-    $company_id =data_get($arr, '*.wst_company_id');
+//        $company_id =0;
+        $templateid =0;
+//if ($arr)
+//    $company_id =data_get($arr, '*.wst_company_id');
 
         if ($arr)
-            $goods_id =data_get($arr, '*.goods_id');
+            $templateid =data_get($arr, '*.templateid');
 
 //dump($goods_id[0]) ;
 //        dump($company_id[0]) ;
@@ -52,12 +52,14 @@ if ($arr)
 
 // 公司数据
 
-        $company = WSTCompanyBiz::retrieve_item($company_id[0]) ;
+//        $company = WSTCompanyBiz::retrieve_item($company_id[0]) ;
         //商品数据
 
-        $goods= SyGoods::retrive_item($goods_id[0]) ;
+      $template =   TemplateBiz::qitem($templateid[0]) ;
 
-            return  [$company[0] , $goods];
+//        $goods= SyGoods::retrive_item($goods_id[0]) ;
+
+            return  $template;
     }
 
 }
