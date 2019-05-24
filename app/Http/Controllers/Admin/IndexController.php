@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpKernel\Exception\HttpException ;
 use Illuminate\Support\Facades\Hash ;
 use App\My\Helpers ;
-class IndexController extends Controller
+class IndexController extends AdminBase
 {
     public function __construct()
     {
@@ -18,6 +18,7 @@ class IndexController extends Controller
 
     }
     public function home(){
+        parent::check_module() ;
 
 
 //Helpers::p(session('menus_ids')) ;

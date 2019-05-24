@@ -32,17 +32,22 @@ class CodeGen implements ShouldQueue
     public function handle()
     {
 
+
+
             for ($i = 0 ; $i <  $this->vo->howmany  ;$i ++)
             {
 
                 $ins_db = [
-                    'sn'=>Str::orderedUuid(),
+                    'sn'=>Str::orderedUuid() ,
                 'wst_company_id'=>$this->vo->company_id ,
-                    'goods_id'=>$this->vo->goods_id,
+                    'templateid'=>$this->vo->goods_id,
                       'ord_detail_id'=>$this->vo->order_id,
                     'created_at'=>date("Y-m-d H:i:s"),
                     'updated_at'=>date("Y-m-d H:i:s")
                 ] ;
+
+
+
 
                 DB::table($this->vo->table_name)->insert(
                     $ins_db

@@ -13,15 +13,15 @@ use Illuminate\Support\Facades\Redis ;
 use Illuminate\Support\Facades\Session ;
 class LoginController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth',[
-            'only'=>['logout']
-        ]);
-        $this->middleware('guest',[
-            'only'=>['login','store']
-        ]);
-    }
+//    public function __construct()
+//    {
+//        $this->middleware('auth',[
+//            'only'=>['logout']
+//        ]);
+//        $this->middleware('guest',[
+//            'only'=>['login','store']
+//        ]);
+//    }
     public function login()
     {
         return view('admin.login');
@@ -40,7 +40,7 @@ class LoginController extends Controller
            $menus_modules =  Module::menus_routes($user->id) ;
 
 //dd($menus_modules) ;
-           Helpers::p($menus_modules) ;
+//           Helpers::p($menus_modules) ;
 
 
 //            session(['menus_ids' =>$menus_modules[0]]);

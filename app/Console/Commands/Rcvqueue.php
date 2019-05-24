@@ -38,14 +38,22 @@ class Rcvqueue extends Command
     public function handle()
     {
 
-        $connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest');
+//        $connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest');
+
+        $connection = AMQPStreamConnection::create_connection([
+            ['host' => "172.16.16.130", 'port' => 30000, 'user' => 'guest', 'password' =>  'guest'],
+            ['host' => "172.16.16.130", 'port' => 30002, 'user' => 'guest', 'password' =>  'guest'],
+            ['host' => "172.16.16.130", 'port' => 30004, 'user' => 'guest', 'password' =>  'guest'],
+        ],[]
+        );
+
         $channel = $connection->channel();
-        $channel->queue_declare('hello', false, false, false, false);
+        $channel->queue_declare('dispatch_ord', false, false, false, false);
         echo " [*] Waiting for messages. To exit press CTRL+C\n";
         $callback = function ($msg) {
             echo ' [x] Received ', $msg->body, "\n";
         };
-        $channel->basic_consume('hello', '', false, true, false, false, $callback);
+        $channel->basic_consume('dispatch_ord', '', false, true, false, false, $callback);
         while (count($channel->callbacks)) {
             $channel->wait();
         }

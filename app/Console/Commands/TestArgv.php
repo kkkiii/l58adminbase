@@ -2,17 +2,16 @@
 
 namespace App\Console\Commands;
 
-use App\My\AMQP;
 use Illuminate\Console\Command;
-use App\My\MyStr ;
-class Test extends Command
+
+class TestArgv extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'test:m{argv*}';
+    protected $signature = 'test_argv:m{argv*}';
 
     /**
      * The console command description.
@@ -38,25 +37,11 @@ class Test extends Command
      */
     public function handle()
     {
-//        $params = ($this->argument('argv')) ;
+        $params = ($this->argument('argv')) ;
+        var_dump($params) ;
 //
-//        foreach ($params as $item){
-//            print_r( json_decode (json_encode($item)) ) ;
-//        }
-
-
-  print_r( MyStr::gen_random_num_cd(32));
-
-  $data =[
-      'a'=>'sdfsd士大夫a',
-      'b'=>'sdfsd士大夫b',
-      'c'=>'sdfsd士大夫c',
-  ] ;
-
-$res =   AMQP::sender(json_encode($data),"testq") ;
-
-dump($res) ;
-
-
+        foreach ($params as $item){
+            print_r( $item ) ;
+        }
     }
 }

@@ -4,14 +4,15 @@ namespace App\Console\Commands;
 use Illuminate\Support\Facades\DB ;
 use Illuminate\Console\Command;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
-class RcvLog extends Command
+use Illuminate\Support\Str ;
+class Subscriber extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'rcv:log';
+    protected $signature = 'subscribe:m{argv*}';
 
     /**
      * The console command description.
@@ -37,7 +38,13 @@ class RcvLog extends Command
      */
     public function handle()
     {
-//        $connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest');
+        $params = ($this->argument('argv')) ;
+
+        if (empty($params))
+            return  ;
+        $topic  =($params[0]) ;
+
+
         $connection = AMQPStreamConnection::create_connection([
                 ['host' => "172.16.16.130", 'port' => '30000', 'user' => 'guest', 'password' =>  'guest'],
                 ['host' => "172.16.16.130", 'port' => '30002', 'user' => 'guest', 'password' =>  'guest'],
@@ -48,20 +55,52 @@ class RcvLog extends Command
 
         $channel = $connection->channel();
 
-        $channel->exchange_declare('logs', 'fanout', false, false, false);
+        $channel->exchange_declare($topic, 'fanout', false, false, false);
 
         list($queue_name, ,) = $channel->queue_declare("", false, false, true, false);
 
-        $channel->queue_bind($queue_name, 'logs');
+        $channel->queue_bind($queue_name, $topic);
 
         echo " [*] Waiting for logs. To exit press CTRL+C\n";
 
         $callback = function ($msg) {
 
-          $res =  DB::connection()->table('tab1')->insert([
-                'title'=>$msg->body
-            ]) ;
-            echo ' [x] ',( $res) , "\n";
+            $jobj = json_decode($msg->body ) ;
+
+            $howmany = intval($jobj->howmany) ;
+            $company_id = ($jobj->wst_company_id) ;
+            $templateid = ($jobj->templateid) ;
+            $ord_detail_id = ($jobj->ord_detail_id) ;
+
+            for ($i = 0 ; $i <  $howmany  ;$i ++)
+            {
+
+                $ins_db = [
+                    'sn'=>Str::orderedUuid() ,
+                    'wst_company_id'=>$company_id ,
+                    'templateid'=>$templateid,
+                    'ord_detail_id'=>$ord_detail_id,
+                    'created_at'=>date("Y-m-d H:i:s"),
+                    'updated_at'=>date("Y-m-d H:i:s")
+                ] ;
+
+                DB::table('code1')->insert(
+                    $ins_db
+                );
+
+                unset($ins_db) ;
+            }
+
+
+
+
+//            $res =  DB::connection()->table('tab1')->insert([
+//                'title'=>$jobj->howmany
+//            ]) ;
+//            echo ' [x] ',( $ord_detail_id) , "\n";\
+print_r("order_detail id:$ord_detail_id ,$howmany is done") ;
+            print_r() ;
+
         };
 
         $channel->basic_consume($queue_name, '', false, true, false, false, $callback);
@@ -72,5 +111,6 @@ class RcvLog extends Command
 
         $channel->close();
         $connection->close();
+
     }
 }

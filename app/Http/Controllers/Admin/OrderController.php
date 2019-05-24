@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers\Admin;
+use App\My\AMQP;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Order ;
@@ -20,11 +21,10 @@ class OrderController extends AdminBase
         return view('admin.order.list',compact('orders'));
     }
     public function shoot($id){
+        parent::check_module();
         // 更新 order 为已派发
 
         $ord =   Order::find($id) ;
-
-
 
         $ord_details =  OrdDetail::where([
             'pid'=>$id
@@ -33,13 +33,27 @@ class OrderController extends AdminBase
         ;
 
         foreach ($ord_details as $item) {
-            $goods_id = $item->sy_goods_id;
-            $ord_detail_id = $item->id;
-            $howmany = $item->code_amount;
-            $company_id = $ord->wst_company_id;
 
-            $this->dispatch(new CodeGen(new CodeGenVo($howmany, $company_id, $goods_id, $ord_detail_id, 'code' . $item->tag_type)));
+
+//            $goods_id = $item->templateid;
+//            $ord_detail_id = $item->id;
+//            $howmany = $item->code_amount;
+//            $company_id = $ord->wst_company_id;
+//            $this->dispatch(new CodeGen(new CodeGenVo($howmany, $company_id, $goods_id, $ord_detail_id, 'code' . $item->tag_type)));
+
+             $data = [
+                 'templateid'=>$item->templateid ,
+                 'ord_detail_id'=>$item->id ,
+                 'howmany'=>$item->code_amount,
+                 'wst_company_id'=>$ord->wst_company_id
+             ] ;
+
+            $result =   AMQP::publish(json_encode($data),'dispatch_ord') ;
+
+
         }
+
+
 
         $ord = Order::find($id);
         $ord->flow_stop =2;

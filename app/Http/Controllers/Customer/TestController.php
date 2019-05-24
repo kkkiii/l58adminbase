@@ -37,6 +37,8 @@ use Illuminate\Support\Facades\Log ;
 use App\Jobs\CodeGen ;
 use Pay;
 use App\Http\Controllers\Controller ;
+use App\Model\OrdDetail ;
+use App\Model\Order ;
 class TestController extends CustomerBase
 {
     public function t1(Request $request)
@@ -48,11 +50,27 @@ dump($code ) ;
 dd($company) ;
     }
     public function t2(){
-        $url = url('preview?p=' . 5);
-//        print_r($url) ;
 
-        print_r(  url('common/qrcode-g') .   ('/preview?p=' . 1) ) ;
+        $ord =   Order::find(7) ;
 
-    }
+        $ord_details =  OrdDetail::where([
+            'pid'=>7
+        ])
+            ->get()
+        ;
+
+        foreach ($ord_details as $item) {
+
+            dump($item) ;
+
+
+            $goods_id = $item->templateid;
+            $ord_detail_id = $item->id;
+            $howmany = $item->code_amount;
+            $company_id = $ord->wst_company_id;
+            $this->dispatch(new CodeGen(new CodeGenVo($howmany, $company_id, $goods_id, $ord_detail_id, 'code' . $item->tag_type)));
+        }
+
+     }
 }
 
