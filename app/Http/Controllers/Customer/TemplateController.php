@@ -89,7 +89,7 @@ class TemplateController extends CustomerBase
 
         $item = TemplateBiz::qitem($id) ;
 
-        dd($item->is_edit) ;
+        var_dump($item->is_edit) ;
 
         return view('customer.template_edit',compact( 'item')) ;
 
