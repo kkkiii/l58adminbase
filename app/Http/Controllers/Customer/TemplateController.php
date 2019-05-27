@@ -134,22 +134,25 @@ class TemplateController extends CustomerBase
 
         $company =  parent::get_bind_company() ;
 
-       $product = SyGood::find($id) ;
+       $code_view = CodeView::find($id) ;
 
-       if ($product->sy_usc_id == $company->company_code)
-       {
-           $product->delete();
-           session()->flash(
-               'success','删除成功'
-           ) ;
-           return redirect(route('template.list') ) ;
-       }else
-       {
-           session()->flash(
-               'success','不要删除别人的产品'
-           ) ;
-           return redirect(route('template.list') ) ;
-       }
+       dd($code_view) ;
+
+
+//       if ($product->sy_usc_id == $company->company_code)
+//       {
+//           $product->delete();
+//           session()->flash(
+//               'success','删除成功'
+//           ) ;
+//           return redirect(route('template.list') ) ;
+//       }else
+//       {
+//           session()->flash(
+//               'success','不要删除别人的产品'
+//           ) ;
+//           return redirect(route('template.list') ) ;
+//       }
 
     }
 
