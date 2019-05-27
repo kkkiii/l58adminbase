@@ -136,10 +136,16 @@ class TemplateController extends CustomerBase
 
        $code_view = CodeView::find($id) ;
 
-       dd($code_view) ;
+//       if( $code_view->is_edit === 0)
+//           $code_view->delete();
 
 
-//       if ($product->sy_usc_id == $company->company_code)
+
+        $temp = TemplateBiz::q_company_cd($id) ;
+        dd($temp) ;
+
+
+//       if ($code_view->sy_usc_id == $company->company_code)
 //       {
 //           $product->delete();
 //           session()->flash(
