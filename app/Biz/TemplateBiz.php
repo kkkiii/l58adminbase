@@ -62,5 +62,22 @@ EOD;
         return $res ;
 
     }
+    static public function q_company_cd($templateid)
+    {
+        $sql = <<<EOD
+SELECT
+company_user_template.company_user_id,
+company_user_template.template_id
+FROM
+company_user_template
+WHERE
+template_id =  $templateid
+EOD;
+
+        $res = DB::connection()
+            ->select($sql);
+        $res =  collect($res)->first();
+    }
+
 
 }
