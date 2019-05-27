@@ -24,7 +24,7 @@
 
 </div>
 
-
+@include('layouts.simplefooter2')
 <script src="/js/app.js"></script>
 @yield('js')
 </body>
