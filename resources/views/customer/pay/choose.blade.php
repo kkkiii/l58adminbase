@@ -38,40 +38,40 @@ use Illuminate\Support\Str;
                 </div>
             </div>
         </div>
-        <div class="col-sm">
-            <div class="card">
+        {{--<div class="col-sm">--}}
+            {{--<div class="card">--}}
 
-                <div class="card-body">
+                {{--<div class="card-body">--}}
 
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="channel" id="exampleRadios1" value="wechatpay" checked>
-                        <label class="form-check-label" for="exampleRadios1">
-                            微信
-                            <img src="/pics/wechatpay.jpg" class="rounded float-left" alt="...">
-                        </label>
-                    </div>
-
-
-                </div>
-            </div>
-        </div>
-        <div class="col-sm">
-            <div class="card">
-
-                <div class="card-body">
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="channel" id="exampleRadios1" value="wechatpay" checked>
-                        <label class="form-check-label" for="exampleRadios1">
-                            支付宝
-                            <img src="/pics/alipay.jpg" class="rounded float-left" alt="...">
-                        </label>
-                    </div>
+                    {{--<div class="form-check">--}}
+                        {{--<input class="form-check-input" type="radio" name="channel" id="exampleRadios1" value="wechatpay" checked>--}}
+                        {{--<label class="form-check-label" for="exampleRadios1">--}}
+                            {{--微信--}}
+                            {{--<img src="/pics/wechatpay.jpg" class="rounded float-left" alt="...">--}}
+                        {{--</label>--}}
+                    {{--</div>--}}
 
 
-                </div>
-            </div>
-        </div>
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+        {{--<div class="col-sm">--}}
+            {{--<div class="card">--}}
+
+                {{--<div class="card-body">--}}
+
+                    {{--<div class="form-check">--}}
+                        {{--<input class="form-check-input" type="radio" name="channel" id="exampleRadios1" value="wechatpay" checked>--}}
+                        {{--<label class="form-check-label" for="exampleRadios1">--}}
+                            {{--支付宝--}}
+                            {{--<img src="/pics/alipay.jpg" class="rounded float-left" alt="...">--}}
+                        {{--</label>--}}
+                    {{--</div>--}}
+
+
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
     </div>
 
 
