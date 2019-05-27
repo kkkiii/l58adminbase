@@ -89,7 +89,13 @@ class TemplateController extends CustomerBase
 
         $item = TemplateBiz::qitem($id) ;
 
-        var_dump($item->is_edit) ;
+        if($item->is_edit === 1)
+        {
+            session()->flash(
+                'success','不能编辑'
+            ) ;
+            return redirect(route('template.list')) ;
+        }
 
         return view('customer.template_edit',compact( 'item')) ;
 
