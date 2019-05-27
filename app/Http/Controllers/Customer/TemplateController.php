@@ -142,23 +142,23 @@ class TemplateController extends CustomerBase
 
 
         $temp = TemplateBiz::q_company_cd($id) ;
-        dd($temp) ;
+        dd($temp->company_user_id) ;
 
 
-//       if ($code_view->sy_usc_id == $company->company_code)
-//       {
-//           $product->delete();
-//           session()->flash(
-//               'success','删除成功'
-//           ) ;
-//           return redirect(route('template.list') ) ;
-//       }else
-//       {
-//           session()->flash(
-//               'success','不要删除别人的产品'
-//           ) ;
-//           return redirect(route('template.list') ) ;
-//       }
+       if ($temp->company_user_id == $company->company_code && $code_view->is_edit === 0)
+       {
+           $code_view->delete();
+           session()->flash(
+               'success','删除成功'
+           ) ;
+           return redirect(route('template.list') ) ;
+       }else
+       {
+           session()->flash(
+               'success','不能删除'
+           ) ;
+           return redirect(route('template.list') ) ;
+       }
 
     }
 
