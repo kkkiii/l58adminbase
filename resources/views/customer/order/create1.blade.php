@@ -61,7 +61,7 @@ use Illuminate\Support\Str;
 
 
         <div class="form-group">
-            <label>选择地址</label>
+            <h4>选择地址</h4>
             <select name="shipping_address" class="form-control">
 
                 @foreach($addrs as $item )
