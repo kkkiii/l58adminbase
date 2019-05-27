@@ -87,12 +87,11 @@ class TemplateController extends CustomerBase
     public function edit($id){
         parent::haveto_login() ;
 
-
         $item = TemplateBiz::qitem($id) ;
 
+        dd($item->is_edit) ;
 
         return view('customer.template_edit',compact( 'item')) ;
-
 
     }
     public function edit_post(Request $request){
