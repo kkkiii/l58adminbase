@@ -24,7 +24,7 @@ $tot = 0 ;
 
 
         <div class="card">
-           <label>选择地址</label>
+           <h4>选择地址</h4>
             <select name="shipping_address" class="form-control">
 
                 @foreach($addrs as $item )
