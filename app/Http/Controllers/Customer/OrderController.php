@@ -10,8 +10,7 @@ use App\Model\SyGood;
 use App\My\MyStr;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Model\Product ;
-use App\Model\ProductPrice ;
+
 use App\Biz\ShippingAddress ;
 use Illuminate\Support\Facades\Auth;
 use App\Model\Dict\DictSecondProd ;
@@ -105,7 +104,7 @@ $company = parent::get_bind_company() ;
 Cart::push2cart($data) ;
 
 
-        return redirect(route('product.list') ) ;
+        return redirect(route('template.list') ) ;
 
 
 
