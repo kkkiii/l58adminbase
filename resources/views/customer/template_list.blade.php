@@ -36,6 +36,9 @@ use App\Model\Dict\FarmProduct ;
                     @if($item->is_edit == 0)
                     <a href="/customer/template.edit/{{$item->id}}" class="btn btn-info">编辑</a>
                     @endif
+                        @if($item->is_edit == 0)
+                            <a href="/customer/template.del/{{$item->id}}" class="btn btn-info">删除</a>
+                        @endif
 
                     <a href="{{   url('common/qrcode-g') . '/'.  ( $item->id) }}" target="_blank" class="btn btn-info">预览</a>
                     <a href="/customer/order.create/{{$item->id}}" class="btn btn-info">加入购物车</a>
