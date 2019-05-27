@@ -77,9 +77,8 @@ EOD;
         $res = DB::connection()
             ->select($sql);
 
+        return  collect($res)->first();
 
-        $res =  collect($res)->first();
-   
     }
 
 
