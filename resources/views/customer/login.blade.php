@@ -54,9 +54,9 @@
         </form>
 
 
-        <div class="alert alert-primary" role="alert">
-            还可以<a href="{{route('customer.login.reg')}}" class="alert-link">注册</a>
-        </div>
+        {{--<div class="alert alert-primary" role="alert">--}}
+            {{--还可以<a href="{{route('customer.login.reg')}}" class="alert-link">注册</a>--}}
+        {{--</div>--}}
     </div>
 
 
