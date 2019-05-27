@@ -79,7 +79,7 @@ EOD;
 
 
         $res =  collect($res)->first();
-        dd($res) ;
+   
     }
 
 
