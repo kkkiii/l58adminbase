@@ -30,7 +30,7 @@ use App\Biz\Cart ;
 
         @if($uid && $cnt = Cart::header_show_count($uid))
             <li class="nav-item">
-                <a class="nav-link" href="{{route('order.cart2ord')}}">结算({{$cnt}})</a>
+                <a class="nav-link" href="{{route('order.cart2ord')}}">购物车({{$cnt}})</a>
             </li>
         @endif
 

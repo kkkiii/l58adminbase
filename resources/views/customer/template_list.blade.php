@@ -35,7 +35,7 @@ use App\Model\Dict\FarmProduct ;
                 <td>
                     <a href="/customer/template.edit/{{$item->id}}" class="btn btn-info">编辑</a>
                     <a href="{{   url('common/qrcode-g') . '/'.  ( $item->id) }}" target="_blank" class="btn btn-info">预览</a>
-                    <a href="/customer/order.create/{{$item->id}}" class="btn btn-info">申请码标</a>
+                    <a href="/customer/order.create/{{$item->id}}" class="btn btn-info">加入购物车</a>
                 </td>
             </tr>
 
