@@ -47,7 +47,8 @@ code_views.id,
 code_views.title,
 code_views.content,
 code_views.updated_at,
-code_views.created_at
+code_views.created_at,
+code_views.is_edit
 FROM
 code_views
 WHERE
