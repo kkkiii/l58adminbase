@@ -24,6 +24,7 @@ SELECT
 	code_views.content,
 	code_views.updated_at,
 	code_views.created_at,
+	code_views.is_edit,
 	company_user_template.company_user_id
 FROM
 	code_views
