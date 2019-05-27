@@ -137,7 +137,7 @@ class TemplateController extends CustomerBase
            session()->flash(
                'success','删除成功'
            ) ;
-           return redirect(route('product.list') ) ;
+           return redirect(route('template.list') ) ;
        }else
        {
            session()->flash(
