@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Console\Commands;
+use App\Model\CodeView;
 use Illuminate\Support\Facades\DB ;
 use Illuminate\Console\Command;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
@@ -71,6 +72,10 @@ class Subscriber extends Command
             $company_id = ($jobj->wst_company_id) ;
             $templateid = ($jobj->templateid) ;
             $ord_detail_id = ($jobj->ord_detail_id) ;
+
+           $code_view =  CodeView::find($templateid) ;
+            $code_view->is_edit = 1 ;
+            $code_view->update();
 
             for ($i = 0 ; $i <  $howmany  ;$i ++)
             {
