@@ -12,10 +12,17 @@ use Keiko\Uuid\Shortener\Number\BigInt\Converter;
 use Keiko\Uuid\Shortener\Shortener;
 class ScanController extends Controller
 {
-    public function q(Request $request)
+    public function q($t,$p)
     {
-        $t=  ($request->query('t')) ;
-        $p =($request->query('p')) ;
+
+
+        if ( strlen($p)==22 && is_numeric($t) )
+        ;
+        else
+            abort(403,'参数错误') ;
+
+//        $t=  ($request->query('t')) ;
+//        $p =($request->query('p')) ;
 
 
 //        $data = $request->validate($request,[
@@ -24,15 +31,12 @@ class ScanController extends Controller
 //        ]) ;
 
 
-        $validator = Validator::make($request->all(), [
-            't' =>'required|integer|size:1',
-            'p' =>'required|size:22',
-        ]);
+//        $validator = Validator::make($request->all(), [
+//            't' =>'required|integer|size:1',
+//            'p' =>'required|size:22',
+//        ]);
 
 
-        if ($validator->fails()) {
-                       throw  new HttpException(403) ;
-        }
 
         $shortener = new Shortener(
             Dictionary::createUnmistakable(), // or just pass your own characters set
@@ -63,7 +67,7 @@ class ScanController extends Controller
                     'template'=>$template
                 ]) ;
         else
-            abort(403) ;
+            abort(403,'模板参数错误') ;
 
 
 //            if (!is_null($res2[0]) && !is_null($res[0]))
