@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers\Phone;
-
 use App\Biz\PhoneScan;
 use function Couchbase\defaultDecoder;
 use Illuminate\Http\Request;
@@ -17,8 +15,6 @@ class ScanController extends Controller
         $p =($request->query('p')) ;
 
 
-
-
 //        $data = $request->validate($request,[
 //            't'=>'required|integer|size:1',
 //            'p'=>'required|size:36',
@@ -27,12 +23,19 @@ class ScanController extends Controller
 
         $validator = Validator::make($request->all(), [
             't' =>'required|integer|size:1',
-            'p' =>'required|size:36',
+            'p' =>'required|size:22',
         ]);
 
         if ($validator->fails()) {
                        throw  new HttpException(403) ;
         }
+
+        $shortener = new Shortener(
+            Dictionary::createUnmistakable(), // or just pass your own characters set
+            new Converter()
+        );
+
+        $expand_backUuid = $shortener->expand($p) ;
 
         $arr = [] ;
 
@@ -41,7 +44,7 @@ class ScanController extends Controller
 
 
             try {
-                $template =    PhoneScan::q1($p);
+                $template =    PhoneScan::q1($expand_backUuid);
 
             } catch (\Exception $e) {
                 abort(403) ;
