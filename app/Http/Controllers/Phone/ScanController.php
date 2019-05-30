@@ -1,12 +1,15 @@
 <?php
 namespace App\Http\Controllers\Phone;
 use App\Biz\PhoneScan;
-use function Couchbase\defaultDecoder;
+//use function Couchbase\defaultDecoder;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB ;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Support\Facades\Validator ;
+use Keiko\Uuid\Shortener\Dictionary;
+use Keiko\Uuid\Shortener\Number\BigInt\Converter;
+use Keiko\Uuid\Shortener\Shortener;
 class ScanController extends Controller
 {
     public function q(Request $request)
@@ -26,6 +29,7 @@ class ScanController extends Controller
             'p' =>'required|size:22',
         ]);
 
+
         if ($validator->fails()) {
                        throw  new HttpException(403) ;
         }
@@ -36,6 +40,8 @@ class ScanController extends Controller
         );
 
         $expand_backUuid = $shortener->expand($p) ;
+
+
 
         $arr = [] ;
 
