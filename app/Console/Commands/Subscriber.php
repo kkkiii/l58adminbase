@@ -47,9 +47,10 @@ class Subscriber extends Command
 
 
         $connection = AMQPStreamConnection::create_connection([
-                ['host' => "172.16.16.130", 'port' => '30000', 'user' => 'guest', 'password' =>  'guest'],
-                ['host' => "172.16.16.130", 'port' => '30002', 'user' => 'guest', 'password' =>  'guest'],
-                ['host' => "172.16.16.130", 'port' => '30004', 'user' => 'guest', 'password' =>  'guest'],
+//                ['host' => "172.16.16.130", 'port' => '30000', 'user' => 'guest', 'password' =>  'guest'],
+//                ['host' => "172.16.16.130", 'port' => '30002', 'user' => 'guest', 'password' =>  'guest'],
+//                ['host' => "172.16.16.130", 'port' => '30004', 'user' => 'guest', 'password' =>  'guest'],
+                ['host' => "172.16.16.10", 'port' => '5672', 'user' => 'zqlmadmin', 'password' =>  'zqlmadmin']
             ]
         );
 
@@ -95,8 +96,6 @@ class Subscriber extends Command
 
                 unset($ins_db) ;
             }
-
-
 
 
 //            $res =  DB::connection()->table('tab1')->insert([
