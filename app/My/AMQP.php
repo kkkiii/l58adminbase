@@ -14,7 +14,10 @@ class AMQP
 //        $connection = new AMQPStreamConnection('172.16.16.130', 30000, 'guest', 'guest');
 
         $connection = AMQPStreamConnection::create_connection(
-            MyConstant::$amqp_cluster
+            [
+
+                ['host' => "172.16.16.10", 'port' => '5672', 'user' => 'zqlmadmin', 'password' =>  'zqlmadmin']
+            ]
         );
         $channel = $connection->channel();
 
@@ -35,7 +38,10 @@ class AMQP
     }
 
     static public function publish($data,$topic){
-        $connection = AMQPStreamConnection::create_connection( MyConstant::$amqp_cluster
+        $connection = AMQPStreamConnection::create_connection(
+            [
+                ['host' => "172.16.16.10", 'port' => '5672', 'user' => 'zqlmadmin', 'password' =>  'zqlmadmin']
+            ]
         );
 
         $channel = $connection->channel();
