@@ -3,7 +3,7 @@
 namespace App\My;
 use PhpAmqpLib\Connection\AMQPStreamConnection ;
 use PhpAmqpLib\Message\AMQPMessage ;
-use App\My\MyConstant ;
+
 class AMQP
 {
 
@@ -35,7 +35,7 @@ class AMQP
     }
 
     static public function publish($data,$topic){
-        $connection = AMQPStreamConnection::create_connection(  MyConstant::$amqp_cluster
+        $connection = AMQPStreamConnection::create_connection( MyConstant::$amqp_cluster
         );
 
         $channel = $connection->channel();
