@@ -35,7 +35,7 @@ class AMQP
     }
 
     static public function publish($data,$topic){
-        $connection = AMQPStreamConnection::create_connection( static::$amqp_cluster
+        $connection = AMQPStreamConnection::create_connection(  MyConstant::$amqp_cluster
         );
 
         $channel = $connection->channel();
