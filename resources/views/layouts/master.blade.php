@@ -15,12 +15,9 @@
 <body>
 
 <div class="container">
-
-
     @include('layouts.errors')
     @include('layouts.msg')
     @yield('content')
-
 
 </div>
 
